@@ -1,0 +1,245 @@
+{
+	"model": "quotationPaper",
+	"schema": {
+		"foriegn": [
+			"quotationPaperDetail"
+		],
+		"foriegnKey": [
+			"idGui"
+		],
+		"partition": true,
+		"fields": [
+			{
+				"name": "idGui",
+				"property": "idGui",
+				"type": "string",
+				"sqlType": "VARCHAR(64)",
+				"primaryKey": true,
+				"required": true
+			},
+			{
+				"name": "voucherDate",
+				"property": "voucherDate",
+				"type": "date",
+				"sqlType": "DATE"
+			},
+			{
+				"name": "voucherNumber",
+				"property": "voucherNumber",
+				"type": "string",
+				"sqlType": "VARCHAR(32)"
+			},
+			{
+				"name": "unitCode",
+				"property": "unitCode",
+				"type": "string",
+				"sqlType": "VARCHAR(16)"
+			},
+			{
+				"name": "status",
+				"property": "status",
+				"type": "string",
+				"sqlType": "CHAR(1)"
+			}
+		]
+	},
+	"excelIntegration": {
+		"sheetName": "QuotationPaper",
+		"columnMapping": [
+			{
+				"excelColumn": "Số báo giá",
+				"fieldName": "voucherNumber",
+				"required": true
+			},
+			{
+				"excelColumn": "Đơn vị",
+				"fieldName": "unitCode",
+				"required": false
+			}
+		],
+		"templateRules": {
+			"fileFormat": "xlsx",
+			"firstRowData": 2,
+			"maxRows": 20000
+		}
+	},
+	"checking": {
+		"rules": [
+			{
+				"fieldName": "voucherNumber",
+				"type": "length",
+				"minLength": "1",
+				"maxLength": "32",
+				"message": "voucherNumber không được để trống và tối đa 32 ký tự."
+			},
+			{
+				"fieldName": "voucherNumber",
+				"type": "databaseCheck",
+				"checkQuery": "WHERE voucherNumber = @voucherNumber and m.status <> '*'",
+				"overWrite": true,
+				"threshold": "0",
+				"message": "voucherNumber đã tồn tại trong hệ thống."
+			}
+		]
+	},
+	"dataProcessing": {
+		"sqlStatements": {
+
+			"Update":  ""
+		}
+	},
+	"foriegnModel": [
+		{
+			"model": "quotationPaperDetail",
+			"schema": {
+				"partition": true,
+				"fields": [
+					{
+						"name": "idGui",
+						"property": "idGui",
+						"type": "string",
+						"sqlType": "VARCHAR(64)",
+						"primaryKey": true,
+						"required": true
+					},
+					{
+						"name": "line_nbr",
+						"property": "line_nbr",
+						"type": "number",
+						"sqlType": "INT",
+						"required": true,
+						"primaryKey": true
+					},
+					{
+						"name": "itemNameCustomer",
+						"property": "itemNameCustomer",
+						"type": "string",
+						"sqlType": "NVARCHAR(256)"
+					},
+					{
+						"name": "itemCode",
+						"property": "itemCode",
+						"type": "string",
+						"sqlType": "VARCHAR(50)"
+					},
+					{
+						"name": "quantity",
+						"property": "quantity",
+						"type": "number",
+						"sqlType": "NUMERIC(19,4)"
+					},
+					{
+						"name": "price",
+						"property": "price",
+						"type": "number",
+						"sqlType": "NUMERIC(19,4)"
+					},
+					{
+						"name": "amount",
+						"property": "amount",
+						"type": "number",
+						"sqlType": "NUMERIC(19,4)"
+					},
+					{
+						"name": "tax_rate",
+						"property": "tax_rate",
+						"type": "number",
+						"sqlType": "NUMERIC(19,4)"
+					},
+					{
+						"name": "payment",
+						"property": "payment",
+						"type": "number",
+						"sqlType": "NUMERIC(19,4)"
+					},
+					{
+						"name": "nha_san_xuat",
+						"property": "nha_san_xuat",
+						"type": "string",
+						"sqlType": "NVARCHAR(128)"
+					}
+				]
+			},
+			"excelIntegration": {
+				"sheetName": "QuotationPaperDetail",
+				"columnMapping": [
+					{
+						"excelColumn": "STT",
+						"fieldName": "line_nbr",
+						"required": true
+					},
+					{
+						"excelColumn": "Mô tả",
+						"fieldName": "itemNameCustomer",
+						"required": false
+					},
+					{
+						"excelColumn": "Số lượng",
+						"fieldName": "quantity",
+						"type": "number",
+						"required": false
+					},
+					{
+						"excelColumn": "Giá",
+						"fieldName": "price",
+						"type":  "number",
+						"required": false
+					},
+					{
+						"excelColumn": "Thành tiền",
+						"fieldName": "amount",
+						"type": "number",
+						"required": false
+					},
+					{
+						"excelColumn": "Thuế suất",
+						"fieldName": "tax_rate",
+						"type": "number",
+						"required": false
+					},
+					{
+						"excelColumn": "Tổng cộng",
+						"fieldName": "payment",
+						"type": "number",
+						"required": false
+					},
+					{
+						"excelColumn": "Nhà sản xuất",
+						"fieldName": "nha_san_xuat",
+						"required": true
+					}
+				],
+				"templateRules": {
+					"fileFormat": "xlsx",
+					"firstRowData": 2,
+					"maxRows": 20000
+				}
+			},
+			"checking": {
+				"rules": [
+					{
+						"fieldName": "line_nbr",
+						"type": "value",
+						"minValue": "1",
+						"message": "line_nbr phải lớn hơn hoặc bằng 1."
+					}
+				]
+			},
+			"dataProcessing": {
+				"sqlStatements": {
+					"Insert": "INSERT INTO quotationPaperDetail@partition (taxCode, vat, payment) SELECT tx.tax_id, ISNULL(q.amount,0) * ISNULL(tx.tax_number,0) / 100, ISNULL(q.amount,0) + (ISNULL(q.amount,0) * ISNULL(tx.tax_number,0) / 100) FROM quotationPaperDetail@partition q CROSS APPLY (SELECT TOP 1 tax_id, tax_number FROM tax WHERE tax_number = @tax_rate AND status = 1 ORDER BY tax_id) tx",
+					"Update": "UPDATE q SET q.uom = z1.uom, q.taxCode = tx.tax_id, q.tax_rate = tx.tax_number, q.vat = ISNULL(q.amount,0) * ISNULL(tx.tax_number,0) / 100, q.payment = ISNULL(q.amount,0) + (ISNULL(q.amount,0) * ISNULL(tx.tax_number,0) / 100) FROM quotationPaperDetail@partition q CROSS APPLY (SELECT TOP 1 tax_id, tax_number FROM tax WHERE tax_number = @tax_rate AND status = 1 ORDER BY tax_id) tx join item z1 with (nolock) on q.itemCode = z1.item_id WHERE q.line_nbr = @line_nbr AND q.idGui = @idGui; UPDATE m SET m.total_quantity = d.total_quantity, m.total_amount = d.total_amount, m.total_vat = d.total_vat, m.total_payment = d.total_payment FROM QuotationPaper@partition m INNER JOIN (SELECT idGui, SUM(ISNULL(quantity,0)) AS total_quantity, SUM(ISNULL(amount,0)) AS total_amount, SUM(ISNULL(vat,0)) AS total_vat, SUM(ISNULL(payment,0)) AS total_payment FROM quotationPaperDetail@partition GROUP BY idGui) d ON m.idGui = d.idGui WHERE m.idGui = @idGui
+					insert into itemsearch (item_id, item_name, Vector, vector_dim, datetime0, idGui, nha_san_xuat)
+						select itemCode, itemNameCustomer, null, 768 , getdate(), @idGui, nha_san_xuat 
+						from quotationPaperDetail@partition a WHERE idGui = @idGui and not exists (select 1 from itemsearch z WITH (NOLOCK, INDEX = idGui) where a.idGui = z.idGui)
+					
+					insert into QuotationPaper$000000 (idGui, idVC, unitCode, customerCode, voucherCode, voucherDate, voucherNumber)
+						select idGui, idVC, unitCode, customerCode, 'Z02', voucherDate, voucherNumber
+						from quotationPaper@partition a 
+							WHERE idGui = @idGui and not exists (select 1 from QuotationPaper$000000 z WITH (NOLOCK) where a.idGui = z.idGui)
+					"
+				}
+			}
+		}
+	]
+}

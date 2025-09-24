@@ -1,0 +1,20 @@
+<div class="p-4 border-2 border-dashed rounded-lg bg-gray-50">
+  <input type="file" multiple (change)="onFileSelected($event)" class="mb-4" />
+
+  <ul class="space-y-2">
+    <li *ngFor="let file of files; let i = index"
+      class="flex items-center justify-between p-2 bg-white rounded shadow-sm">
+      <div>
+        📎 <span class="font-medium">{{ file.name }}</span>
+        <span class="text-sm text-gray-500 ml-2">
+          ({{ (file.size / 1024).toFixed(1) }} KB)
+        </span>
+      </div>
+      <button type="button" class="text-red-600 hover:text-red-800 font-bold" (click)="removeFile(i)">
+        ✕
+      </button>
+    </li>
+  </ul>
+  <!-- Import/Export -->
+ 
+</div>

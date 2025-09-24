@@ -1,0 +1,103 @@
+<!-- Nếu là chế độ đơn giản, chỉ hiện 2 nút -->
+<div *ngIf="minimalMode" class="flex flex-wrap items-center gap-2 my-4">
+  <ngx-spinner
+    bdColor="rgba(0, 0, 0, 0.6)"
+    size="medium"
+    color="#fff"
+    type="ball-clip-rotate-multiple"
+    [fullScreen]="true">
+    <p style="color: white; font-size: 20px; margin-top: 10px;">
+      Đang xử lý, vui lòng chờ...
+    </p>
+  </ngx-spinner>
+
+  <!-- Import -->
+  <div class="relative" #importMenu>
+    <button (click)="toggleImportOptions()"
+      class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition min-w-fit">
+      <mat-icon class="text-base">upload</mat-icon>
+      {{ "COMMON.IMPORT" | translate }}
+    </button>
+
+    <!-- Dropdown Import -->
+    <div *ngIf="showImportOptions"
+      class="absolute left-0 mt-1 w-40 bg-white shadow-lg rounded-md border border-gray-200 z-20 p-2">
+      <button mat-button class="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-100 text-sm rounded"
+        (click)="selectImportType('template')">
+        <mat-icon class="text-base">download</mat-icon> {{ "COMMON.DOWNLOAD_TEMPLATE" | translate }}
+      </button>
+      <button mat-button class="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-100 text-sm rounded"
+        (click)="selectImportType('import')">
+        <mat-icon class="text-base">upload_file</mat-icon> {{ "COMMON.UPLOAD_FILE" | translate }}
+      </button>
+    </div>
+
+    <!-- Hidden input -->
+    <input #importInput type="file" hidden accept=".csv, .xlsx, .xls"
+      (change)="importCSV($event, user, controll, 'import')" />
+  </div>
+
+  <!-- Export -->
+  <div class="relative" #exportMenu>
+    <button (click)="toggleExportOptions()"
+      class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition min-w-fit">
+      <mat-icon class="text-base">download</mat-icon>
+      {{ "COMMON.EXPORT" | translate }}
+    </button>
+
+    <!-- Dropdown Export -->
+    <div *ngIf="showExportOptions"
+      class="absolute left-0 mt-1 w-40 bg-white shadow-lg rounded-md border border-gray-200 z-20 p-2">
+      <button mat-button class="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-100 text-sm rounded"
+        (click)="selectExportType('pdf')">
+        <mat-icon class="text-base">picture_as_pdf</mat-icon> PDF
+      </button>
+      <button mat-button class="w-full flex items-center gap-2 px-2 py-1 hover:bg-gray-100 text-sm rounded"
+        (click)="selectExportType('excel')">
+        <mat-icon class="text-base">grid_on</mat-icon> Excel
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!minimalMode">
+  <div class="file-handle-container">
+    <h2 class="title">Quản lý dữ liệu</h2>
+    <div class="import-form-wrapper">
+      <!-- Nhập tên bảng -->
+      <input matInput [(ngModel)]="controll" placeholder="Nhập tên bảng" class="custom-input" />
+
+      <!-- Nút Import + Export -->
+      <div class="action-buttons-wrapper">
+        <!-- Input file ẩn -->
+        <input type="file" id="importFile" style="display: none" accept=".csv, .xlsx, .xls"
+          (change)="importCSV($event, user, controll, 'template')" />
+
+        <!-- Nút Import -->
+        <button mat-stroked-button color="accent" [disabled]="!controll" (click)="triggerImport('import')">
+          <mat-icon>upload</mat-icon>
+          Import Excel
+        </button>
+
+        <!-- Nút Export -->
+        <div class="export-wrapper">
+          <button mat-stroked-button color="accent" (click)="toggleExportOptions()">
+            <mat-icon>download</mat-icon>
+            Export
+          </button>
+
+          <!-- Dropdown -->
+          <div *ngIf="showExportOptions" class="export-dropdown">
+            <button mat-button (click)="exportToReport(controll, 'pdf')">
+              <mat-icon>picture_as_pdf</mat-icon> PDF
+            </button>
+            <button mat-button (click)="exportToReport(controll, 'excel')">
+              <mat-icon>grid_on</mat-icon> Excel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

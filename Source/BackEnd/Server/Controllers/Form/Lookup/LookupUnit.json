@@ -1,0 +1,24 @@
+{
+  "controller": "unit",
+  "formId": "unit",
+  "primaryKey": ["UnitCode"],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": ["UnitCode"],
+  "fields": [
+    {
+      "field": "UnitCode",
+      "header": "Mã đơn vị"
+    },
+    {
+      "field": "UnitName",
+      "header": "Tên đơn vị"
+    },
+    {
+      "field": "UnitName2",
+      "header": "Tên đơn vị (EN)"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+
+npm install xlsx --save
+
+<app-file-attachment 
+  [controller]="'YourController'" 
+  [sysKey]="'YourSysKey'">
+</app-file-attachment>
+
+CREATE TABLE Files (
+    Controller varchar(64),
+    sysKey varchar(64),
+    FileName NVARCHAR(255),
+    FileContent VARBINARY(MAX), -- lưu nội dung file
+    ContentType NVARCHAR(100)   -- ví dụ: 'application/pdf'
+);

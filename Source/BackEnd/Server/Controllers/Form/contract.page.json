@@ -1,0 +1,392 @@
+{
+	"controller": "contract",
+	"type": "voucher",
+	"formId": "contract",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z04",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Hợp đồng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"title": "Thông tin hợp đồng",
+				"class": "",
+				"formId": "Contract",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "customer_id",
+						"label": "Mã khách hàng",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "customer",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						},
+						"onChange": {
+							"api": "/api/CustomQuery/execute",
+							"params": [
+								"customerCode"
+							],
+							"dataType": [
+								"String"
+							],
+							"query": "select isnull (address, '') as address, isnull (phone_number, '') as phone , isnull (email, '') as email from customer where customer_id = @customerCode",
+							"map": {
+								"address": "address",
+								"phone": "phone",
+								"email": "email"
+							}
+						}
+					},
+					{
+						"key": "number_ddh",
+						"label": "Số ĐĐH",
+						"required": false,
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "quotationCode",
+						"label": "Mã báo giá",
+						"required": true,
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày tạo",
+						"type": "date",
+						"default": "now",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "customer_group_id",
+						"label": "Nhóm khách hàng",
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "representative",
+						"label": "Đại diện Ký hợp hợp đồng",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "position",
+						"label": "Chức vụ",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "address",
+						"label": "Địa chỉ",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "phone",
+						"label": "Điện thoại",
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "account",
+						"label": "Tài khoản",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "customer_account",
+						"label": "Tài khoản (Bên B)",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "tax_code",
+						"label": "MST",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "delivery_note",
+						"label": "Ghi chú Thời gian giao nhận hàng",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "contract_note",
+						"label": "Ghi chú Hiệu lực hợp đồng",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Tạo hợp đồng",
+								"value": "1"
+							},
+							{
+								"label": "Hủy",
+								"value": "9"
+							}
+						]
+					},
+					{
+						"key": "amount_total",
+						"label": "Tổng cộng",
+						"type": "number",
+						"disabled": true,
+						"currency": "VN",
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[amount_total] = SUM([amount])",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "amount_in_word",
+						"label": "Số tiền bằng chữ",
+						"type": "text",
+						"subtotal": true,
+						"disabled": true,
+						"required": false,
+						"placeholder": ""
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "contractDetail",
+					"formId": "contractDetail",
+					"foreignKey": "idGui, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "item_id",
+							"label": "Mã hàng",
+							"required": true,
+							"type": "lookup",
+							"width": "450px",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom as uomCode from item where item_id = @item_id",
+								"map": {
+									"uomCode": "uomCode"
+								}
+							}
+						},
+						{
+							"key": "uomCode",
+							"label": "Đơn vị tính",
+							"required": true,
+							"width": "150px",
+							"type": "lookup",
+							"multiple": false,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "quantity",
+							"label": "Số lượng",
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"amount"
+							]
+						},
+						{
+							"key": "price",
+							"label": "Đơn giá",
+							"type": "number",
+							"width": "150px",
+							"currency": "VN",
+							"trigger": [
+								"amount"
+							]
+						},
+						{
+							"key": "taxcode",
+							"label": "Mã thuế",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "tax",
+								"filter": [
+									{
+										"field": "1",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"taxcode"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select tax_number as tax_rate from tax where tax_id = @taxcode",
+								"map": {
+									"tax_rate": "tax_rate"
+								}
+							}
+						},
+						{
+							"key": "tax_rate",
+							"label": "Thuế suất",
+							"required": true,
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"vat",
+								"payment"
+							]
+						},
+						{
+							"key": "tax",
+							"label": "% VAT",
+							"type": "number",
+							"currency": "VN",
+							"width": "150px",
+							"trigger": [
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[vat] = [amount] * [tax_rate] / 100",
+										"dependencies": [
+											"amount",
+											"tax_rate"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "amount",
+							"label": "Thành tiền",
+							"currency": "VN",
+							"width": "150px",
+							"type": "number",
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[amount] = [quantity] * [price] + ([quantity] * [price])*[tax]/100",
+										"dependencies": [
+											"quantity",
+											"price"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "note",
+							"width": "150px",
+							"label": "Ghi chú",
+							"type": "text"
+						}
+					],
+					"initialData": []
+				}
+			]
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "beforeUpdate",
+					"type": "sql01",
+					"query": "exec beforeUpdateContract N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				},
+				{
+					"step": "afterUpdate",
+					"type": "sql02",
+					"query": "exec afterUpdateContract N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				}
+			]
+		}
+	}
+}

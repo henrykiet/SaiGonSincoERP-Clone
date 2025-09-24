@@ -1,0 +1,61 @@
+<div class="relative w-full">
+  <!-- Textarea -->
+  <textarea *ngIf="response"
+    class="w-full h-10 max-h-32 overflow-y-auto border border-gray-300 rounded-lg px-2 py-1 text-sm bg-white resize-none cursor-pointer"
+    [readonly]="true" (click)="togglePopup()" [value]="getDisplayText()" placeholder="Nhấn để chọn..."></textarea>
+
+  <!-- Overlay & Popup -->
+  <div *ngIf="showPopup" class="fixed inset-0 z-50 flex items-center justify-center bg-[#01162583] bg-opacity-50">
+    <div class="bg-white w-full max-w-4xl max-h-[90vh] rounded-xl shadow-xl p-4 overflow-hidden flex flex-col">
+      <div class="flex justify-between items-center mb-4">
+        <div class="flex items-center gap-4">
+          <input type="text" [(ngModel)]="searchText" (ngModelChange)="filterData()"
+            class="border px-3 py-1 rounded w-1/2 text-sm" placeholder="Tìm kiếm..." />
+          <input type="text" [(ngModel)]="searchName" (ngModelChange)="filterData()"
+            class="border px-3 py-1 rounded w-1/2 text-sm" placeholder="Tìm kiếm theo tên..." />
+        </div>
+        <button (click)="showPopup = false" class="text-gray-600 hover:text-red-500">
+          Đóng ✕
+        </button>
+      </div>
+
+      <div class="overflow-auto flex-1 rounded-xl border border-gray-300 shadow-sm">
+        <table class="min-w-full text-sm text-gray-800">
+          <!-- Header -->
+          <thead class="bg-gray-50 text-xs text-gray-600 uppercase tracking-wider sticky top-0 z-10">
+            <tr>
+              <th *ngFor="let field of response?.fields"
+                class="px-3 py-2 text-left border-b border-gray-200 font-semibold">
+                {{ field.header }}
+              </th>
+            </tr>
+          </thead>
+
+          <!-- Body -->
+          <tbody>
+            <tr *ngFor="let data of paginatedData" (click)="selectData(data[response.primaryKey[0]])"
+              class="hover:bg-blue-50 cursor-pointer transition-colors duration-150" [ngClass]="{
+                'bg-[#40a45c]': isSelected(data[response.primaryKey[0]])
+              }">
+              <td *ngFor="let field of response.fields" class="px-3 py-2 border-t border-gray-100 truncate">
+                {{ data[field.field] }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-between items-center mt-3 text-xs">
+        <div>Trang {{ currentPage + 1 }} / {{ totalPages }}</div>
+        <div class="space-x-2">
+          <button (click)="prevPage()" [disabled]="currentPage === 0" class="px-2 py-1 border rounded">
+            ←
+          </button>
+          <button (click)="nextPage()" [disabled]="currentPage + 1 >= totalPages" class="px-2 py-1 border rounded">
+            →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

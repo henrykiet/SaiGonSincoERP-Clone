@@ -1,0 +1,391 @@
+﻿{
+	"controller": "PurchaseReturnReceipt",
+	"type": "voucher",
+	"formId": "purchaseReturn",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z09",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Phiếu nhập hàng trả lại",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"title": "Thông tin phiếu nhập hàng trả lại",
+				"class": "",
+				"formId": "purchaseReturn",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "voucherNumber",
+						"label": "Số phiếu",
+						"type": "text",
+						"required": true,
+						"placeholder": "Số phiếu"
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày tạo",
+						"required": true,
+						"default": "now",
+						"type": "date",
+						"placeholder": "Chọn ngày tạo"
+					},
+					{
+						"key": "customerGroupCode",
+						"label": "Nhóm khách hàng",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "customerGroup",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "customerCode",
+						"label": "Mã khách hàng",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "customer",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "addressCustomer",
+						"label": "Địa chỉ chi tiết",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "phoneCustomer",
+						"label": "Điện thoại liên hệ",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "employeeCode",
+						"label": "Nhân viên lập phiếu",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "Employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "number_delivery",
+						"label": "Số phiếu xuất hàng",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},	
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Nhập kho",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "totalQuantity",
+						"label": "Tổng số lượng",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalQuantity] = SUM([quantity])",
+									"dependencies": [
+										"quantity"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalAmount",
+						"label": "Tổng tiền",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalAmount] = SUM([amount])",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalDiscount",
+						"label": "Tổng chiết khấu",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalDiscount] = SUM([discount])",
+									"dependencies": [
+										"discount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalPayment",
+						"label": "Tổng tiền sau chiết khấu",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"currency": "VN",
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalPayment] = SUM([payment])",
+									"dependencies": [
+										"payment"
+									],
+									"precision": 2
+								}
+							]
+						}
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "purchaseReturnDetail",
+					"formId": "purchaseReturnDetail",
+					"foreignKey": "idGui, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "item_id",
+							"label": "Mã vật tư",
+							"required": true,
+							"type": "lookup",
+							"width": "450px",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom from item where item_id = @item_id",
+								"map": {
+									"uom": "uom"
+								}
+							}
+						},
+						{
+							"key": "uom",
+							"label": "Đơn vị tính",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "quantity",
+							"label": "Số lượng",
+							"required": true,
+							"type": "number",
+							"width": "150px",
+							"trigger": [
+								"amount",
+								"discount",
+								"payment"
+							]
+						},
+						{
+							"key": "price",
+							"label": "Đơn giá",
+							"type": "number",
+							"width": "150px",
+							"currency": "VN",
+							"trigger": [
+								"amount",
+								"discount",
+								"payment"
+							]
+						},
+						{
+							"key": "amount",
+							"label": "Thành tiền",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"trigger": [
+								"discount",
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[amount] = [quantity] * [price]",
+										"dependencies": [
+											"quantity",
+											"price"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "ratioDiscount",
+							"label": "% Chiết khấu",
+							"required": true,
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"discount",
+								"payment"
+							]
+						},
+						{
+							"key": "discount",
+							"label": "Tiền chiết khấu",
+							"type": "number",
+							"currency": "VN",
+							"width": "150px",
+							"trigger": [
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[discount] = [amount] * [ratioDiscount] / 100",
+										"dependencies": [
+											"amount",
+											"ratioDiscount"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "payment",
+							"label": "Tổng cộng",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[payment] = [amount] + [discount]",
+										"dependencies": [
+											"amount",
+											"discount"
+										],
+										"precision": 0
+									}
+								]
+							}
+						}
+					],
+					"initialData": []
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

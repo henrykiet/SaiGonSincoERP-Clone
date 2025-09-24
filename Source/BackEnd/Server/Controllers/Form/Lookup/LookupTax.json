@@ -1,0 +1,20 @@
+{
+  "controller": "tax",
+  "formId": "tax",
+  "primaryKey": ["tax_id"],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": ["tax_id"],
+  "fields": [
+    {
+      "field": "tax_id",
+      "header": "Mã thuế"
+    },
+    {
+      "field": "tax_type",
+      "header": "Loại thuế"
+    }
+  ]
+}

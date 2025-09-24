@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="2025-06-29" ReportInfo.CreatorVersion="2025.2.5.0">
+  <ReportPage Name="HeaderPage">
+	  <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="103.95">
+		  <PictureObject Name="Picture1" Left="18.9" Top="18.9" Width="113.4" Height="75.6" ImageLocation="Images\SaiGonSinco_logo.png"/>
+		  <TextObject Name="Text2" Left="141.75" Top="18.9" Width="557.55" Height="18.9" Text="CTY TNHH TM &amp; XL Công nghiệp Sài Gòn" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+		  <TextObject Name="Text3" Left="141.75" Top="37.8" Width="56.7" Height="18.9" Text="Địa chỉ: " VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text5" Left="198.45" Top="37.8" Width="500.85" Height="18.9" Text="489/9 Mã Lò, P.Bình Hưng Hoà A, Bình Tân, TP.HCM" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text4" Left="141.75" Top="56.7" Width="56.7" Height="18.9" Text="ĐT:" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text7" Left="198.45" Top="56.7" Width="255.15" Height="18.9" Text="(028) 3767 2061            (028) 5426 4890" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text8" Left="453.6" Top="56.7" Width="75.6" Height="18.9" Text="-   Fax: " VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text9" Left="529.2" Top="56.7" Width="170.1" Height="18.9" Text="(028) 3750 2826" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text10" Left="198.45" Top="75.6" Width="255.15" Height="28.35" CanGrow="true" Text="saigon_sinco@yahoo.com,&#13;&#10;saigonsinco@gmail.com" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text6" Left="141.75" Top="75.6" Width="56.7" Height="18.9" Text="Email: " VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text11" Left="453.6" Top="75.6" Width="75.6" Height="18.9" Text="-   Website:" VertAlign="Center" Font="Arial, 8pt"/>
+		  <TextObject Name="Text12" Left="529.2" Top="75.6" Width="170.1" Height="18.9" Text="www.saigonsinco.com" VertAlign="Center" Font="Arial, 8pt"/>
+	  </ReportTitleBand>
+  </ReportPage>
+</Report>

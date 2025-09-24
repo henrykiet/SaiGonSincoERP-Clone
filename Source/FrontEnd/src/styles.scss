@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-form-field {
+  width: 100%;
+}
+
+.mat-mdc-dialog-container {
+  .mat-mdc-dialog-surface {
+    padding: 24px;
+  }
+}
+
+.mat-mdc-table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}

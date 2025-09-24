@@ -1,0 +1,248 @@
+{
+  "model": "Price",
+  "schema": {
+    "partition": false,
+    "fields": [
+      {
+        "name": "price_id",
+        "property": "price_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "price_name",
+        "property": "price_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "customer_id",
+        "property": "customer_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "customer_group_id",
+        "property": "customer_group_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "effective_date",
+        "property": "effective_date",
+        "type": "date",
+        "sqlType": "SMALLDATETIME"
+      },
+      {
+        "name": "expired_date",
+        "property": "expired_date",
+        "type": "date",
+        "sqlType": "SMALLDATETIME"
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(MAX)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "VARCHAR(1)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Price",
+    "columnMapping": [
+      {
+        "excelColumn": "Mã bảng giá",
+        "fieldName": "price_id",
+        "required": false
+      },
+      {
+        "excelColumn": "Tên bảng giá",
+        "fieldName": "price_name",
+        "required": true
+      },
+      {
+        "excelColumn": "Mã khách hàng",
+        "fieldName": "customer_id",
+        "required": true,
+        "clauseForiegn": "SELECT customer_id, customer_name FROM customer WHERE status = '1'"
+      },
+      {
+        "excelColumn": "Nhóm KH",
+        "fieldName": "customer_group_id",
+        "required": false,
+        "clauseForiegn": "SELECT customer_group_id, customer_group_name FROM customerGroup WHERE status = '1'"
+      },
+      {
+        "excelColumn": "Ngày hiệu lực",
+        "fieldName": "effective_date",
+        "type": "date",
+        "required": false,
+        "hide":  true
+      },
+      {
+        "excelColumn": "Ngày hết hiệu lực",
+        "fieldName": "expired_date",
+        "type": "date",
+        "required": false,
+        "hide":  true
+      },
+      {
+        "excelColumn": "Ghi chú",
+        "fieldName": "note",
+        "required": false
+      },
+      {
+        "excelColumn": "Trạng thái",
+        "fieldName": "status",
+        "required": false,
+        "hide": true
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "price_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Price name is required and maximum 256 characters."
+      },
+      {
+        "fieldName": "price_id",
+        "type": "databaseCheck",
+        "overWrite": true,
+        "checkQuery": "WHERE price_id = @price_id",
+        "threshold": "0",
+        "message": "Price ID already exists in the system."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+    }
+  },
+  "foriegnModel": [
+    {
+      "model": "PriceDetail",
+      "schema": {
+        "partition": false,
+        "fields": [
+          {
+            "name": "price_id",
+            "property": "price_id",
+            "type": "string",
+            "sqlType": "VARCHAR(50)",
+            "primaryKey": true
+          },
+          {
+            "name": "line_nbr",
+            "property": "line_nbr",
+            "type": "number",
+            "sqlType": "INT",
+            "primaryKey": true
+          },
+          {
+            "name": "item_id",
+            "property": "item_id",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "uom",
+            "property": "uom",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "price",
+            "property": "price",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "apply_date",
+            "property": "apply_date",
+            "type": "date",
+            "sqlType": "SMALLDATETIME"
+          },
+          {
+            "name": "note",
+            "property": "note",
+            "type": "string",
+            "sqlType": "NVARCHAR(MAX)"
+          }
+        ]
+      },
+      "excelIntegration": {
+        "sheetName": "PriceDetail",
+        "columnMapping": [
+          {
+            "excelColumn": "Stt",
+            "fieldName": "line_nbr",
+            "required": true
+          },
+		  {
+            "excelColumn": "Vật tư",
+            "fieldName": "item_id",
+            "required": true
+          },
+          {
+            "excelColumn": "Đơn vị tính",
+            "fieldName": "uom",
+            "required": true,
+            "clauseForiegn": "SELECT uomCode,uomName FROM uom WHERE status = '1'"
+          },
+          {
+            "excelColumn": "Giá bán",
+            "fieldName": "price",
+            "required": true
+          },
+          {
+            "excelColumn": "Ngày áp dụng",
+            "fieldName": "apply_date",
+            "type":  "date",
+            "required": false,
+            "hide":  true
+          },
+          {
+            "excelColumn": "Ghi chú",
+            "fieldName": "note",
+            "required": false
+          }
+        ],
+        "templateRules": {
+          "fileFormat": "xlsx",
+          "firstRowData": 2,
+          "maxRows": 20000
+        }
+      },
+      "checking": {
+        "rules": [
+          {
+            "fieldName": "price",
+            "type": "range",
+            "min": "0",
+            "message": "Price must be greater than or equal to 0."
+          }
+        ]
+      },
+      "dataProcessing": {
+        "sqlStatements": {
+        }
+      }
+    }
+  ]
+}

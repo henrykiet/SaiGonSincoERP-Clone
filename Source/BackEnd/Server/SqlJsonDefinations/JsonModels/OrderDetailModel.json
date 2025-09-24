@@ -1,0 +1,158 @@
+{
+  "model": "OrderDetail",
+  "schema": {
+    "fields": [
+      {
+        "name": "OrderDetailId",
+        "property": "orderDetailId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "OrderId",
+        "property": "orderId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "Orders",
+          "key": "OrderId"
+        }
+      },
+      {
+        "name": "ItemId",
+        "property": "itemId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "Quantity",
+        "property": "quantity",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "UnitPrice",
+        "property": "unitPrice",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "TaxAmount",
+        "property": "taxAmount",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "QuoteId",
+        "property": "quoteId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "QuoteDetailId",
+        "property": "quoteDetailId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "OrderDetail",
+    "columnMapping": [
+      {
+        "excelColumn": "OrderDetailId",
+        "fieldName": "OrderDetailId",
+        "required": true
+      },
+      {
+        "excelColumn": "OrderId",
+        "fieldName": "OrderId",
+        "required": true
+      },
+      {
+        "excelColumn": "ItemId",
+        "fieldName": "ItemId",
+        "required": true
+      },
+      {
+        "excelColumn": "Quantity",
+        "fieldName": "Quantity",
+        "required": true
+      },
+      {
+        "excelColumn": "UnitPrice",
+        "fieldName": "UnitPrice",
+        "required": false
+      },
+      {
+        "excelColumn": "TaxAmount",
+        "fieldName": "TaxAmount",
+        "required": false
+      },
+      {
+        "excelColumn": "QuoteId",
+        "fieldName": "QuoteId",
+        "required": false
+      },
+      {
+        "excelColumn": "QuoteDetailId",
+        "fieldName": "QuoteDetailId",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "OrderDetailId",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "OrderDetailId must be between 1 and 50 characters"
+      },
+      {
+        "fieldName": "Quantity",
+        "type": "range",
+        "min": "1",
+        "max": "10000",
+        "message": "Quantity must be between 1 and 10,000"
+      },
+      {
+        "fieldName": "UnitPrice",
+        "type": "range",
+        "min": "0",
+        "max": "100000000",
+        "message": "UnitPrice must be between 0 and 100 million"
+      },
+      {
+        "fieldName": "TaxAmount",
+        "type": "range",
+        "min": "0",
+        "max": "100000000",
+        "message": "TaxAmount must be between 0 and 100 million"
+      },
+      {
+        "fieldName": "OrderDetailId",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE OrderDetailId = @orderDetailId",
+        "threshold": "0",
+        "message": "OrderDetailId already exists in database"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF @orderDetailId IS NULL OR @orderDetailId = '' THROW 70001, 'OrderDetailId is required', 1;\nIF EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @orderDetailId) THROW 70002, 'Duplicate OrderDetailId', 1;\nINSERT INTO ChiTietDonHang (MaChiTietDonHang, MaDonHang, MaVatTu, SoLuong, DonGia, Thue_Tien, MaBaoGia, MaChiTietBaoGia) VALUES (@orderDetailId, @orderId, @itemId, @quantity, @unitPrice, @taxAmount, @quoteId, @quoteDetailId);",
+      "update": "IF @orderDetailId IS NULL THROW 70003, 'OrderDetailId is required for update', 1;\nIF NOT EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @orderDetailId) THROW 70004, 'Order detail not found', 1;\nUPDATE ChiTietDonHang SET MaDonHang = @orderId, MaVatTu = @itemId, SoLuong = @quantity, DonGia = @unitPrice, Thue_Tien = @taxAmount, MaBaoGia = @quoteId, MaChiTietBaoGia = @quoteDetailId WHERE MaChiTietDonHang = @orderDetailId;",
+      "delete": "IF @orderDetailId IS NULL THROW 70005, 'OrderDetailId is required for deletion', 1;\nIF NOT EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @orderDetailId) THROW 70006, 'Order detail not found', 1;\nDELETE FROM ChiTietDonHang WHERE MaChiTietDonHang = @orderDetailId;",
+      "myTableType": "CREATE TYPE dbo.OrderDetailTableType AS TABLE (MaChiTietDonHang VARCHAR(50) PRIMARY KEY, MaDonHang VARCHAR(50), MaVatTu VARCHAR(50), SoLuong INT, DonGia DECIMAL(18,2), Thue_Tien DECIMAL(18,2), MaBaoGia VARCHAR(50), MaChiTietBaoGia VARCHAR(50));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertOrderDetail; DROP TYPE IF EXISTS dbo.OrderDetailTableType;"
+    }
+  }
+}

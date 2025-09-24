@@ -1,0 +1,60 @@
+{
+	"controller": "order",
+	"formId": "order",
+	"action": "insert",
+	"type": "voucher",
+	"userId": "1",
+	"unit": "CTY",
+	"language": "vn",
+	"VCDate": "2025-06-16",
+	"idVC": "",
+	"primaryKey": "idGui",
+	"data": {
+		"ten_kh": "Lợi",
+		"email_kh": "loi@fast.com.vn",
+		"phone_kh": "0969711136",
+		"address_kh": "",
+		"order_code": "DH001",
+		"order_date": "2025-06-16",
+		"shipping_fee": "10000",
+		"idGui": "",
+		"details": [
+			{
+				"controllerDetail": "orderDetail",
+				"formIdDetail": "orderDetail",
+				"foreignKey": "idGui, line_nbr",
+				"data": [
+					{
+						"line_nbr": 1,
+						"idGui": "",
+						"product_code": "sp001",
+						"product": "sp001",
+						"quantity": "10",
+						"price": "100000",
+						"amount": "1000000",
+						"tax_code": "10",
+						"tax_rate": "10",
+						"tax": "100000",
+						"total": "1000000"
+					}
+				]
+			}
+		]
+	},
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "soKho",
+					"type": "sql",
+					"query": "exec postSoKho N'', N'', N'';"
+				},
+				{
+					"step": "soCai",
+					"type": "sql",
+					"query": "exec postSoCai N'', N'', N'';"
+				}
+			]
+		}
+	}
+}

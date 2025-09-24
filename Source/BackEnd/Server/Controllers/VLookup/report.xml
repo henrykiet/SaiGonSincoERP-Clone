@@ -1,0 +1,10 @@
+<VLookup>
+  <Lookup code="report">
+    <Table>report</Table>
+    <Fields>
+      <Field>Id</Field>
+      <Field>Title</Field>
+    </Fields>
+    <Where>1=1</Where>
+  </Lookup>
+</VLookup>

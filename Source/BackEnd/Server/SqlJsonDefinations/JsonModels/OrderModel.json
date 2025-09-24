@@ -1,0 +1,550 @@
+{
+  "model": "order",
+  "schema": {
+    "foriegn": [ "orderDetail" ],
+    "foriegnKey": [ "idGui" ],
+    "partition": true,
+    "fields": [
+      {
+        "name": "idGui",
+        "property": "idGui",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true,
+        "required" : true
+      },
+      {
+        "name": "customerID",
+        "property": "customerID",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "required": true
+      },
+      {
+        "name": "jobCode",
+        "property": "jobCode",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "required": true
+      },
+      {
+        "name": "voucherDate",
+        "property": "voucherDate",
+        "type": "date",
+        "sqlType": "smalldatetime",
+        "required": true
+      },
+      {
+        "name": "voucherNumber",
+        "property": "voucherNumber",
+        "type": "string",
+        "sqlType": "VARCHAR(100)",
+        "required": true
+      },
+      {
+        "name": "DeliveryDate",
+        "property": "DeliveryDate",
+        "type": "date",
+        "sqlType": "smalldatetime",
+        "required": true
+      },
+      {
+        "name": "DeliveryCust",
+        "property": "DeliveryCust",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "DeliveryAddress",
+        "property": "DeliveryAddress",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "DeliveryEmail",
+        "property": "DeliveryEmail",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "DeliveryPhone",
+        "property": "DeliveryPhone",
+        "type": "string",
+        "sqlType": "NVARCHAR(50)"
+      },
+      {
+        "name": "SaleID",
+        "property": "SaleID",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "OrderCreatorPhone",
+        "property": "OrderCreatorPhone",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "OrderCreatorFax",
+        "property": "OrderCreatorFax",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "OrderCreatorMail",
+        "property": "OrderCreatorMail",
+        "type": "string",
+        "sqlType": "VARCHAR(100)"
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(MAX)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "VARCHAR(1)",
+        "required": true
+      },
+      {
+        "name": "statusApprove",
+        "property": "statusApprove",
+        "type": "string",
+        "sqlType": "VARCHAR(10)"
+      },
+      {
+        "name": "total_quantity",
+        "property": "total_quantity",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "total_amount",
+        "property": "total_amount",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "total_vat",
+        "property": "total_vat",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "total_payment",
+        "property": "total_payment",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Order",
+    "columnMapping": [
+      {
+        "excelColumn": "idGui",
+        "fieldName": "idGui",
+        "required": true
+      },
+      {
+        "excelColumn": "Mã khách hàng",
+        "fieldName": "customerID",
+        "required": true
+      },
+      {
+        "excelColumn": "Số đơn đặt hàng",
+        "fieldName": "voucherNumber",
+        "required": true
+      },
+      {
+        "excelColumn": "Ngày tạo",
+        "fieldName": "voucherDate",
+        "required": true
+      },
+      {
+        "excelColumn": "Dự án",
+        "fieldName": "jobCode",
+        "required": true
+      },
+      {
+        "excelColumn": "Ngày giao hàng",
+        "fieldName": "DeliveryDate",
+        "required": true
+      },
+      {
+        "excelColumn": "Người liên hệ giao hàng",
+        "fieldName": "DeliveryCust",
+        "required": false
+      },
+      {
+        "excelColumn": "Điện thoại người liên hệ giao hàng",
+        "fieldName": "DeliveryPhone",
+        "required": false
+      },
+      {
+        "excelColumn": "Địa chỉ đặt hàng",
+        "fieldName": "DeliveryAddress",
+        "required": false
+      },
+      {
+        "excelColumn": "Email người liên hệ báo giá",
+        "fieldName": "DeliveryEmail",
+        "required": false
+      },
+      {
+        "excelColumn": "Mã NVKD",
+        "fieldName": "SaleID",
+        "required": false
+      },
+      {
+        "excelColumn": "Số Điện thoại người tạo",
+        "fieldName": "OrderCreatorPhone",
+        "required": false
+      },
+      {
+        "excelColumn": "Số Fax người tạo",
+        "fieldName": "OrderCreatorFax",
+        "required": false
+      },
+      {
+        "excelColumn": "Mail (Người gửi)",
+        "fieldName": "OrderCreatorMail",
+        "required": false
+      },
+      {
+        "excelColumn": "Ghi chú",
+        "fieldName": "note",
+        "required": false
+      },
+      {
+        "excelColumn": "Trạng thái",
+        "fieldName": "status",
+        "required": true
+      },
+      {
+        "excelColumn": "Trạng thái duyệt",
+        "fieldName": "statusApprove",
+        "required": false
+      },
+      {
+        "excelColumn": "Tổng số lượng",
+        "fieldName": "total_quantity",
+        "required": false
+      },
+      {
+        "excelColumn": "Tổng tiền",
+        "fieldName": "total_amount",
+        "required": false
+      },
+      {
+        "excelColumn": "Tổng thuế",
+        "fieldName": "total_vat",
+        "required": false
+      },
+      {
+        "excelColumn": "Tổng tiền sau thuế",
+        "fieldName": "total_payment",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "idGui",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "Mã đơn hàng không được để trống và tối đa 50 ký tự"
+      },
+      {
+        "fieldName": "voucherNumber",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "100",
+        "message": "Số đơn đặt hàng không được để trống và tối đa 100 ký tự"
+      },
+      //{
+      //  "fieldName": "status",
+      //  "type": "pattern",
+      //  "pattern": "^(0|1)$",
+      //  "message": "Trạng thái phải là: 0 (Lập chứng từ), 1 (Hủy)"
+      //},
+      {
+        "fieldName": "total_amount",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "Tổng tiền không hợp lệ"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF @idGui IS NULL OR @idGui = '' THROW 60001, 'idGui is required', 1;\nIF EXISTS (SELECT 1 FROM [Order] WHERE idGui = @idGui) THROW 60002, 'Duplicate idGui', 1;\nINSERT INTO [Order] (...) VALUES (...);",
+      "update": "IF @idGui IS NULL THROW 60003, 'idGui is required for update', 1;\nIF NOT EXISTS (SELECT 1 FROM [Order] WHERE idGui = @idGui) THROW 60004, 'Order not found', 1;\nUPDATE [Order] SET ... WHERE idGui = @idGui;",
+      "delete": "IF @idGui IS NULL THROW 60005, 'idGui is required for deletion', 1;\nIF NOT EXISTS (SELECT 1 FROM [Order] WHERE idGui = @idGui) THROW 60006, 'Order not found', 1;\nDELETE FROM [Order] WHERE idGui = @idGui;",
+      "myTableType": "CREATE TYPE dbo.OrderTableType AS TABLE (...);",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertOrder; DROP TYPE IF EXISTS dbo.OrderTableType;"
+    }
+  },
+  "foriegnModel": [
+    {
+      "model": "orderDetail",
+      "schema": {
+        "partition": true,
+        "fields": [
+          {
+            "name": "idGui",
+            "property": "idGui",
+            "type": "string",
+            "sqlType": "VARCHAR(50)",
+            "primaryKey": true,
+            "required": true
+          },
+          {
+            "name": "line_nbr",
+            "property": "line_nbr",
+            "type": "number",
+            "sqlType": "INT",
+            "primaryKey": true,
+            "required": true
+          },
+          {
+            "name": "itemNameCustomer",
+            "property": "itemNameCustomer",
+            "type": "string",
+            "sqlType": "NVARCHAR(250)"
+          },
+          {
+            "name": "uomCust",
+            "property": "uomCust",
+            "type": "string",
+            "sqlType": "VARCHAR(50)",
+            "required": true
+          },
+          {
+            "name": "itemCode",
+            "property": "itemCode",
+            "type": "string",
+            "sqlType": "VARCHAR(50)",
+            "required": true
+          },
+          {
+            "name": "uom",
+            "property": "uom",
+            "type": "string",
+            "sqlType": "VARCHAR(50)",
+            "required": true
+          },
+          {
+            "name": "quantity",
+            "property": "quantity",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "priceCur",
+            "property": "priceCur",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "price",
+            "property": "price",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "purchasePrice",
+            "property": "purchasePrice",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "amount",
+            "property": "amount",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "amountCur",
+            "property": "amountCur",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "taxCode",
+            "property": "taxCode",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "tax_rate",
+            "property": "tax_rate",
+            "type": "number",
+            "sqlType": "DECIMAL(5,2)"
+          },
+          {
+            "name": "vat",
+            "property": "vat",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "vatCur",
+            "property": "vatCur",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "payment",
+            "property": "payment",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "paymentCur",
+            "property": "paymentCur",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "note",
+            "property": "note",
+            "type": "string",
+            "sqlType": "NVARCHAR(MAX)"
+          }
+        ]
+      },
+      "excelIntegration": {
+        "sheetName": "OrderDetail",
+        "columnMapping": [
+          {
+            "excelColumn": "idGui",
+            "fieldName": "idGui",
+            "required": true
+          },
+          {
+            "excelColumn": "STT",
+            "fieldName": "line_nbr",
+            "required": true
+          },
+          {
+            "excelColumn": "Tên Vật tư KH",
+            "fieldName": "itemNameCustomer",
+            "required": false
+          },
+          {
+            "excelColumn": "Đơn vị tính KH",
+            "fieldName": "uomCust",
+            "required": true
+          },
+          {
+            "excelColumn": "Mã vật tư",
+            "fieldName": "itemCode",
+            "required": true
+          },
+          {
+            "excelColumn": "Đơn vị tính",
+            "fieldName": "uom",
+            "required": true
+          },
+          {
+            "excelColumn": "Số lượng",
+            "fieldName": "quantity",
+            "required": false
+          },
+          {
+            "excelColumn": "Đơn giá",
+            "fieldName": "price",
+            "required": false
+          },
+          {
+            "excelColumn": "Giá mua",
+            "fieldName": "purchasePrice ",
+            "required": false
+          },
+          {
+            "excelColumn": "Thành tiền",
+            "fieldName": "amount",
+            "required": false
+          },
+          {
+            "excelColumn": "Mã thuế",
+            "fieldName": "taxCode",
+            "required": false
+          },
+          {
+            "excelColumn": "Thuế suất",
+            "fieldName": "tax_rate",
+            "required": false
+          },
+          {
+            "excelColumn": "Thuế VAT",
+            "fieldName": "vat",
+            "required": false
+          },
+          {
+            "excelColumn": "Tổng cộng",
+            "fieldName": "payment",
+            "required": false
+          },
+          {
+            "excelColumn": "Ghi chú",
+            "fieldName": "note",
+            "required": false
+          }
+        ],
+        "templateRules": {
+          "fileFormat": "xlsx",
+          "firstRowData": 2,
+          "maxRows": 20000
+        }
+      },
+      "checking": {
+        "rules": [
+          {
+            "fieldName": "itemCode",
+            "type": "length",
+            "minLength": "1",
+            "maxLength": "50",
+            "message": "Mã vật tư không được để trống"
+          },
+          {
+            "fieldName": "uom",
+            "type": "length",
+            "minLength": "1",
+            "maxLength": "50",
+            "message": "Đơn vị tính không hợp lệ"
+          },
+          {
+            "fieldName": "quantity",
+            "type": "range",
+            "min": "0",
+            "max": "100000",
+            "message": "Số lượng phải từ 0 đến 100000"
+          }
+        ]
+      },
+      "dataProcessing": {
+        "sqlStatements": {
+          "insert": "INSERT INTO OrderDetail (...) VALUES (...);",
+          "update": "UPDATE OrderDetail SET ... WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+          "delete": "DELETE FROM OrderDetail WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+          "myTableType": "CREATE TYPE [dbo].[OrderDetailTableType] AS TABLE (idGui VARCHAR(50), line_nbr INT PRIMARY KEY, itemNameCustomer NVARCHAR(250), uomCust VARCHAR(50), itemCode VARCHAR(50), uom VARCHAR(50), quantity DECIMAL(18,2), priceCur DECIMAL(18,2), price DECIMAL(18,2), purchasePrice DECIMAL(18,2), amount DECIMAL(18,2), amountCur DECIMAL(18,2), taxCode VARCHAR(50), tax_rate DECIMAL(5,2), vat DECIMAL(18,2), vatCur DECIMAL(18,2), payment DECIMAL(18,2), paymentCur DECIMAL(18,2), note NVARCHAR(MAX));",
+          "dropTableType": "DROP TYPE IF EXISTS [dbo].[OrderDetailTableType];"
+        }
+      }
+    }
+
+  ]
+}

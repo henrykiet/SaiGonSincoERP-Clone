@@ -1,0 +1,149 @@
+{
+	"controller": "order",
+	"type": "voucher",
+	"idVC": "",
+	"title": "Quản lý khách hàng & đơn hàng",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Khách hàng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"typeForm": "master",
+				"formId": "DonHang",
+				"primaryKey": "idGui",
+				"title": "Thông tin khách hàng",
+				"fields": [
+					{
+						"key": "name",
+						"label": "Tên",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập tên khách hàng"
+					},
+					{
+						"key": "email",
+						"label": "Email",
+						"type": "email",
+						"placeholder": "example@gmail.com"
+					,
+					{
+						"key": "phone",
+						"label": "SĐT",
+						"type": "text",
+						"placeholder": "Nhập số điện thoại"
+					},
+					{
+						"key": "address",
+						"label": "SĐT",
+						"type": "text",
+						"placeholder": "Nhập số điện thoại"
+					}
+				],
+				
+				"initialData": {
+					"name": "LOI",
+					"email": "123213@gmail.com",
+					"phone": "",
+					"address": "zzzz"
+				}
+			}
+		},
+		{
+			"title": "Đơn hàng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"typeForm": "master",
+				"formId": "DonHang",
+				"primaryKey": "idGui",
+				"title": "Thông tin đơn hàng",
+				"class": "",
+				"fields": [
+					{
+						"key": "order_code",
+						"label": "Mã đơn",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập mã đơn hàng"
+					},
+					{
+						"key": "order_date",
+						"label": "Ngày đặt",
+						"type": "date",
+						"placeholder": "Chọn ngày đặt hàng"
+					},
+					{
+						"key": "shipping_fee",
+						"label": "Phí vận chuyển",
+						"type": "number",
+						"default": 50000,
+						"placeholder": "Nhập phí vận chuyển"
+					}
+				],
+				"initialData": {
+					"order_code": "zzz",
+					"order_date": "12313123123",
+					"shipping_fee": "zzz"
+				}
+			},
+			"detail": {
+				"typeForm": "detail",
+				"formId": "DonHangCT1",
+				"primaryKey": "idGui,product_code",
+				"title": "Chi tiết đơn hàng",
+				"entity": "OrderItem",
+				"foreignKey": "order_code",
+				"fields": [
+					{
+						"key": "product_code",
+						"label": "Mã sản phẩm",
+						"type": "text"
+					},
+					{
+						"key": "product",
+						"label": "Sản phẩm",
+						"type": "text"
+					},
+					{
+						"key": "quantity",
+						"label": "Số lượng",
+						"type": "number",
+						"min": 1,
+						"placeholder": "Nhập số lượng"
+					},
+					{
+						"key": "price",
+						"label": "Đơn giá",
+						"type": "number",
+						"placeholder": "Nhập đơn giá"
+					},
+					{
+						"key": "total",
+						"label": "Thành tiền",
+						"type": "number",
+						"disabled": true,
+						"placeholder": "Tự động tính"
+					}
+				],
+				
+				"initialData": []
+			}
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "soKho",
+					"type": "sql",
+					"query": "exec postSoKho @idGui, @name, @email, @phone, @order_code, @order_date, @shipping_fee;"
+				},
+				{
+					"step": "soCai",
+					"type": "sql",
+					"query": "exec postSoCai @idGui, @name, @email, @phone, @order_code, @order_date, @shipping_fee;"
+				}
+			]
+		}
+	}
+}

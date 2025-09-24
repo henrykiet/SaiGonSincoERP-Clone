@@ -1,0 +1,498 @@
+﻿{
+	"controller": "goodsReceipt",
+	"type": "voucher",
+	"formId": "goodsReceipt",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z10",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Phiếu nhập hàng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"title": "Thông tin phiếu nhập hàng",
+				"class": "",
+				"formId": "goodsReceipt",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "number_invoice",
+						"label": "Số hóa đơn",
+						"required": false,
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "voucherNumber",
+						"label": "Số phiếu",
+						"type": "text",
+						"required": true,
+						"placeholder": "Số phiếu"
+					},
+					{
+						"key": "receipt",
+						"label": "Nhận hàng",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Chưa nhận",
+								"value": "0"
+							},
+							{
+								"label": "Đã nhận",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày chứng từ",
+						"required": true,
+						"default": "now",
+						"type": "date",
+						"placeholder": "Chọn ngày chứng từ"
+					},
+					{
+						"key": "supplierCode",
+						"label": "Mã cung cấp",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "Supplier",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "addressSupplier",
+						"label": "Địa chỉ",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "phoneSupplier",
+						"label": "Điện thoại",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "emailSupplier",
+						"label": "Email",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "employeeCode",
+						"label": "Nhân viên",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "Employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "term",
+						"label": "Kỳ hạn thanh toán",
+						"type": "number",
+						"placeholder": ""
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Tạo phiếu",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "totalQuantity",
+						"label": "Tổng số lượng",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalQuantity] = SUM([quantity])",
+									"dependencies": [
+										"quantity"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalAmount",
+						"label": "Tổng tiền",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalAmount] = SUM([amount])",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalDiscount",
+						"label": "Tổng chiết khấu",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalDiscount] = SUM([discount])",
+									"dependencies": [
+										"discount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalTax",
+						"label": "Tổng thuế",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalTax] = SUM([tax])",
+									"dependencies": [
+										"tax"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalPayment",
+						"label": "Tổng thanh toán",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"currency": "VN",
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalPayment] = SUM([payment])",
+									"dependencies": [
+										"payment"
+									],
+									"precision": 2
+								}
+							]
+						}
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "goodsReceiptDetail",
+					"formId": "goodsReceiptDetail",
+					"foreignKey": "idGui, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "item_id",
+							"label": "Mã vật tư",
+							"required": true,
+							"type": "lookup",
+							"width": "450px",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom from item where item_id = @item_id",
+								"map": {
+									"uom": "uom"
+								}
+							}
+						},
+						{
+							"key": "uom",
+							"label": "Đơn vị tính",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "quantity",
+							"label": "Số lượng",
+							"required": true,
+							"type": "number",
+							"width": "150px",
+							"trigger": [
+								"amount",
+								"tax",
+								"payment"
+							]
+						},
+						{
+							"key": "price",
+							"label": "Đơn giá",
+							"type": "number",
+							"width": "150px",
+							"currency": "VN",
+							"trigger": [
+								"amount",
+								"tax",
+								"payment"
+							]
+						},
+						{
+							"key": "amount",
+							"label": "Thành tiền",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"trigger": [
+								"tax",
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[amount] = [quantity] * [price]",
+										"dependencies": [
+											"quantity",
+											"price"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "ratioDiscount",
+							"label": "% Chiết khấu",
+							"required": true,
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"discount",
+								"payment"
+							]
+						},
+						{
+							"key": "discount",
+							"label": "Tiền chiết khấu",
+							"type": "number",
+							"currency": "VN",
+							"width": "150px",
+							"trigger": [
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[discount] = [amount] * [ratioDiscount] / 100",
+										"dependencies": [
+											"amount",
+											"ratioDiscount"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "taxCode",
+							"label": "Mã thuế",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "tax",
+								"filter": [
+									{
+										"field": "1",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"taxCode"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select tax_number as tax_rate from tax where tax_id = @taxCode",
+								"map": {
+									"tax_rate": "tax_rate"
+								}
+							}
+						},
+						{
+							"key": "tax_rate",
+							"label": "Thuế suất",
+							"required": true,
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"tax",
+								"payment"
+							]
+						},
+						{
+							"key": "tax",
+							"label": "Thuế tax",
+							"type": "number",
+							"currency": "VN",
+							"width": "150px",
+							"trigger": [
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[tax] = [amount] * [tax_rate] / 100",
+										"dependencies": [
+											"amount",
+											"tax_rate"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "payment",
+							"label": "Tổng cộng",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[payment] = [amount] + [tax] - [discount]",
+										"dependencies": [
+											"amount",
+											"tax",
+											"discount"
+										],
+										"precision": 0
+									}
+								]
+							}
+						}
+					],
+					"initialData": []
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "beforeUpdate",
+					"type": "sql01",
+					"query": "exec beforeUpdateGoodsReceipt N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				},
+				{
+					"step": "afterUpdate",
+					"type": "sql02",
+					"query": "exec afterUpdateGoodsReceipt N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				}
+			]
+		}
+	}
+}

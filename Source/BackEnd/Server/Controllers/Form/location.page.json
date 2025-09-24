@@ -1,0 +1,143 @@
+{
+  "controller": "location",
+  "type": "list",
+  "formId": "location",
+  "primaryKey": [ "province_code", "district_code", "ward_code" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Danh mục Tỉnh thành – Xã phường",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin địa bàn hành chính",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "location",
+        "primaryKey": [ "province_code", "district_code", "ward_code" ],
+        "title": "Thông tin Tỉnh thành – Xã phường",
+        "fields": [
+          {
+            "key": "province_code",
+            "label": "Mã tỉnh thành (mới)",
+            "type": "lookup",
+            "required": true,
+            "placeholder": "Chọn mã tỉnh thành",
+            "default": {
+              "controller": "province",
+              "filter": []
+            }
+          },
+          {
+            "key": "province_name",
+            "label": "Tên tỉnh thành",
+            "type": "text",
+            "required": true,
+            "readonly": true
+          },
+          {
+            "key": "district_code",
+            "label": "Mã quận huyện (mới)",
+            "type": "lookup",
+            "required": true,
+            "placeholder": "Chọn mã quận huyện",
+            "default": {
+              "controller": "district",
+              "filter": [
+              ]
+            }
+          },
+          {
+            "key": "district_name",
+            "label": "Tên quận huyện",
+            "type": "text",
+            "required": true,
+            "readonly": true
+          },
+          {
+            "key": "ward_code",
+            "label": "Mã xã phường (mới)",
+            "type": "lookup",
+            "required": true,
+            "placeholder": "Chọn mã xã phường",
+            "default": {
+              "controller": "ward",
+              "filter": [
+              ]
+            }
+          },
+          {
+            "key": "ward_name",
+            "label": "Tên xã phường",
+            "type": "text",
+            "required": true,
+            "readonly": true
+          },
+          {
+            "key": "unit_type",
+            "label": "Loại đơn vị hành chính",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Phường",
+                "value": "Phường"
+              },
+              {
+                "label": "Xã",
+                "value": "Xã"
+              },
+              {
+                "label": "Thị trấn",
+                "value": "Thị trấn"
+              }
+            ]
+          },
+          {
+            "key": "ward_code_old",
+            "label": "Mã xã phường (cũ)",
+            "type": "text"
+          },
+          {
+            "key": "district_code_old",
+            "label": "Mã quận huyện (cũ)",
+            "type": "text"
+          },
+          {
+            "key": "province_code_old",
+            "label": "Mã tỉnh thành (cũ)",
+            "type": "text"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Ngừng hạot động",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "key": "last_update_date",
+            "label": "Ngày cập nhật bản đồ hành chính",
+            "type": "date"
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

@@ -1,0 +1,175 @@
+﻿{
+  "controller": "item",
+  "type": "list",
+  "formId": "item",
+  "primaryKey": [ "item_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Danh mục vật tư",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "item",
+        "primaryKey": "item_id",
+        "title": "Thông tin vật tư",
+        "fields": [
+          {
+            "key": "item_id",
+            "label": "Mã vật tư",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã vật tư"
+          },
+          {
+            "key": "item_name",
+            "label": "Tên vật tư",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên vật tư"
+          },
+          {
+            "key": "group_item_id",
+            "label": "Mã nhóm",
+            "type": "lookup",
+            "required": true,
+            "placeholder": "Nhập mã nhóm",
+            "default": {
+              "controller": "itemGroup",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "uom",
+            "label": "Đơn vị tính",
+            "type": "lookup",
+            "multiple": false,
+            "required": true,
+            "default": {
+              "controller": "uom",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "purchase_price",
+            "label": "Đơn giá mua",
+            "type": "number",
+            "required": false,
+			"currency": "VN",
+            "min": 0,
+            "placeholder": "Nhập đơn giá mua"
+          },
+          {
+            "key": "sale_price",
+            "label": "Đơn giá bán",
+            "type": "number",
+            "required": false,
+			"currency": "VN",
+            "min": 0,
+            "placeholder": "Nhập đơn giá bán"
+          },
+          {
+            "key": "is_raw_material",
+            "label": "Nguyên liệu",
+            "type": "select",
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Có",
+                "value": "0"
+              },
+              {
+                "label": "Không",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "key": "is_finished_good",
+            "label": "Thành phẩm",
+            "type": "select",
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Có",
+                "value": "0"
+              },
+              {
+                "label": "Không",
+                "value": "1"
+              }
+            ]
+          },
+          {
+            "key": "description",
+            "label": "Mô tả",
+            "type": "text",
+            "placeholder": "Nhập mô tả"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Không hoạt động",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "key": "min_inventory",
+            "label": "Tồn kho tối thiểu",
+            "type": "number",
+            "placeholder": "Nhập tồn kho tối thiểu"
+          },
+          {
+            "key": "origin",
+            "label": "Xuất xứ",
+            "type": "text",
+            "placeholder": "Nhập xuất xứ"
+          },
+          {
+            "key": "max_inventory",
+            "label": "Tồn kho tối đa",
+            "type": "number",
+            "placeholder": "Nhập tồn kho tối đa"
+          },
+          {
+            "key": "manufacturer",
+            "label": "Nhà sản xuất",
+            "type": "text",
+            "placeholder": "Nhập nhà sản xuất"
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

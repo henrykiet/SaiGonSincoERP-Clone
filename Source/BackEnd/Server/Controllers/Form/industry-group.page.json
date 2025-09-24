@@ -1,0 +1,106 @@
+{
+	"controller": "industry-group",
+	"type": "list",
+	"formId": "industryGroup",
+	"primaryKey": [
+		"industry_group_id"
+	],
+	"idVC": "",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Danh mục Nhóm ngành hàng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"typeForm": "master",
+				"formId": "industryGroup",
+				"primaryKey": "industry_group_id",
+				"title": "Thông tin nhóm ngành hàng",
+				"fields": [
+					{
+						"key": "industry_group_id",
+						"label": "Mã ngành",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập mã ngành"
+					},
+					{
+						"key": "industry_group_name",
+						"label": "Tên ngành",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập tên ngành"
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text",
+						"required": false,
+						"placeholder": "Nhập ghi chú"
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"defaultValue": "1",
+						"options": [
+							{
+								"label": "Đang hoạt động",
+								"value": "1"
+							},
+							{
+								"label": "Không hoạt động",
+								"value": "0"
+							}
+						]
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết nhóm vật tư",
+					"controllerDetail": "itemGroup",
+					"formId": "itemGroup",
+					"foreignKey": "industry_group_id",
+					"fields": [
+						{
+							"key": "item_group_id",
+							"label": "Mã nhóm",
+							"type": "text"
+						},
+						{
+							"key": "item_group_name",
+							"label": "Tên nhóm hàng",
+							"type": "text"
+						},
+						{
+							"key": "industry_group_id",
+							"label": "Ngành hàng",
+							"type": "text"
+						},
+						{
+							"key": "group_index",
+							"label": "Thứ tự hiển thị",
+							"type": "number"
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"type": "text"
+						}
+					],
+					"initialData": []
+				}
+			]
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

@@ -1,0 +1,186 @@
+{
+
+  "FILTER": {
+    "CLEAR_FILTER": "🗑️ Xóa bộ lọc",
+    "MODE": "Chế độ lọc:",
+    "ADD_ROW": "+ Thêm dòng",
+    "EMPTY_ADD_ROW": "Chưa có dữ liệu. Nhấn 'Thêm dòng' để bắt đầu.",
+    "ACTION": "Thao tác",
+    "NOT_FOUND": "Không tìm thấy kết quả phù hợp với bộ lọc.",
+    "REMOVE_ALL": "🗑️ Xóa tất cả bộ lọc",
+    "CLEAR_ALL": "🗑️ Xóa tất cả bộ lọc",
+    "ADD_FILTER": "🗑️ Thêm bộ lọc",
+    "NO_FILTERS_APPLIED": "Không có dữ liệu lọc",
+    "SELECT_COLUMN": "Chọn cột",
+    "COLUMN": "Cột lọc",
+    "OPERATOR": "Toán tử",
+    "VALUE": "Giá trị",
+    "SELECT_OPERATOR": "Chọn toán tử",
+    "OPERATORS": {
+      "CONTAINS": "Chứa",
+      "NOT_CONTAINS": "Không chứa",
+      "EQUALS": "Bằng",
+      "NOT_EQUALS": "Không bằng",
+      "STARTS_WITH": "Bắt đầu bằng",
+      "ENDS_WITH": "Kết thúc bằng",
+      "IS_EMPTY": "Trống",
+      "IS_NOT_EMPTY": "Không trống",
+      "GREATER_THAN": "Lớn hơn",
+      "GREATER_EQUAL": "Lớn hơn hoặc bằng",
+      "LESS_THAN": "Nhỏ hơn",
+      "LESS_EQUAL": "Nhỏ hơn hoặc bằng",
+      "BETWEEN": "Trong khoảng",
+      "ON": "Vào ngày",
+      "NOT_ON": "Không vào ngày",
+      "AFTER": "Sau",
+      "ON_AFTER": "Vào hoặc sau",
+      "BEFORE": "Trước",
+      "ON_BEFORE": "Vào hoặc trước",
+      "IS": "Là",
+      "IS_NOT": "Không là"
+    }
+  },
+  "GRID": {
+    "CUSTOMER": "Khách hàng",
+    "CUSTOMER_GROUP": "Nhóm khách hàng",
+    "COMPANY": "Công ty",
+    "ITEM": "Vật tư",
+    "QUOTATION_PAPER": "Báo giá",
+    "ORDER": "Đơn hàng",
+    "UOM": "Đơn vị tính"
+  },
+  "COMMON": {
+    "ACTION": "Hành động",
+    "STATUS": "Trạng thái",
+    "VIEW": "Xem",
+    "EDIT": "Sửa",
+    "DELETE": "Xóa",
+    "ADD_NEW": "Thêm mới",
+    "IMPORT": "Nhập dữ liệu",
+    "EXPORT": "Xuất dữ liệu",
+    "DOWNLOAD_TEMPLATE": "Tải mẫu",
+    "UPLOAD_FILE": "Chọn tệp",
+    "LOADING": "Đang tải....",
+    "CANCEL": "Hủy",
+    "SAVE": "Lưu",
+    "SELECT": "Chọn",
+    "LANGUAGE": "Ngôn ngữ",
+    "ENTER": "Nhập"
+  },
+  "POPUP": {
+    "CUSTOMER": {
+      "CODE": "Mã KH",
+      "NAME": "Tên Khách hàng",
+      "GROUP": "Nhóm / Loại khách hàng",
+      "PHONE": "SĐT",
+      "EMAIL": "Email",
+      "ADDRESS": "Địa chỉ đăng ký",
+      "CITY": "Tỉnh/Thành phố",
+      "DISTRICT": "Quận/Huyện",
+      "STATUS": "Trạng thái"
+    },
+    "CUSTOMER_GROUP": {
+      "ID": "Mã nhóm",
+      "NAME": "Tên nhóm",
+      "NOTE": "Ghi chú",
+      "STATUS": "Trạng thái"
+    },
+    "COMPANY": {
+      "ID": "Mã công ty",
+      "NAME": "Tên công ty",
+      "ADDRESS": "Địa chỉ",
+      "PHONE_NUMBER": "Số điện thoại bàn",
+      "FAX_NUMBER": "Số FAX",
+      "MST": "Mã số thuế"
+    },
+    "ITEM": {
+      "ID": "Mã vật tư",
+      "NAME": "Tên vật tư",
+      "GROUP_ID": "Mã nhóm",
+      "GROUP_NAME": "Tên nhóm hàng",
+      "UOM": "Đơn vị tính",
+      "PURCHASE_PRICE": "Đơn giá mua",
+      "SALE_PRICE": "Đơn giá bán",
+      "MIN_INVENTORY": "Tồn kho tối thiểu",
+      "MAX_INVENTORY": "Tồn kho tối đa",
+      "STATUS": "Trạng thái"
+    },
+    "UOM": {
+      "TITLE": "Danh mục đơn vị tính",
+      "FORM_TITLE": "Thông tin đơn vị tính",
+      "CODE": "Mã đvt",
+      "NAME": "Tên đvt",
+      "NAME_VN": "Tên đvt (VN)",
+      "NAME_EN": "Tên đvt (EN)",
+      "ALIAS": "Tên khác",
+      "STATUS": "Trạng thái",
+      "ACTIVE": "Đang hoạt động",
+      "LOCKED": "Bị khóa",
+      "PLACEHOLDER_CODE": "Nhập đvt",
+      "PLACEHOLDER_NAME": "Nhập tên đvt",
+      "PLACEHOLDER_ALIAS": "Nhập tên khác"
+    },
+    "QUOTATION_PAPER": {
+      "VOUCHER_DATE": "Ngày báo giá",
+      "VOUCHER_NUMBER": "Số báo giá",
+      "CUSTOMER_CODE": "Khách hàng",
+      "JOB_CODE": "Dự án",
+      "CONTACT_PERSON": "Người liên hệ báo giá",
+      "PHONE_PERSON": "Điện thoại",
+      "EMAIL_PERSON": "Email",
+      "STATUS": "Trạng thái"
+    },
+    "ORDER": {
+      "VOUCHER_DATE": "Ngày báo giá",
+      "VOUCHER_NUMBER": "Số báo giá",
+      "CUSTOMER_ID": "Khách hàng",
+      "JOB_CODE": "Dự án",
+      "DELIVERY_DATE": "Ngày đơn hàng",
+      "DELIVERY_CUST": "Thông tin đơn hàng",
+      "DELIVERY_ADDRESS": "Địa chỉ",
+      "STATUS": "Trạng thái"
+    },
+    "receipt": {
+      "title": "Phiếu thu",
+      "voucherDate": "Ngày tạo",
+      "voucherNumber": "Số phiếu thu",
+      "customerCode": "Mã khách hàng",
+      "invoiceNumber": "Số hóa đơn",
+      "status": "Trạng thái"
+    },
+    "ACCOUNT_SINCO": {
+      "CODE": "Mã tài khoản Sinco",
+      "NAME": "Tên tài khoản",
+      "TYPE": "Hình thức sử dụng",
+      "BANK_NAME": "Ngân hàng",
+      "ACCOUNT_NUMBER": "Số tài khoản",
+      "BANK_BRANCH": "Chi nhánh ngân hàng",
+      "NOTE": "Ghi chú",
+      "STATUS": "Trạng thái"
+    },
+    "INCOME_EXPENDITURE": {
+      "TYPE": "Loại thu chi",
+      "CODE": "Mã thu chi",
+      "NAME_VN": "Tên thu chi (VN)",
+      "NAME_EN": "Tên thu chi (EN)",
+      "SERIAL": "Stt sắp xếp",
+      "STATUS": "Trạng thái"
+    },
+    "LOCATION": {
+      "PROVINCE_CODE": "Mã tỉnh thành (mới)",
+      "PROVINCE_NAME": "Tên tỉnh thành",
+      "DISTRICT_CODE": "Mã quận huyện (mới)",
+      "DISTRICT_NAME": "Tên quận huyện",
+      "WARD_CODE": "Mã xã phường (mới)",
+      "WARD_NAME": "Tên xã phường",
+      "UNIT_TYPE": "Loại đơn vị hành chính",
+      "STATUS": "Trạng thái"
+    },
+    "EMPLOYEE_ROLE": {
+      "CODE": "Mã chức vụ",
+      "NAME": "Tên chức vụ",
+      "STATUS": "Trạng thái"
+    }
+  }
+}
+

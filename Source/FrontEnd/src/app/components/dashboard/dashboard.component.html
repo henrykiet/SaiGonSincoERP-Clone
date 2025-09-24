@@ -1,0 +1,46 @@
+<div class="dashboard">
+  <div class="header">
+    <div class="header-left">
+      <h1>Dashboard</h1>
+      <div class="date-range">
+        <span>Hôm nay: {{ today | date:'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="refresh-btn" (click)="refreshData()" [disabled]="isLoading">
+        <i class="fas fa-sync-alt" [class.fa-spin]="isLoading"></i>
+        Làm mới
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
+  <div class="content" [class.loading]="isLoading">
+    <div class="statistics-grid">
+      <app-statistics-card
+        *ngFor="let stat of statistics"
+        [title]="stat.title"
+        [value]="stat.value"
+        [icon]="stat.icon"
+        [trend]="stat.trend"
+        [trendText]="stat.trendText"
+        [trendUp]="stat.trendUp"
+        [color]="stat.color">
+      </app-statistics-card>
+    </div>
+
+    <div class="charts-grid">
+      <app-chart-card
+        *ngFor="let chart of charts"
+        [title]="chart.title"
+        [chartType]="chart.type"
+        [data]="chart.data"
+        [labels]="chart.labels"
+        [color]="chart.color">
+      </app-chart-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,212 @@
+{
+  "controller": "employee",
+  "type": "list",
+  "formId": "employee",
+  "primaryKey": [ "employee_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Quản lý nhân viên",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin nhân viên",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "employee",
+        "primaryKey": "employee_id",
+        "title": "Thông tin nhân viên",
+        "fields": [
+          {
+            "key": "employee_id",
+            "label": "Mã nhân viên",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã nhân viên"
+          },
+
+          {
+            "key": "employee_role_id",
+            "label": "Vai trò",
+            "type": "lookup",
+            "multiple": false,
+            "required": true,
+            "default": {
+              "controller": "employeeRole",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "full_name",
+            "label": "Họ và tên",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập họ tên"
+          },
+          {
+            "key": "abbreviation",
+            "label": "Tên viết tắt",
+            "type": "text",
+            "required": false,
+            "placeholder": "Nhập viết tắt"
+          },
+          {
+            "key": "gender",
+            "label": "Giới tính",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Nam",
+                "value": "M"
+              },
+              {
+                "label": "Nữ",
+                "value": "F"
+              }
+            ]
+          },
+          {
+            "key": "birth_date",
+            "label": "Ngày sinh",
+            "type": "date",
+            "required": true
+          },
+          {
+            "key": "starting_date",
+            "label": "Ngày bắt đầu làm việc",
+            "type": "date",
+            "required": true
+          },
+          {
+            "key": "end_date",
+            "label": "Ngày nghỉ việc",
+            "type": "date",
+            "required": false
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang làm",
+                "value": "1"
+              },
+              {
+                "label": "Đã nghỉ",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "key": "email",
+            "label": "Email",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "phone_number",
+            "label": "Số điện thoại",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "note",
+            "label": "Ghi chú",
+            "type": "text",
+            "required": false
+          },
+          {
+            "key": "reason_leave_job",
+            "label": "Lý do nghỉ việc",
+            "type": "text",
+            "required": false
+          }
+        ],
+        "initialData": {}
+      },
+      "detail": [
+        {
+          "title": "Thông tin liên hệ",
+          "controllerDetail": "employeeAddress",
+          "formId": "employeeAddress",
+          "foreignKey": "employee_id",
+          "fields": [
+            {
+              "key": "line_nbr",
+              "label": "Stt",
+              "disabled": true,
+              "type": "text"
+            },
+            {
+              "key": "employee_address",
+              "label": "Địa chỉ",
+              "type": "text"
+            },
+            {
+              "key": "phone_number",
+              "label": "Số điện thoại",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "label": "Email",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "title": "Thông tin thu thập",
+          "controllerDetail": "employeeCollectedInfo",
+          "formId": "employeeCollectedInfo",
+          "foreignKey": "employee_id",
+          "fields": [
+            {
+              "key": "line_nbr",
+              "label": "Stt",
+              "disabled": true,
+              "type": "text"
+            },
+            {
+              "key": "salary",
+              "label": "Lương",
+              "type": "text"
+            },
+            {
+              "key": "income_type",
+              "label": "Loại thu nhập",
+              "type": "text"
+            },
+            {
+              "key": "working_day",
+              "label": "Số ngày công",
+              "type": "number"
+            },
+            {
+              "key": "note",
+              "label": "Ghi chú",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tệp đính kèm",
+      "type": "file-attachment"
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

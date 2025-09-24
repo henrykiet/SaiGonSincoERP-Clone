@@ -1,0 +1,231 @@
+﻿{
+  "controller": "customer",
+  "type": "list",
+  "formId": "customer",
+  "primaryKey": [ "customer_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Khách hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "customer",
+        "primaryKey": "customer_id",
+        "title": "Thông tin khách hàng",
+        "fields": [
+          {
+            "key": "customer_id",
+            "label": "Mã khách hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã khách hàng",
+            "onChange": {
+              "api": "/api/CustomQuery/execute",
+              "params": [ "customer_id" ],
+              "dataType": [ "String" ],
+              "query": "SELECT address FROM customer WHERE customer_id = @customer_id",
+              "map": {
+                "address": "address"
+              }
+            }
+          },
+          {
+            "key": "customer_name",
+            "label": "Tên khách hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên khách hàng"
+          },
+          {
+            "key": "customer_group_id",
+            "label": "Nhóm / Loại khách hàng",
+            "type": "lookup",
+            "required": false,
+            "placeholder": "Nhập nhóm hoặc loại khách hàng",
+            "default": {
+              "controller": "customerGroup",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "represent_birthday",
+            "label": "Ngày sinh người đại diện",
+            "type": "date",
+            "required": false,
+            "placeholder": "Nhập ngày sinh"
+          },
+          {
+            "key": "debt_limit",
+            "label": "Hạn mức công nợ",
+            "currency": "VN",
+            "type": "number",
+            "required": false,
+            "placeholder": "Nhập hạn mức"
+          },
+          {
+            "key": "phone_number",
+            "label": "Số điện thoại",
+            "type": "text",
+            "placeholder": "Nhập số điện thoại",
+            "required": true
+          },
+          {
+            "key": "email",
+            "label": "Email",
+            "type": "text",
+            "required": true
+          },
+          {
+            "key": "address",
+            "label": "Địa chỉ đăng ký",
+            "type": "text",
+            "placeholder": "Nhập địa chỉ",
+            "required": false
+          },
+          {
+            "key": "city",
+            "label": "Thành phố",
+            "placeholder": "Thành phố",
+            "type": "text",
+            "required": true
+          },
+          {
+            "key": "district",
+            "label": "Quận/Huyện",
+            "type": "text",
+            "placeholder": "Nhập Quận/Huyện",
+            "required": false
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Bị khóa",
+                "value": "0"
+              }
+            ]
+          },
+          {
+            "key": "note",
+            "label": "Ghi chú",
+            "type": "text",
+            "placeholder": "Nhập ghi chú",
+            "required": false
+          },
+          {
+            "key": "supplier_id",
+            "label": "ID nhà cung cấp",
+            "type": "text",
+            "placeholder": "Nhập ID NCC",
+            "required": false
+          }
+        ],
+        "initialData": {}
+      },
+      "detail": [
+        {
+          "title": "Chi tiết Thông tin liên hệ",
+          "controllerDetail": "customerDetail",
+          "formId": "customerDetail",
+          "foreignKey": "customer_id",
+          "fields": [
+            {
+              "key": "name",
+              "label": "Tên người liên hệ",
+              "type": "text"
+            },
+            {
+              "key": "role",
+              "label": "Chức vụ",
+              "type": "text"
+            },
+            {
+              "key": "phone_number",
+              "label": "Số điện thoại",
+              "type": "text"
+            },
+            {
+              "key": "email",
+              "label": "Email",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "label": "Địa chỉ liên hệ",
+              "type": "text"
+            },
+            {
+              "key": "note",
+              "label": "Ghi chú",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "title": "Chi tiết Thông tin giao hàng",
+          "controllerDetail": "deliveryDetail",
+          "formId": "deliveryDetail",
+          "foreignKey": "customer_id,delivery_id",
+          "fields": [
+            {
+              "key": "delivery_id",
+              "label": "Thông tin giao hàng",
+              "type": "lookup",
+              "default": {
+                "controller": "deliveryLocation",
+                "filter": [
+                ]
+              }
+            },
+            {
+              "key": "role",
+              "label": "Người liên hệ giao hàng",
+              "type": "text"
+            },
+            {
+              "key": "address",
+              "label": "Địa chỉ giao hàng",
+              "type": "text"
+            },
+            {
+              "key": "phone_number",
+              "label": "Số điện thoại giao hàng",
+              "type": "text"
+            },
+            {
+              "key": "note",
+              "label": "Ghi chú giao hàng",
+              "type": "text"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tệp đính kèm",
+      "type": "file-attachment"
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

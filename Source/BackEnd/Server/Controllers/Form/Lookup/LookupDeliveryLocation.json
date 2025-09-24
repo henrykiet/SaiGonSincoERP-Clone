@@ -1,0 +1,20 @@
+{
+  "controller": "deliveryLocation",
+  "formId": "deliveryLocation",
+  "primaryKey": [ "delivery_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "delivery_id" ],
+  "fields": [
+    {
+      "field": "delivery_id",
+      "header": "Mã nơi giao hàng"
+    },
+    {
+      "field": "delivery_name",
+      "header": "Tên nơi giao hàng"
+    }
+  ]
+}

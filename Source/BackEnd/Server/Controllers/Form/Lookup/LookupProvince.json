@@ -1,0 +1,20 @@
+{
+  "controller": "province",
+  "formId": "Province",
+  "primaryKey": [ "province_code" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "province_code" ],
+  "fields": [
+    {
+      "field": "province_code",
+      "header": "Mã tỉnh thành"
+    },
+    {
+      "field": "province_name",
+      "header": "Tên tỉnh thành"
+    }
+  ]
+}

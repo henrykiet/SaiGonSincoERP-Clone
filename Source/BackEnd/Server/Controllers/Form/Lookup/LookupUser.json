@@ -1,0 +1,20 @@
+{
+  "controller": "User",
+  "formId": "Users",
+  "primaryKey": [ "UserName" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "many",
+  "sort": [ "UserName" ],
+  "fields": [
+    {
+      "field": "UserName",
+      "header": "Người dùng"
+    },
+    {
+      "field": "FullName",
+      "header": "Tên người dùng"
+    }
+  ]
+}

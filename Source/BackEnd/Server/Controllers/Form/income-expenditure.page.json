@@ -1,0 +1,97 @@
+﻿{
+  "controller": "income-expenditure",
+  "type": "list",
+  "formId": "incomeExpenditure",
+  "primaryKey": [ "incomeExpenditure_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Danh mục loại thu/chi",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "uom",
+        "primaryKey": "uomCode",
+        "title": "Thông tin loại thu/chi",
+        "fields": [
+          {
+            "key": "type",
+            "label": "Loại thu chi",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Thu",
+                "value": "1"
+              },
+              {
+                "label": "Chi",
+                "value": "2"
+              }
+            ]
+          },
+          {
+            "key": "incomeExpenditure_id",
+            "label": "Mã thu chi",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã thu chi"
+          },
+          {
+            "key": "incomeExpenditure_Name",
+            "label": "Tên thu chi",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên thu chi"
+          },
+          {
+            "key": "incomeExpenditure_Name2",
+            "label": "Tên khác",
+            "type": "text",
+            "required": false,
+            "placeholder": ""
+          },
+          {
+            "key": "description",
+            "label": "Mô tả",
+            "type": "text",
+            "required": false,
+            "placeholder": ""
+          },
+          {
+            "key": "serial",
+            "label": "Stt sắp xếp",
+            "type": "number",
+            "required": false,
+            "placeholder": ""
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Bị khóa",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

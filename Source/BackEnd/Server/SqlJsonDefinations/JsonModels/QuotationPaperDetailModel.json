@@ -1,0 +1,247 @@
+{
+  "model": "quotationPaperDetail",
+  "schema": {
+    "partition": true,
+    "fields": [
+      {
+        "name": "idGui",
+        "property": "idGui",
+        "type": "string",
+        "sqlType": "VARCHAR(64)",
+        "primaryKey": true
+      },
+      {
+        "name": "line_nbr",
+        "property": "line_nbr",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "itemNameCustomer",
+        "property": "itemNameCustomer",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "itemCode",
+        "property": "itemCode",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "uom",
+        "property": "uom",
+        "type": "string",
+        "sqlType": "NVARCHAR(16)"
+      },
+      {
+        "name": "quantity",
+        "property": "quantity",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "price",
+        "property": "price",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "purchasePrice",
+        "property": "purchasePrice",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "amount",
+        "property": "amount",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "vat",
+        "property": "vat",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "paymentVat",
+        "property": "paymentVat",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "payment",
+        "property": "payment",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "DienThoai",
+        "property": "DienThoai",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "total",
+        "property": "total",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "tax_rate",
+        "property": "tax_rate",
+        "type": "number",
+        "sqlType": "NUMERIC(5,2)"
+      },
+      {
+        "name": "taxCode",
+        "property": "taxCode",
+        "type": "string",
+        "sqlType": "VARCHAR(8)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "QuotationPaperDetail",
+    "columnMapping": [
+      {
+        "excelColumn": "idGui",
+        "fieldName": "idGui",
+        "required": true
+      },
+      {
+        "excelColumn": "line_nbr",
+        "fieldName": "line_nbr",
+        "required": true
+      },
+      {
+        "excelColumn": "itemNameCustomer",
+        "fieldName": "itemNameCustomer",
+        "required": false
+      },
+      {
+        "excelColumn": "itemCode",
+        "fieldName": "itemCode",
+        "required": false
+      },
+      {
+        "excelColumn": "uom",
+        "fieldName": "uom",
+        "required": false
+      },
+      {
+        "excelColumn": "quantity",
+        "fieldName": "quantity",
+        "required": false
+      },
+      {
+        "excelColumn": "price",
+        "fieldName": "price",
+        "required": false
+      },
+      {
+        "excelColumn": "purchasePrice",
+        "fieldName": "purchasePrice",
+        "required": false
+      },
+      {
+        "excelColumn": "amount",
+        "fieldName": "amount",
+        "required": false
+      },
+      {
+        "excelColumn": "vat",
+        "fieldName": "vat",
+        "required": false
+      },
+      {
+        "excelColumn": "paymentVat",
+        "fieldName": "paymentVat",
+        "required": false
+      },
+      {
+        "excelColumn": "payment",
+        "fieldName": "payment",
+        "required": false
+      },
+      {
+        "excelColumn": "note",
+        "fieldName": "note",
+        "required": false
+      },
+      {
+        "excelColumn": "DienThoai",
+        "fieldName": "DienThoai",
+        "required": false
+      },
+      {
+        "excelColumn": "total",
+        "fieldName": "total",
+        "required": false
+      },
+      {
+        "excelColumn": "tax_rate",
+        "fieldName": "tax_rate",
+        "required": false
+      },
+      {
+        "excelColumn": "taxCode",
+        "fieldName": "taxCode",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "idGui",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "64",
+        "message": "idGui không được để trống và tối đa 64 ký tự."
+      },
+      {
+        "fieldName": "line_nbr",
+        "type": "value",
+        "minValue": "1",
+        "message": "line_nbr phải lớn hơn hoặc bằng 1."
+      },
+      {
+        "fieldName": "itemCode",
+        "type": "length",
+        "minLength": "0",
+        "maxLength": "16",
+        "message": "itemCode tối đa 16 ký tự."
+      },
+      {
+        "fieldName": "taxCode",
+        "type": "length",
+        "minLength": "0",
+        "maxLength": "8",
+        "message": "taxCode tối đa 8 ký tự."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "INSERT INTO QuotationPaperDetail (idGui, line_nbr, itemNameCustomer, itemCode, uom, quantity, price, purchasePrice, amount, vat, paymentVat, payment, note, DienThoai, total, tax_rate, taxCode) VALUES (@idGui, @line_nbr, @itemNameCustomer, @itemCode, @uom, @quantity, @price, @purchasePrice, @amount, @vat, @paymentVat, @payment, @note, @DienThoai, @total, @tax_rate, @taxCode);",
+      "update": "UPDATE QuotationPaperDetail SET itemNameCustomer = @itemNameCustomer, itemCode = @itemCode, uom = @uom, quantity = @quantity, price = @price, purchasePrice = @purchasePrice, amount = @amount, vat = @vat, paymentVat = @paymentVat, payment = @payment, note = @note, DienThoai = @DienThoai, total = @total, tax_rate = @tax_rate, taxCode = @taxCode WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+      "delete": "DELETE FROM QuotationPaperDetail WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+      "myTableType": "CREATE TYPE dbo.QuotationPaperDetailType AS TABLE (idGui VARCHAR(64), line_nbr INT, itemNameCustomer NVARCHAR(256), itemCode VARCHAR(16), uom NVARCHAR(16), quantity NUMERIC(19,4), price NUMERIC(19,4), purchasePrice NUMERIC(19,4), amount NUMERIC(19,4), vat NUMERIC(19,4), paymentVat NUMERIC(19,4), payment NUMERIC(19,4), note NVARCHAR(256), DienThoai NUMERIC(19,4), total NUMERIC(19,4), tax_rate NUMERIC(5,2), taxCode VARCHAR(8));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertQuotationPaperDetail; DROP TYPE IF EXISTS dbo.QuotationPaperDetailType;"
+    }
+  }
+
+}

@@ -1,0 +1,20 @@
+{
+  "controller": "uom",
+  "formId": "uom",
+  "primaryKey": [ "uomCode" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "uomCode" ],
+  "fields": [
+    {
+      "field": "uomCode",
+      "header": "Đơn vị tính"
+    },
+    {
+      "field": "uomName",
+      "header": "Tên ĐVT"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+{
+  "model": "OrderDetailPrim",
+  "schema": {
+    "fields": [
+      {
+        "name": "OrderId",
+        "property": "orderId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "ItemId",
+        "property": "itemId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "Quantity",
+        "property": "quantity",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "TotalPrice",
+        "property": "totalPrice",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "OrderDetailPrim",
+    "columnMapping": [
+      {
+        "excelColumn": "OrderId",
+        "fieldName": "OrderId",
+        "required": true
+      },
+      {
+        "excelColumn": "ItemId",
+        "fieldName": "ItemId",
+        "required": true
+      },
+      {
+        "excelColumn": "Quantity",
+        "fieldName": "Quantity",
+        "required": true
+      },
+      {
+        "excelColumn": "TotalPrice",
+        "fieldName": "TotalPrice",
+        "required": true
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "OrderId",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE OrderId = @orderId",
+        "threshold": "0",
+        "message": "OrderId already exists in the system"
+      },
+      {
+        "fieldName": "Quantity",
+        "type": "range",
+        "min": "1",
+        "max": "100000",
+        "message": "Quantity must be between 1 and 100000"
+      },
+      {
+        "fieldName": "TotalPrice",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "TotalPrice must be between 0 and 1 billion"
+      },
+      {
+        "fieldName": "ItemId",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE ItemId = @itemId",
+        "threshold": "0",
+        "message": "ItemId already exists in the system"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF EXISTS (SELECT 1 FROM OrderDetailPrim WHERE OrderId = @orderId AND ItemId = @itemId) THROW 51001, 'Duplicate OrderId and ItemId', 1;\nINSERT INTO OrderDetailPrim (OrderId, ItemId, Quantity, TotalPrice) VALUES (@orderId, @itemId, @quantity, @totalPrice);",
+      "update": "IF NOT EXISTS (SELECT 1 FROM OrderDetailPrim WHERE OrderId = @orderId AND ItemId = @itemId) THROW 51002, 'Order detail does not exist', 1;\nUPDATE OrderDetailPrim SET Quantity = @quantity, TotalPrice = @totalPrice WHERE OrderId = @orderId AND ItemId = @itemId;",
+      "delete": "IF NOT EXISTS (SELECT 1 FROM OrderDetailPrim WHERE OrderId = @orderId AND ItemId = @itemId) THROW 51003, 'Order detail not found for deletion', 1;\nDELETE FROM OrderDetailPrim WHERE OrderId = @orderId AND ItemId = @itemId;",
+      "myTableType": "CREATE TYPE dbo.OrderDetailPrimTableType AS TABLE (OrderId VARCHAR(50), ItemId VARCHAR(50), Quantity INT, TotalPrice DECIMAL(18,2));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertOrderDetailPrim; DROP TYPE IF EXISTS dbo.OrderDetailPrimTableType;"
+    }
+  }
+}

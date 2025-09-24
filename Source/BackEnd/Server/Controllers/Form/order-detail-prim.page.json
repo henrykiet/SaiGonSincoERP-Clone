@@ -1,0 +1,87 @@
+{
+  "controller": "order-detail",
+  "type": "list",
+  "formId": "OrderDetailPrim",
+  "primaryKey": "OrderId,ItemId",
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Chi tiết đơn hàng Prim",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "title": "Thông tin chi tiết đơn hàng prim",
+        "class": "",
+        "formId": "OrderDetailPrim",
+        "fields": [
+          {
+            "key": "MaDonHang",
+            "label": "Mã đơn",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã đơn hàng"
+          },
+          {
+            "key": "ItemId",
+            "label": "Mã sản phẩm",
+            "type": "text",
+            "placeholder": "Mã Sản Phẩm"
+          },
+          {
+            "key": "Quantity",
+            "label": "Số Lượng",
+            "type": "number",
+            "default": 50000,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "TotalPrice",
+            "label": "Dơn Giá",
+            "type": "number",
+            "default": 50000,
+            "placeholder": "Nhập đơn giá"
+          }
+        ]
+      },
+      "detail": {
+        "title": "Chi tiết đơn hàng",
+        "entity": "OrderItem",
+        "foreignKey": "order_code",
+        "fields": [
+          {
+            "key": "MaChiTietDonHang",
+            "label": "Mã sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "OrderId",
+            "label": "Sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "Quantity",
+            "label": "Số lượng",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "TotalAmount",
+            "label": "Đơn giá",
+            "type": "number",
+            "placeholder": "Nhập đơn giá"
+          }
+        ],
+        "initialData": [
+        ]
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

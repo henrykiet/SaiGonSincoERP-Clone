@@ -1,0 +1,39 @@
+.dialog-content {
+  min-width: 500px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+}
+
+mat-error {
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+mat-dialog-actions {
+  padding: 16px 0 0 0;
+  margin: 0;
+  gap: 8px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}

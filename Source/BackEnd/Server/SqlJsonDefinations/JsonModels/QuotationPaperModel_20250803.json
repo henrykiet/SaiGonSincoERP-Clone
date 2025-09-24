@@ -1,0 +1,497 @@
+{
+  "model": "quotationPaper",
+  "schema": {
+    "foriegn": [ "quotationPaperDetail" ],
+    "foriegnKey": [ "idGui" ],
+    "partition": true,
+    "fields": [
+      {
+        "name": "idGui",
+        "property": "idGui",
+        "type": "string",
+        "sqlType": "VARCHAR(64)",
+        "primaryKey": true
+      },
+      {
+        "name": "customerCode",
+        "property": "customerCode",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "jobCode",
+        "property": "jobCode",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "voucherDate",
+        "property": "voucherDate",
+        "type": "date",
+        "sqlType": "SMALLDATETIME"
+      },
+      {
+        "name": "voucherNumber",
+        "property": "voucherNumber",
+        "type": "string",
+        "sqlType": "VARCHAR(32)"
+      },
+      {
+        "name": "contactPerson",
+        "property": "contactPerson",
+        "type": "string",
+        "sqlType": "NVARCHAR(128)"
+      },
+      {
+        "name": "phonePerson",
+        "property": "phonePerson",
+        "type": "string",
+        "sqlType": "NVARCHAR(128)"
+      },
+      {
+        "name": "orderAddress",
+        "property": "orderAddress",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "emailPerson",
+        "property": "emailPerson",
+        "type": "string",
+        "sqlType": "NVARCHAR(64)"
+      },
+      {
+        "name": "phone",
+        "property": "phone",
+        "type": "string",
+        "sqlType": "NVARCHAR(64)"
+      },
+      {
+        "name": "fax",
+        "property": "fax",
+        "type": "string",
+        "sqlType": "NVARCHAR(64)"
+      },
+      {
+        "name": "email",
+        "property": "email",
+        "type": "string",
+        "sqlType": "NVARCHAR(64)"
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "CHAR(1)"
+      },
+      {
+        "name": "datetime0",
+        "property": "datetime0",
+        "type": "datetime",
+        "sqlType": "DATETIME"
+      },
+      {
+        "name": "datetime2",
+        "property": "datetime2",
+        "type": "datetime",
+        "sqlType": "DATETIME"
+      },
+      {
+        "name": "idVC",
+        "property": "idVC",
+        "type": "string",
+        "sqlType": "VARCHAR(5)"
+      },
+      {
+        "name": "unitCode",
+        "property": "unitCode",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "QuotationPaper",
+    "columnMapping": [
+      {
+        "excelColumn": "idGui",
+        "fieldName": "idGui",
+        "required": true
+      },
+      {
+        "excelColumn": "customerCode",
+        "fieldName": "customerCode",
+        "required": true
+      },
+      {
+        "excelColumn": "jobCode",
+        "fieldName": "jobCode",
+        "required": false
+      },
+      {
+        "excelColumn": "voucherDate",
+        "fieldName": "voucherDate",
+        "required": true
+      },
+      {
+        "excelColumn": "voucherNumber",
+        "fieldName": "voucherNumber",
+        "required": true
+      },
+      {
+        "excelColumn": "contactPerson",
+        "fieldName": "contactPerson",
+        "required": false
+      },
+      {
+        "excelColumn": "phonePerson",
+        "fieldName": "phonePerson",
+        "required": false
+      },
+      {
+        "excelColumn": "orderAddress",
+        "fieldName": "orderAddress",
+        "required": false
+      },
+      {
+        "excelColumn": "emailPerson",
+        "fieldName": "emailPerson",
+        "required": false
+      },
+      {
+        "excelColumn": "phone",
+        "fieldName": "phone",
+        "required": false
+      },
+      {
+        "excelColumn": "fax",
+        "fieldName": "fax",
+        "required": false
+      },
+      {
+        "excelColumn": "email",
+        "fieldName": "email",
+        "required": false
+      },
+      {
+        "excelColumn": "note",
+        "fieldName": "note",
+        "required": false
+      },
+      {
+        "excelColumn": "status",
+        "fieldName": "status",
+        "required": false
+      },
+      {
+        "excelColumn": "datetime0",
+        "fieldName": "datetime0",
+        "required": false
+      },
+      {
+        "excelColumn": "datetime2",
+        "fieldName": "datetime2",
+        "required": false
+      },
+      {
+        "excelColumn": "idVC",
+        "fieldName": "idVC",
+        "required": false
+      },
+      {
+        "excelColumn": "unitCode",
+        "fieldName": "unitCode",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "idGui",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "64",
+        "message": "idGui không được để trống và tối đa 64 ký tự."
+      },
+      {
+        "fieldName": "voucherNumber",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "32",
+        "message": "voucherNumber không được để trống và tối đa 32 ký tự."
+      },
+      {
+        "fieldName": "customerCode",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "16",
+        "message": "customerCode phải từ 1 đến 16 ký tự."
+      },
+      {
+        "fieldName": "idGui",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE idGui = @idGui",
+        "threshold": "0",
+        "message": "idGui đã tồn tại trong hệ thống."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF @idGui IS NULL OR @idGui = '' THROW 50001, 'idGui is required', 1;\nIF EXISTS (SELECT 1 FROM QuotationPaper WHERE idGui = @idGui) THROW 50002, 'Duplicate idGui', 1;\nINSERT INTO QuotationPaper (idGui, customerCode, jobCode, voucherDate, voucherNumber, contactPerson, phonePerson, orderAddress, emailPerson, phone, fax, email, note, status, userId0, userId2, datetime0, datetime2, idVC, unitCode) VALUES (@idGui, @customerCode, @jobCode, @voucherDate, @voucherNumber, @contactPerson, @phonePerson, @orderAddress, @emailPerson, @phone, @fax, @email, @note, @status, @userId0, @userId2, @datetime0, @datetime2, @idVC, @unitCode);",
+      "update": "IF @idGui IS NULL THROW 50003, 'idGui is required for update', 1;\nIF NOT EXISTS (SELECT 1 FROM QuotationPaper WHERE idGui = @idGui) THROW 50004, 'QuotationPaper does not exist', 1;\nUPDATE QuotationPaper SET customerCode = @customerCode, jobCode = @jobCode, voucherDate = @voucherDate, voucherNumber = @voucherNumber, contactPerson = @contactPerson, phonePerson = @phonePerson, orderAddress = @orderAddress, emailPerson = @emailPerson, phone = @phone, fax = @fax, email = @email, note = @note, status = @status, userId0 = @userId0, userId2 = @userId2, datetime0 = @datetime0, datetime2 = @datetime2, idVC = @idVC, unitCode = @unitCode WHERE idGui = @idGui;",
+      "delete": "IF @idGui IS NULL THROW 50005, 'idGui is required for deletion', 1;\nIF NOT EXISTS (SELECT 1 FROM QuotationPaper WHERE idGui = @idGui) THROW 50006, 'QuotationPaper does not exist', 1;\nDELETE FROM QuotationPaper WHERE idGui = @idGui;",
+      "myTableType": "CREATE TYPE dbo.QuotationPaperType AS TABLE (idGui VARCHAR(64) PRIMARY KEY, customerCode VARCHAR(16), jobCode VARCHAR(16), voucherDate SMALLDATETIME, voucherNumber VARCHAR(32), contactPerson NVARCHAR(128), phonePerson NVARCHAR(128), orderAddress NVARCHAR(256), emailPerson NVARCHAR(64), phone NVARCHAR(64), fax NVARCHAR(64), email NVARCHAR(64), note NVARCHAR(256), status CHAR(1), userId0 INT, userId2 INT, datetime0 DATETIME, datetime2 DATETIME, idVC VARCHAR(5), unitCode VARCHAR(16));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertQuotationPaper; DROP TYPE IF EXISTS dbo.QuotationPaperType;"
+    }
+  },
+  "foriegnModel": [
+    {
+      "model": "quotationPaperDetail",
+      "schema": {
+        "partition": true,
+        "fields": [
+          {
+            "name": "idGui",
+            "property": "idGui",
+            "type": "string",
+            "sqlType": "VARCHAR(64)",
+            "primaryKey": true
+          },
+          {
+            "name": "line_nbr",
+            "property": "line_nbr",
+            "type": "number",
+            "sqlType": "INT"
+          },
+          {
+            "name": "itemNameCustomer",
+            "property": "itemNameCustomer",
+            "type": "string",
+            "sqlType": "NVARCHAR(256)"
+          },
+          {
+            "name": "itemCode",
+            "property": "itemCode",
+            "type": "string",
+            "sqlType": "VARCHAR(16)"
+          },
+          {
+            "name": "uom",
+            "property": "uom",
+            "type": "string",
+            "sqlType": "NVARCHAR(16)"
+          },
+          {
+            "name": "quantity",
+            "property": "quantity",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "price",
+            "property": "price",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "purchasePrice",
+            "property": "purchasePrice",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "amount",
+            "property": "amount",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "vat",
+            "property": "vat",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "paymentVat",
+            "property": "paymentVat",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "payment",
+            "property": "payment",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "DienThoai",
+            "property": "DienThoai",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "total",
+            "property": "total",
+            "type": "number",
+            "sqlType": "NUMERIC(19,4)"
+          },
+          {
+            "name": "tax_rate",
+            "property": "tax_rate",
+            "type": "number",
+            "sqlType": "NUMERIC(5,2)"
+          },
+          {
+            "name": "taxCode",
+            "property": "taxCode",
+            "type": "string",
+            "sqlType": "VARCHAR(8)"
+          }
+        ]
+      },
+      "excelIntegration": {
+        "sheetName": "QuotationPaperDetail",
+        "columnMapping": [
+          {
+            "excelColumn": "idGui",
+            "fieldName": "idGui",
+            "required": true
+          },
+          {
+            "excelColumn": "line_nbr",
+            "fieldName": "line_nbr",
+            "required": true
+          },
+          {
+            "excelColumn": "itemNameCustomer",
+            "fieldName": "itemNameCustomer",
+            "required": false
+          },
+          {
+            "excelColumn": "itemCode",
+            "fieldName": "itemCode",
+            "required": false
+          },
+          {
+            "excelColumn": "uom",
+            "fieldName": "uom",
+            "required": false
+          },
+          {
+            "excelColumn": "quantity",
+            "fieldName": "quantity",
+            "required": false
+          },
+          {
+            "excelColumn": "price",
+            "fieldName": "price",
+            "required": false
+          },
+          {
+            "excelColumn": "purchasePrice",
+            "fieldName": "purchasePrice",
+            "required": false
+          },
+          {
+            "excelColumn": "amount",
+            "fieldName": "amount",
+            "required": false
+          },
+          {
+            "excelColumn": "vat",
+            "fieldName": "vat",
+            "required": false
+          },
+          {
+            "excelColumn": "paymentVat",
+            "fieldName": "paymentVat",
+            "required": false
+          },
+          {
+            "excelColumn": "payment",
+            "fieldName": "payment",
+            "required": false
+          },
+          {
+            "excelColumn": "DienThoai",
+            "fieldName": "DienThoai",
+            "required": false
+          },
+          {
+            "excelColumn": "total",
+            "fieldName": "total",
+            "required": false
+          },
+          {
+            "excelColumn": "tax_rate",
+            "fieldName": "tax_rate",
+            "required": false
+          },
+          {
+            "excelColumn": "taxCode",
+            "fieldName": "taxCode",
+            "required": false
+          }
+        ],
+        "templateRules": {
+          "fileFormat": "xlsx",
+          "firstRowData": 2,
+          "maxRows": 20000
+        }
+      },
+      "checking": {
+        "rules": [
+          {
+            "fieldName": "idGui",
+            "type": "length",
+            "minLength": "1",
+            "maxLength": "64",
+            "message": "idGui không được để trống và tối đa 64 ký tự."
+          },
+          {
+            "fieldName": "line_nbr",
+            "type": "value",
+            "minValue": "1",
+            "message": "line_nbr phải lớn hơn hoặc bằng 1."
+          },
+          {
+            "fieldName": "itemCode",
+            "type": "length",
+            "minLength": "0",
+            "maxLength": "16",
+            "message": "itemCode tối đa 16 ký tự."
+          },
+          {
+            "fieldName": "taxCode",
+            "type": "length",
+            "minLength": "0",
+            "maxLength": "8",
+            "message": "taxCode tối đa 8 ký tự."
+          }
+        ]
+      },
+      "dataProcessing": {
+        "sqlStatements": {
+          "insert": "INSERT INTO QuotationPaperDetail (idGui, line_nbr, itemNameCustomer, itemCode, uom, quantity, price, purchasePrice, amount, vat, paymentVat, payment, note, DienThoai, total, tax_rate, taxCode) VALUES (@idGui, @line_nbr, @itemNameCustomer, @itemCode, @uom, @quantity, @price, @purchasePrice, @amount, @vat, @paymentVat, @payment, @note, @DienThoai, @total, @tax_rate, @taxCode);",
+          "update": "UPDATE QuotationPaperDetail SET itemNameCustomer = @itemNameCustomer, itemCode = @itemCode, uom = @uom, quantity = @quantity, price = @price, purchasePrice = @purchasePrice, amount = @amount, vat = @vat, paymentVat = @paymentVat, payment = @payment, note = @note, DienThoai = @DienThoai, total = @total, tax_rate = @tax_rate, taxCode = @taxCode WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+          "delete": "DELETE FROM QuotationPaperDetail WHERE idGui = @idGui AND line_nbr = @line_nbr;",
+          "myTableType": "CREATE TYPE dbo.QuotationPaperDetailType AS TABLE (idGui VARCHAR(64), line_nbr INT, itemNameCustomer NVARCHAR(256), itemCode VARCHAR(16), uom NVARCHAR(16), quantity NUMERIC(19,4), price NUMERIC(19,4), purchasePrice NUMERIC(19,4), amount NUMERIC(19,4), vat NUMERIC(19,4), paymentVat NUMERIC(19,4), payment NUMERIC(19,4), note NVARCHAR(256), DienThoai NUMERIC(19,4), total NUMERIC(19,4), tax_rate NUMERIC(5,2), taxCode VARCHAR(8));",
+          "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertQuotationPaperDetail; DROP TYPE IF EXISTS dbo.QuotationPaperDetailType;"
+        }
+      }
+    }
+  ]
+}

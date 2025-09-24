@@ -1,0 +1,138 @@
+{
+  "model": "deliveryLocation",
+  "schema": {
+    "partition": false,
+    "fields": [
+      {
+        "name": "delivery_id",
+        "property": "delivery_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "delivery_name",
+        "property": "delivery_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)",
+        "required": true
+      },
+      {
+        "name": "address",
+        "property": "address",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)",
+        "required": true
+      },
+      {
+        "name": "phone_number",
+        "property": "phone_number",
+        "type": "string",
+        "sqlType": "NVARCHAR(200)",
+        "required": true
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)"
+      },
+      {
+        "name": "location",
+        "property": "location",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "CHAR(1)",
+        "required": true
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "DeliveryLocation",
+    "columnMapping": [
+      {
+        "excelColumn": "delivery_id",
+        "fieldName": "delivery_id",
+        "required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "delivery_name",
+        "fieldName": "delivery_name",
+        "required": true
+      },
+      {
+        "excelColumn": "address",
+        "fieldName": "address",
+        "required": true
+      },
+      {
+        "excelColumn": "phone_number",
+        "fieldName": "phone_number",
+        "required": true
+      },
+      {
+        "excelColumn": "note",
+        "fieldName": "note",
+        "required": false
+      },
+      {
+        "excelColumn": "location",
+        "fieldName": "location",
+        "required": false
+      },
+      {
+        "excelColumn": "status",
+        "fieldName": "status",
+        "required": true
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "delivery_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "500",
+        "message": "Tên nơi giao hàng không được để trống và tối đa 500 ký tự."
+      },
+      {
+        "fieldName": "delivery_id",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE delivery_id = @delivery_id",
+        "threshold": "0",
+        "message": "Mã nơi giao hàng đã tồn tại trong hệ thống."
+      },
+      {
+        "fieldName": "address",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "500",
+        "message": "Địa chỉ không được để trống và tối đa 500 ký tự."
+      },
+      {
+        "fieldName": "phone_number",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "200",
+        "message": "Số điện thoại không được để trống và tối đa 200 ký tự."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {}
+  },
+  "foriegnModel": []
+}

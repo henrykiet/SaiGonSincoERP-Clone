@@ -1,0 +1,124 @@
+/* Component-specific overrides and additions */
+
+.product-lookup .form-lookup-button {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.product-lookup .form-lookup-button:hover {
+  background-color: #2563eb;
+}
+
+/* Order detail table specific styling */
+.order-detail-table .detail-table td:nth-child(4), /* Quantity column */
+.order-detail-table .detail-table td:nth-child(5), /* Price column */
+.order-detail-table .detail-table td:nth-child(6)  /* Total column */ {
+  text-align: right;
+}
+
+/* Calculated fields styling */
+.calculated-field {
+  background-color: #f9fafb;
+  font-weight: 500;
+  text-align: right;
+}
+
+/* Status-specific styling for orders */
+.order-status-new {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.order-status-confirmed {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.order-status-delivered {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.order-status-cancelled {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+/* Customer info section */
+.customer-info-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .customer-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .customer-info-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Order summary styling */
+.order-summary {
+  background-color: #dbeafe;
+  border: 1px solid #93c5fd;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.order-summary .summary-grid {
+  max-width: none;
+}
+
+/* Animation for adding/removing rows */
+.detail-row-enter {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.2s ease-in;
+}
+
+.detail-row-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.detail-row-leave {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.2s ease-out;
+}
+
+.detail-row-leave-active {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* Print-specific styles for invoices */
+@media print {
+  .order-summary {
+    background-color: white;
+    border-color: #d1d5db;
+  }
+  
+  .customer-info-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .form-header {
+    text-align: center;
+  }
+  
+  .form-title {
+    font-size: 1.25rem;
+  }
+  
+  .form-subtitle {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,8 @@
+<Report>
+  <Grids>
+    <Grid id ="Id" name="ID" type="" />
+    <Grid id ="Title" name="Tiêu đề" type="" />
+    <Grid id ="Content" name="Mô tả" type="" />
+	<Grid id ="CreatedDate" name="Ngày tạo" type="date" />
+  </Grids>
+</Report>

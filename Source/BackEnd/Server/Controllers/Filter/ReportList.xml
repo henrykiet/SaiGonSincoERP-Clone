@@ -1,0 +1,9 @@
+﻿<Report>
+<storeProc>test1</storeProc>
+  <Filters>
+    <Filter id ="fromDate" name="fromDate" type="date" valid="" />
+    <Filter id ="toDate" name="toDate" type="date" valid="" />
+    <Filter id ="reportId" name="reportId" type="lookup" valid="report" />
+	<Filter id ="status" name="Status" type="checkbox" valid="" />
+  </Filters>
+</Report>

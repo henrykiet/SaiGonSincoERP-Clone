@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="02/25/2025 22:38:32" ReportInfo.Modified="02/25/2025 22:44:51" ReportInfo.CreatorVersion="2025.1.10.0">
+  <Dictionary>
+    <TableDataSource Name="Table" ReferenceName="MyDataSet.Table" DataType="System.Int32" Enabled="true">
+      <Column Name="RowNum" DataType="System.Int64"/>
+      <Column Name="Id" DataType="System.String"/>
+      <Column Name="Title" DataType="System.String"/>
+      <Column Name="Content" DataType="System.String"/>
+      <Column Name="CreatedDate" DataType="System.DateTime"/>
+    </TableDataSource>
+    <TableDataSource Name="Table1" ReferenceName="MyDataSet.Table1" DataType="System.Int32" Enabled="true">
+      <Column Name="TotalResult" DataType="System.Int32"/>
+      <Column Name="TotalPages" DataType="System.Int32"/>
+      <Column Name="currentPage" DataType="System.Int32"/>
+      <Column Name="pageSize" DataType="System.Int32"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="75.6">
+      <TextObject Name="Text11" Left="255.15" Top="9.45" Width="245.7" Height="18.9" Text="BÁO CÁO DEMO" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <SubreportObject Name="Subreport1" Left="56.7" Top="47.25" Width="94.5" Height="18.9" ReportPage="Page2"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="78.27" Width="718.2" Height="18.9">
+      <TextObject Name="Text4" Left="56.7" Width="94.5" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Id" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="151.2" Width="245.7" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Title" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="396.9" Width="151.2" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Content" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text10" Left="548.1" Width="113.4" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="CreatedDate" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="99.83" Width="718.2" Height="18.9" DataSource="Table">
+      <TextObject Name="Text3" Left="56.7" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.Id]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="396.9" Width="151.2" Height="18.9" Border.Lines="All" Text="[Table.Content]" Font="Arial, 10pt"/>
+      <TextObject Name="Text9" Left="548.1" Width="113.4" Height="18.9" Border.Lines="All" Text="[Table.CreatedDate]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="151.2" Width="245.7" Height="18.9" Border.Lines="All" Text="[Table.Title]" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="121.4" Width="718.2" Height="18.9"/>
+  </ReportPage>
+  <ReportPage Name="Page2" Watermark.Font="Arial, 60pt">
+    <DataBand Name="Data2" Width="718.2" Height="56.7" DataSource="Table1">
+      <TextObject Name="Text12" Top="28.35" Width="132.3" Height="18.9" Border.Lines="All" Text="[Table1.TotalResult]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text13" Left="132.3" Top="28.35" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table1.TotalPages]" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text14" Top="9.45" Width="132.3" Height="18.9" Border.Lines="All" Fill.Color="Linen" Text="Số dòng" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text15" Left="132.3" Top="9.45" Width="94.5" Height="18.9" Border.Lines="All" Fill.Color="Linen" Text="Số trang" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </DataBand>
+  </ReportPage>
+</Report>

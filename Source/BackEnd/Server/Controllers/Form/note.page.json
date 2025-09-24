@@ -1,0 +1,79 @@
+{
+  "controller": "note",
+  "type": "list",
+  "formId": "note",
+  "primaryKey": [ "note_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Quản lý ghi chú",
+  "tabs": [
+    {
+      "title": "Thông tin ghi chú",
+      "form": {
+        "typeForm": "master",
+        "formId": "note",
+        "primaryKey": "note_id",
+        "title": "Thông tin ghi chú",
+        "fields": [
+          {
+            "key": "note_id",
+            "label": "Mã ghi chú",
+            "type": "text",
+            "required": true,
+            "disabled": true,
+            "placeholder": "Hệ thống tự sinh mã ghi chú"
+          },
+          {
+            "key": "note_content",
+            "label": "Ghi chú default",
+            "type": "textarea",
+            "required": true,
+            "maxLength": 200,
+            "placeholder": "Nhập ghi chú mặc định"
+          },
+          {
+            "key": "feature_code",
+            "label": "Tính năng",
+            "type": "lookup",
+            "required": true,
+            "default": {
+              "controller": "feature",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "0",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "0"
+              },
+              {
+                "label": "Không hoạt động",
+                "value": "1"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Tệp đính kèm",
+      "type": "file-attachment"
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

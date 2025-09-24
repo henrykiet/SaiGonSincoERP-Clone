@@ -1,0 +1,62 @@
+{
+  "controller": "employeeRole",
+  "type": "list",
+  "formId": "employeeRole",
+  "primaryKey": [ "employee_role_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin chức vụ nhân viên",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "employeeRole",
+        "primaryKey": "employee_role_id",
+        "title": "Thông tin chức vụ",
+        "fields": [
+          {
+            "key": "employee_role_id",
+            "label": "Mã chức vụ",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã chức vụ"
+          },
+          {
+            "key": "role_name",
+            "label": "Tên chức vụ",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên chức vụ"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "placeholder": "Nhập Trạng thái",
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Không hoạt động",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

@@ -1,0 +1,55 @@
+﻿{
+  "controller": "customer",
+  "type": "list",
+  "formId": "customer",
+  "primaryKey": [
+    "ma_kh"
+  ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Khách hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "customer",
+        "primaryKey": "ma_kh",
+        "title": "Thông tin khách hàng",
+        "fields": [
+          {
+            "key": "ma_kh",
+            "label": "Mã khách hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã khách hàng"
+          },
+          {
+            "key": "example",
+            "label": "Khách hàng",
+            "type": "lookup",
+            "multiple": true,
+            "default": {
+              "controller": "customer",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

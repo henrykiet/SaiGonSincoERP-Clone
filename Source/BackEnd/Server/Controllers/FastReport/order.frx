@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/31/2025 16:53:50" ReportInfo.Modified="09/11/2025 21:44:31" ReportInfo.CreatorVersion="2025.2.6.0">
+  <Dictionary>
+    <TableDataSource Name="order" ReferenceName="ReportData.order" DataType="System.Int32" Enabled="true" TableName="order">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="customerID" DataType="System.String"/>
+      <Column Name="voucherNumber" DataType="System.String"/>
+      <Column Name="voucherDate" DataType="System.DateTime"/>
+      <Column Name="jobCode" DataType="System.String"/>
+      <Column Name="DeliveryDate" DataType="System.DateTime"/>
+      <Column Name="DeliveryCust" DataType="System.String"/>
+      <Column Name="DeliveryAddress" DataType="System.String"/>
+      <Column Name="DeliveryPhone" DataType="System.String"/>
+      <Column Name="DeliveryMail" DataType="System.String"/>
+      <Column Name="SaleID" DataType="System.String"/>
+      <Column Name="OrderCreatorPhone" DataType="System.String"/>
+      <Column Name="OrderCreatorFax" DataType="System.String"/>
+      <Column Name="OrderCreatorMail" DataType="System.String"/>
+      <Column Name="note" DataType="System.String"/>
+      <Column Name="totalQuantity" DataType="System.Decimal"/>
+      <Column Name="totalAmountCur" DataType="System.Decimal"/>
+      <Column Name="totalAmount" DataType="System.Decimal"/>
+      <Column Name="totalTaxCur" DataType="System.Decimal"/>
+      <Column Name="totalTax" DataType="System.Decimal"/>
+      <Column Name="totalPaymentCur" DataType="System.Decimal"/>
+      <Column Name="totalPayment" DataType="System.Decimal"/>
+      <Column Name="idGuiQP" DataType="System.String"/>
+      <Column Name="voucherNumerQP" DataType="System.String"/>
+      <Column Name="status" DataType="System.String"/>
+      <Column Name="userid0" DataType="System.Int32"/>
+      <Column Name="userid2" DataType="System.Int32"/>
+      <Column Name="datetime0" DataType="System.DateTime"/>
+      <Column Name="datetime2" DataType="System.DateTime"/>
+      <Column Name="idVC" DataType="System.String"/>
+      <Column Name="unitCode" DataType="System.String"/>
+      <Column Name="DeliveryEmail" DataType="System.String"/>
+      <Column Name="statusApprove" DataType="System.String"/>
+      <Column Name="total_amount" DataType="System.Decimal"/>
+      <Column Name="total_vat" DataType="System.Decimal"/>
+      <Column Name="total_payment" DataType="System.Decimal"/>
+      <Column Name="total_quantity" DataType="System.Decimal"/>
+    </TableDataSource>
+    <TableDataSource Name="orderDetail" ReferenceName="ReportData.orderdetail" DataType="System.Int32" Enabled="true" TableName="orderdetail">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="line_nbr" DataType="System.Int32"/>
+      <Column Name="itemNameCustomer" DataType="System.String"/>
+      <Column Name="itemCode" DataType="System.String"/>
+      <Column Name="uom" DataType="System.String"/>
+      <Column Name="quantity" DataType="System.Decimal"/>
+      <Column Name="priceCur" DataType="System.Decimal"/>
+      <Column Name="price" DataType="System.Decimal"/>
+      <Column Name="purchasePriceCur" DataType="System.Decimal"/>
+      <Column Name="purchasePrice" DataType="System.Decimal"/>
+      <Column Name="amountCur" DataType="System.Decimal"/>
+      <Column Name="amount" DataType="System.Decimal"/>
+      <Column Name="vatCur" DataType="System.Decimal"/>
+      <Column Name="vat" DataType="System.Decimal"/>
+      <Column Name="paymentVatCur" DataType="System.Decimal"/>
+      <Column Name="paymentVat" DataType="System.Decimal"/>
+      <Column Name="paymentCur" DataType="System.Decimal"/>
+      <Column Name="payment" DataType="System.Decimal"/>
+      <Column Name="totalCur" DataType="System.Decimal"/>
+      <Column Name="total" DataType="System.Decimal"/>
+      <Column Name="note" DataType="System.String"/>
+      <Column Name="taxCode" DataType="System.String"/>
+      <Column Name="uomCust" DataType="System.String"/>
+      <Column Name="tax_rate" DataType="System.Decimal"/>
+      <Column Name="idGuiBG" DataType="System.String"/>
+      <Column Name="lnBG" DataType="System.Int32"/>
+      <Column Name="vcNumBG" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="85.05">
+      <PictureObject Name="Picture1" Top="18.9" Width="122.85" Height="66.15" ImageLocation="Images\SaiGonSinco_logo.png"/>
+      <TextObject Name="Text2" Left="122.85" Top="18.9" Width="595.35" Height="18.9" Text="CTY TNHH TM &amp; XL Công nghiệp Sài Gòn" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+      <TextObject Name="Text3" Left="122.85" Top="37.8" Width="595.35" Height="47.25" Text="Địa chỉ: 489/0 Mã Lò, P.Bình Hưng Hòa A, Bình Tân, TP.HCM&#13;&#10;ĐT: (028) 3767 2061            (028) 5426 4890     -     Fax: (028) 37502826&#13;&#10;Email: saigon_sinco@yahoo.com, saigonsinco@gmail.com          -  Website: www.saigonsinco.com       &#13;&#10;" Font="Arial, 8pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="88.25" Width="718.2" Height="37.8">
+      <TextObject Name="Text13" Left="-9.45" Width="727.65" Height="37.8" Text="ĐƠN ĐẶT HÀNG" HorzAlign="Center" VertAlign="Center" Font="Arial, 20pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="OrderBand" Top="129.25" Width="718.2" Height="113.4">
+      <TextObject Name="Text14" Width="113.4" Height="18.9" Text="Nhà cung cấp: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="113.4" Width="311.85" Height="18.9" CanGrow="true" Text="[]" HorzAlign="Justify" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text19" Left="113.4" Top="37.8" Width="311.85" Height="18.9" CanGrow="true" Text="[order.customerID]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="425.25" Top="18.9" Width="75.6" Height="18.9" Text="Số phiếu:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text18" Left="500.85" Top="18.9" Width="217.35" Height="18.9" CanGrow="true" Text="[order.voucherNumber]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text21" Left="500.85" Top="37.8" Width="217.35" Height="18.9" CanGrow="true" Text="VND" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="425.25" Top="37.8" Width="75.6" Height="18.9" Text="Loại tiền: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text24" Top="18.9" Width="113.4" Height="18.9" Text="Địa chỉ:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="113.4" Top="18.9" Width="311.85" Height="18.9" CanGrow="true" Text="[order.DeliveryAddress]" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Top="56.7" Width="113.4" Height="18.9" Text="Điện thoại: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text27" Left="113.4" Top="56.7" Width="151.2" Height="18.9" CanGrow="true" Text="[order.OrderCreatorPhone]" Format="Custom" Format.Format="(000) 000-0000" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text28" Left="113.4" Top="94.5" Width="604.8" Height="18.9" CanGrow="true" Text="[order.note]" Font="Arial, 9pt"/>
+      <TextObject Name="Text30" Left="264.6" Top="56.7" Width="37.8" Height="18.9" Text="Fax:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text31" Left="302.4" Top="56.7" Width="122.85" Height="18.9" CanGrow="true" Text="[order.OrderCreatorFax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Left="425.25" Top="56.7" Width="75.6" Height="18.9" Text="Email: " Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text33" Left="500.85" Top="56.7" Width="217.35" Height="18.9" CanGrow="true" Text="[order.OrderCreatorMail]" Font="Arial, 10pt"/>
+      <TextObject Name="Text42" Left="425.25" Width="75.6" Height="18.9" Text="Ngày:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text43" Left="500.85" Width="217.35" Height="18.9" CanGrow="true" Text="[Format(FormatDateTime([order.voucherDate], &quot;dd/MM/yyyy&quot;))]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Top="37.8" Width="113.4" Height="18.9" Text="Mã số thuế: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text46" Top="75.6" Width="113.4" Height="18.9" Text="Nơi nhận hàng:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text47" Left="113.4" Top="75.6" Width="604.8" Height="18.9" CanGrow="true" Text="[order.DeliveryAddress]" Font="Arial, 10pt"/>
+      <TextObject Name="Text48" Top="94.5" Width="113.4" Height="18.9" Text="Diễn giải:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </DataBand>
+    <DataBand Name="MasterHeaderBand" Top="245.85" Width="718.2" Height="18.9" CanGrow="true">
+      <TableObject Name="MaterialsHeader" Width="715.37" Height="18.9" Border.Lines="All">
+        <TableColumn Name="Column1" Width="42.23"/>
+        <TableColumn Name="Column2" Width="89.48"/>
+        <TableColumn Name="Column3" Width="155.62"/>
+        <TableColumn Name="Column4" Width="80.03"/>
+        <TableColumn Name="Column5" Width="70.58"/>
+        <TableColumn Name="Column6" Width="98.93"/>
+        <TableColumn Name="Column8" Width="89.25"/>
+        <TableColumn Name="Column9" Width="89.25"/>
+        <TableRow Name="HeaderRow" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" CanGrow="true" Text="STT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell2" Border.Lines="All" CanGrow="true" Text="Mã hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell3" Border.Lines="All" CanGrow="true" Text="Tên hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell4" Border.Lines="All" CanGrow="true" Text="ĐVT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell5" Border.Lines="All" CanGrow="true" Text="Số lượng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell6" Border.Lines="All" CanGrow="true" Text="Đơn giá" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Thành tiền" HorzAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="Ghi chú" HorzAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="DetailBand" Top="267.95" Width="718.2" Height="18.9" CanGrow="true" DataSource="orderDetail">
+      <TableObject Name="Table1" Width="715.37" Height="18.9" Border.Lines="All">
+        <TableColumn Name="Column10" Width="42.23"/>
+        <TableColumn Name="Column11" Width="89.48"/>
+        <TableColumn Name="Column12" Width="155.62"/>
+        <TableColumn Name="Column13" Width="80.03"/>
+        <TableColumn Name="Column14" Width="70.58"/>
+        <TableColumn Name="Column15" Width="98.93"/>
+        <TableColumn Name="Column17" Width="89.25"/>
+        <TableColumn Name="Column18" Width="89.25"/>
+        <TableRow Name="Row1" AutoSize="true">
+          <TableCell Name="Cell10" Border.Lines="All" CanGrow="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell11" Border.Lines="All" CanGrow="true" Text="[orderDetail.itemCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" CanGrow="true" Text="[orderDetail.itemNameCustomer]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" CanGrow="true" Text="[orderDetail.uom]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" CanGrow="true" Text="[orderDetail.amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" CanGrow="true" Text="[orderDetail.price]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" CanGrow="true" Text="[orderDetail.payment]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Border.Lines="All" CanGrow="true" Text="[orderDetail.note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="OrderBand2" Top="290.05" Width="718.2" Height="189" CanGrow="true" DataSource="order">
+      <TextObject Name="Text52" Top="18.9" Width="113.4" Height="18.9" Text="Số tiền bằng chữ:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text53" Left="113.4" Top="18.9" Width="604.8" Height="18.9" CanGrow="true" Text="[order.total_payment]" Font="Arial, 10pt"/>
+      <TextObject Name="Text44" Width="113.4" Height="18.9" Text="Hạn thanh toán:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text49" Left="302.4" Width="94.5" Height="18.9" Text="Tổng tiền hàng:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text50" Left="113.4" Width="189" Height="18.9" CanGrow="true" Text="[order.DeliveryDate]" Format="Date" Format.Format="D" Font="Arial, 10pt"/>
+      <TextObject Name="Text51" Left="396.9" Width="321.3" Height="18.9" CanGrow="true" Text="[order.total_payment]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" Font="Arial, 10pt"/>
+      <TextObject Name="Text34" Top="56.7" Width="359.1" Height="18.9" Text="Người nhận" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text35" Top="75.6" Width="359.1" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text36" Left="359.1" Top="56.7" Width="359.1" Height="18.9" Text="Người lập" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text39" Left="359.1" Top="75.6" Width="359.1" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text37" Left="359.1" Top="37.8" Width="359.1" Height="18.9" Text="[Format(&quot;{0}, {1}&quot;, [order.DeliveryAddress].ToString().Substring([order.DeliveryAddress].ToString().IndexOf(&quot;,&quot;) + 1).Trim(), FormatDateTime([order.voucherDate], &quot;dd/MM/yyyy&quot;))]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text54" Left="359.1" Top="94.5" Width="359.1" Height="66.15" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text55" Top="94.5" Width="359.1" Height="66.15" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text56" Top="37.8" Width="359.1" Height="18.9" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text40" Left="359.1" Top="160.65" Width="359.1" Height="18.9" Text="TRƯƠNG THỊ HỒNG PHƯƠNG" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

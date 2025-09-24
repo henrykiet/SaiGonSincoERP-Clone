@@ -1,0 +1,222 @@
+{
+  "model": "Customer",
+  "schema": {
+    "partition": false,
+    "fields": [
+      {
+        "name": "customer_id",
+        "property": "customer_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "customer_name",
+        "property": "customer_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "customer_group_id",
+        "property": "customer_group_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "VARCHAR(1)"
+      },
+      {
+        "name": "represent_birthday",
+        "property": "represent_birthday",
+        "type": "date",
+        "sqlType": "SMALLDATETIME"
+      },
+      {
+        "name": "debt_limit",
+        "property": "debt_limit",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "phone_number",
+        "property": "phone_number",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "email",
+        "property": "email",
+        "type": "string",
+        "sqlType": "VARCHAR(128)"
+      },
+      {
+        "name": "address",
+        "property": "address",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)"
+      },
+      {
+        "name": "city",
+        "property": "city",
+        "type": "string",
+        "sqlType": "NVARCHAR(100)"
+      },
+      {
+        "name": "district",
+        "property": "district",
+        "type": "string",
+        "sqlType": "NVARCHAR(100)"
+      },
+      {
+        "name": "note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(MAX)"
+      },
+      {
+        "name": "supplier_id",
+        "property": "supplier_id",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Customer",
+    "columnMapping": [
+      {
+        "excelColumn": "ID Khách Hàng",
+        "fieldName": "customer_id",
+        "required": false
+      },
+      {
+        "excelColumn": "Tên Khách hàng",
+        "fieldName": "customer_name",
+        "required": true
+      },
+      {
+        "excelColumn": "ID Group",
+        "fieldName": "customer_group_id",
+        "required": false,
+        "clauseForiegn": "SELECT customer_group_id, customer_group_name FROM customerGroup where status = '1'"
+      },
+      {
+        "excelColumn": "Trạng thái (0,1)",
+        "fieldName": "status",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Sinh nhật người đại diện",
+        "fieldName": "represent_birthday",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Hạn mức công nợ",
+        "fieldName": "debt_limit",
+        "required": false
+      },
+      {
+        "excelColumn": "Số điện thoại",
+        "fieldName": "phone_number",
+        "required": true
+      },
+      {
+        "excelColumn": "Email",
+        "fieldName": "email",
+        "required": true
+      },
+      {
+        "excelColumn": "Địa chỉ",
+        "fieldName": "address",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Thành phố",
+        "fieldName": "city",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Quận / Huyện",
+        "fieldName": "district",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Ghi chú",
+        "fieldName": "note",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "ID Nhà cung cấp",
+        "fieldName": "supplier_id",
+        "required": false,
+        "hide": true,
+        "clauseForiegn": "SELECT supplier_id, supplier_name FROM supplier where status = '1'"
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "customer_id",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "Customer ID must be between 1 and 50 characters."
+      },
+      {
+        "fieldName": "customer_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Customer name is required and maximum 256 characters."
+      },
+      //{
+      //  "fieldName": "email",
+      //  "type": "pattern",
+      //  "pattern": "^.+@.+\\..+$",
+      //  "message": "Invalid email format."
+      //},
+      //{
+      //  "fieldName": "phone_number",
+      //  "type": "pattern",
+      //  "pattern": "^[0-9 +-]*$",
+      //  "message": "Phone number contains invalid characters."
+      //},
+      {
+        "fieldName": "customer_id",
+        "type": "databaseCheck",
+        "overWrite": true,
+        "checkQuery": "WHERE customer_id = @customer_id",
+        "threshold": "0",
+        "message": "Customer ID already exists in the system."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "INSERT INTO supplier (supplier_id, supplier_name, phone_number, email, address, province, district, status, customer_id) VALUES (@customer_id, @customer_name, @phone_number, @email, @address, @city, @district, @status, @customer_id);",
+
+      "update": "MERGE supplier AS t USING (SELECT @customer_id AS supplier_id, @customer_name AS supplier_name, @phone_number AS phone_number, @email AS email, @address AS address, @city AS province, @district AS district, @status AS status) AS s ON t.supplier_id = s.supplier_id WHEN MATCHED THEN UPDATE SET supplier_name = s.supplier_name, phone_number = s.phone_number, email = s.email, address = s.address, province = s.province, district = s.district, status = s.status WHEN NOT MATCHED THEN INSERT (supplier_id, supplier_name, phone_number, email, address, province, district, status) VALUES (s.supplier_id, s.supplier_name, s.phone_number, s.email, s.address, s.province, s.district, s.status);",
+
+      "delete": "",
+
+      "myTableType": "CREATE TYPE [systemReport].[dbo].[CustomerTableType] AS TABLE (customer_id VARCHAR(50) PRIMARY KEY, customer_name NVARCHAR(256), group_id VARCHAR(50), status VARCHAR(1), represent_birthday SMALLDATETIME, debt_limit DECIMAL(18,2), phone_number VARCHAR(50), email VARCHAR(128), address NVARCHAR(500), city NVARCHAR(100), district NVARCHAR(100), note NVARCHAR(MAX), supplier_id VARCHAR(50));",
+
+      "dropTableType": "DROP TYPE IF EXISTS [systemReport].[dbo].[CustomerTableType];"
+    }
+  }
+}

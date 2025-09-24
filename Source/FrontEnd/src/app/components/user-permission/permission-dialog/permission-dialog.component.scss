@@ -1,0 +1,47 @@
+.permission-tree {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.permission-node {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.permission-main {
+  min-width: 200px;
+}
+
+.permission-actions {
+  display: flex;
+  gap: 16px;
+  margin-left: 24px;
+}
+
+mat-checkbox {
+  margin-right: 8px;
+}
+
+mat-tree-node {
+  min-height: 40px;
+}
+
+.mat-tree-node {
+  padding: 8px 0;
+}
+
+.mat-icon-button {
+  margin-right: 8px;
+}
+
+mat-dialog-content {
+  min-width: 600px;
+}
+
+mat-dialog-actions {
+  padding: 16px;
+  margin: 0;
+} 

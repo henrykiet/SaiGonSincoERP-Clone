@@ -1,0 +1,74 @@
+﻿{
+  "controller": "job",
+  "type": "list",
+  "formId": "job",
+  "primaryKey": [ "jobCode" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Danh mục dự án",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "job",
+        "primaryKey": "jobCode",
+        "title": "Thông tin dự án",
+        "fields": [
+          {
+            "key": "jobCode",
+            "label": "Mã dự án",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập dự án"
+          },
+          {
+            "key": "jobName",
+            "label": "Tên dự án",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên dự án"
+          },
+          {
+            "key": "jobName2",
+            "label": "Tên dự án",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên khác"
+          },
+          {
+            "key": "descript",
+            "label": "Diễn giải",
+            "type": "text",
+            "required": false,
+            "placeholder": "Nhập diễn giải"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Bị khóa",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

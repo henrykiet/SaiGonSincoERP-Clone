@@ -1,0 +1,84 @@
+﻿{
+  "controller": "customer",
+  "type": "list",
+  "formId": "customer",
+  "primaryKey": "ma_kh",
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Khách hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "order",
+        "primaryKey": "idGui",
+        "title": "Thông tin khách hàng",
+        "fields": [
+          {
+            "key": "ma_kh",
+            "label": "Mã khách hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã khách hàng"
+          },
+          {
+            "key": "ten_kh",
+            "label": "Tên",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên khách hàng"
+          },
+          {
+            "key": "ten_kh2",
+            "label": "Tên khách hàng(EN)",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên khách hàng(EN)"
+          },
+          {
+            "key": "email",
+            "label": "Email",
+            "type": "text",
+            "required": true
+
+          },
+          {
+            "key": "dien_thoai",
+            "label": "SĐT",
+            "type": "text",
+            "placeholder": "Nhập số điện thoại",
+            "required": true
+
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "text",
+            "required": true
+          },
+          {
+            "key": "datetime0",
+            "label": "Ngày tạo",
+            "type": "date",
+            "required": true
+          },
+          {
+            "key": "datetime2",
+            "label": "Ngày sửa",
+            "type": "date",
+            "required": true
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

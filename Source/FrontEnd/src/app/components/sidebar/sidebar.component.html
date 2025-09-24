@@ -1,0 +1,56 @@
+<div class="sidebar" [class.open]="isOpen" [class.collapsed]="isCollapsed">
+  <div class="sidebar-header">
+    <h2 *ngIf="!isCollapsed"></h2>
+  </div>
+  
+  <div class="sidebar-content">
+    <!-- Loading state -->
+    <div *ngIf="isLoading" class="loading-container">
+      <i class="fas fa-spinner fa-spin"></i>
+      <span *ngIf="!isCollapsed">Đang tải menu...</span>
+    </div>
+
+    <!-- Error state -->
+    <div *ngIf="error && !isLoading" class="error-container">
+      <i class="fas fa-exclamation-triangle"></i>
+      <span *ngIf="!isCollapsed">{{ error }}</span>
+      <button *ngIf="!isCollapsed" class="retry-btn" (click)="refreshMenu()">
+        <i class="fas fa-redo"></i> Thử lại
+      </button>
+    </div>
+
+    <!-- Menu items -->
+    <ng-container *ngIf="!isLoading && !error">
+      <ng-container *ngFor="let item of menuItems">
+        <!-- Parent menu item -->
+        <div class="menu-item parent" 
+             [class.expanded]="item.isExpanded"
+             [class.has-children]="hasChildren(item)"
+             (click)="toggleSubmenu(item)">
+          <i [class]="item.icon"></i>
+          <span *ngIf="!isCollapsed">{{ item.name }}</span>
+          <i class="fas fa-chevron-down arrow" *ngIf="hasChildren(item) && !isCollapsed"></i>
+        </div>
+        
+        <!-- Child menu items -->
+        <div class="submenu" *ngIf="hasChildren(item)" [class.expanded]="item.isExpanded">
+          <div class="menu-item child" 
+               *ngFor="let child of item.children"
+               [routerLink]="child.url" 
+               routerLinkActive="active"
+               [class.disabled]="!hasAccess(child)">
+            <i [class]="child.icon"></i>
+            <span>{{ child.name }}</span>
+            <!-- Hiển thị badges quyền nếu cần 
+            <div class="permissions" *ngIf="!isCollapsed">
+              <span class="permission-badge insert" *ngIf="hasInsert(child)" title="Thêm mới">+</span>
+              <span class="permission-badge update" *ngIf="hasUpdate(child)" title="Sửa">✎</span>
+              <span class="permission-badge delete" *ngIf="hasDelete(child)" title="Xóa">×</span>
+            </div>
+            -->
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div> 

@@ -1,0 +1,103 @@
+<div class="file-attachment-container">
+  <div class="header">
+    <h2>Quản lý tệp đính kèm</h2>
+    <div class="upload-section">
+      <input type="file" #fileInput style="display: none" (change)="onFileSelected($event)" [disabled]="isReadOnly">
+      <button 
+        mat-raised-button 
+        color="primary" 
+        (click)="fileInput.click()"
+        [disabled]="isReadOnly">
+        <mat-icon>upload_file</mat-icon>
+        Thêm tệp đính kèm
+      </button>
+      <div *ngIf="hasChanges" class="changes-notice">
+        <mat-icon>info</mat-icon>
+        <span>Các thay đổi sẽ được lưu khi lưu form chính</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Files tạm thời (chưa upload) -->
+  <div *ngIf="tempFiles.length > 0" class="temp-files-section">
+    <h3>Files mới (chưa lưu)</h3>
+    <div class="file-list temp-files">
+      <div *ngFor="let tempFile of tempFiles; let i = index" class="file-item temp-file">
+        <div class="file-info">
+          <mat-icon class="file-icon">add_circle</mat-icon>
+          <span class="file-name">{{ tempFile.fileName }}</span>
+          <span class="file-size">({{ (tempFile.size / 1024).toFixed(1) }} KB)</span>
+        </div>
+        <div class="file-actions">
+          <button 
+            *ngIf="canPreviewTempFile(tempFile)"
+            mat-icon-button 
+            (click)="previewTempFile(tempFile)" 
+            matTooltip="Xem trước"
+            class="preview-button">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removeTempFile(i)" matTooltip="Xóa khỏi danh sách">
+            <mat-icon class="delete-button">remove_circle</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Files đã xóa tạm thời -->
+  <div *ngIf="filesToDelete.length > 0" class="deleted-files-section">
+    <h3>Files đã đánh dấu xóa</h3>
+    <div class="file-list deleted-files">
+      <div *ngFor="let fileName of filesToDelete" class="file-item deleted-file">
+        <div class="file-info">
+          <mat-icon class="file-icon">delete</mat-icon>
+          <span class="file-name">{{ fileName }}</span>
+        </div>
+        <div class="file-actions">
+          <span class="deleted-label">Sẽ xóa khi lưu</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Files hiện tại -->
+  <div class="current-files-section">
+    <h3>Files hiện tại</h3>
+    <div class="file-list">
+      <div *ngIf="loading" class="loading">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+
+      <div *ngIf="!loading && files.length === 0 && tempFiles.length === 0" class="no-files">
+        <mat-icon>folder_open</mat-icon>
+        <p>Chưa có tệp đính kèm nào</p>
+      </div>
+
+      <div *ngIf="!loading && files.length > 0">
+        <div *ngFor="let file of files" class="file-item">
+          <div class="file-info">
+            <mat-icon class="file-icon">insert_drive_file</mat-icon>
+            <span class="file-name">{{ file.fileName }}</span>
+          </div>
+          <div class="file-actions">
+            <button 
+              *ngIf="canPreviewFile(file)"
+              mat-icon-button 
+              (click)="previewFile(file)" 
+              matTooltip="Xem trước"
+              class="preview-button">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button (click)="downloadFile(file)" matTooltip="Tải xuống">
+              <mat-icon>download</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteFile(file)" matTooltip="Xóa">
+              <mat-icon class="delete-button">delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

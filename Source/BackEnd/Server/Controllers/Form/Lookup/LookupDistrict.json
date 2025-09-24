@@ -1,0 +1,20 @@
+{
+  "controller": "district",
+  "formId": "district",
+  "primaryKey": [ "district_code" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "district_code" ],
+  "fields": [
+    {
+      "field": "district_code",
+      "header": "Mã quận huyện"
+    },
+    {
+      "field": "district_name",
+      "header": "Tên quận huyện"
+    }
+  ]
+}

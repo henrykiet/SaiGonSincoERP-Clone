@@ -1,0 +1,52 @@
+<div class="container mx-auto p-6"></div>
+<div class="container mx-auto p-6 bg-gradient-to-b from-white to-gray-50 min-h-screen relative">
+  <h1 class="text-3xl font-extrabold text-center text-gray-600 mb-8 tracking-wide break-words">QUY TRÌNH BÁN HÀNG</h1>
+
+  <!-- Header Roles -->
+  <div class="grid grid-cols-5 gap-4 text-sm font-semibold text-center">
+    <div class="bg-gray-100 p-2 border border-gray-300">NHÂN VIÊN KINH DOANH<br />KẾ TOÁN BÁN HÀNG</div>
+    <div class="bg-gray-100 p-2 border border-gray-300">KẾ TOÁN BÁN HÀNG</div>
+    <div class="bg-gray-100 p-2 border border-gray-300">KẾ TOÁN THANH TOÁN</div>
+    <div class="bg-gray-100 p-2 border border-gray-300">KẾ TOÁN BÁN HÀNG</div>
+  </div>
+
+  <!-- Process Steps -->
+  <div class="grid grid-cols-5 gap-6 mt-6 relative">
+    <!-- Cột 1 -->
+    <div class="flex flex-col items-center gap-4">
+      <a href="/quotationPaper" target="_blank"><app-step [title]="'Báo giá'" [icon]="'file-invoice'" /></a>
+      <i class="fas fa-arrow-down text-gray-400 text-lg"></i>
+      <a href="/order" target="_blank"><app-step [title]="'Đơn đặt hàng'" [icon]="'file-signature'" /></a>
+      <i class="fas fa-arrow-down text-gray-400 text-lg"></i>
+      <a href="/contract" target="_blank"><app-step [title]="'Hợp đồng'" [icon]="'handshake'" /></a>
+      <div class="absolute left-[18%] top-[45%] z-10">
+        <i class="fas fa-arrow-right text-gray-400 text-2xl"></i>
+      </div>
+    </div>
+
+    <!-- Cột 2 -->
+    <div class="flex flex-col items-center gap-4">
+      <a href="/ghi-nhan-doanh-thu" target="_blank"><app-step [title]="'Ghi nhận doanh thu'" [icon]="'chart-line'" /></a>
+      <i class="fas fa-arrow-down text-gray-400 text-lg"></i>
+      <a href="/xuat-hoa-don" target="_blank"><app-step [title]="'Xuất hóa đơn'" [icon]="'file-invoice-dollar'" /></a>
+      <i class="fas fa-arrow-down text-gray-400 text-lg"></i>
+      <a href="/giam-gia" target="_blank"><app-step [title]="'Giảm giá hàng bán'" [icon]="'tags'" /></a>
+      <div class="absolute left-[38%] top-[45%] z-10">
+        <i class="fas fa-arrow-right text-gray-400 text-2xl"></i>
+      </div>
+    </div>
+
+    <!-- Cột 3 -->
+    <div class="flex flex-col items-center gap-4 mt-38">
+      <a href="/thu-tien" target="_blank"><app-step [title]="'Thu tiền khách hàng'" [icon]="'money-bill-wave'" /></a>
+      <div class="absolute left-[58%] top-[45%] z-10">
+        <i class="fas fa-arrow-right text-gray-400 text-2xl"></i>
+      </div>
+    </div>
+
+    <!-- Cột 4 -->
+    <div class="flex flex-col items-center gap-4 mt-38">
+      <a href="/bao-cao-phan-tich" target="_blank"><app-step [title]="'Báo cáo phân tích'" [icon]="'chart-pie'" /></a>
+    </div>
+  </div>
+</div>

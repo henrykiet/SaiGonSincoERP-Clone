@@ -1,0 +1,99 @@
+<h2 mat-dialog-title>Phân Quyền Nhóm: {{data.groupName}}</h2>
+<mat-dialog-content>
+  <div class="permission-tree">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- Node template -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <div class="permission-node">
+          <div class="permission-main">
+            <mat-checkbox
+              [checked]="node.hasAccess"
+              (change)="updateNodeAccess(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              {{node.name}}
+            </mat-checkbox>
+          </div>
+          
+          <div class="permission-actions" *ngIf="node.hasAccess">
+            <mat-checkbox
+              [checked]="node.hasAccess"
+              (change)="updateNodeAccess(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Xem
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canInsert"
+              (change)="updateNodeInsert(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Thêm
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canUpdate"
+              (change)="updateNodeUpdate(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Sửa
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canDelete"
+              (change)="updateNodeDelete(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Xóa
+            </mat-checkbox>
+          </div>
+        </div>
+      </mat-tree-node>
+
+      <!-- Expandable node template -->
+      <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle
+                [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon class="mat-icon-rtl-mirror">
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <div class="permission-node">
+          <div class="permission-main">
+            <mat-checkbox
+              [checked]="node.hasAccess"
+              (change)="updateNodeAccess(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              {{node.name}}
+            </mat-checkbox>
+          </div>
+          
+          <div class="permission-actions" *ngIf="node.hasAccess">
+            <mat-checkbox
+              [checked]="node.hasAccess"
+              (change)="updateNodeAccess(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Xem
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canInsert"
+              (change)="updateNodeInsert(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Thêm
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canUpdate"
+              (change)="updateNodeUpdate(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Sửa
+            </mat-checkbox>
+            <mat-checkbox
+              [checked]="node.canDelete"
+              (change)="updateNodeDelete(node, $event.checked)"
+              (click)="$event.stopPropagation()">
+              Xóa
+            </mat-checkbox>
+          </div>
+        </div>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">Hủy</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Lưu</button>
+</mat-dialog-actions>

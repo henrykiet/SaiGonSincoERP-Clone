@@ -1,0 +1,69 @@
+<div class="user-group-permissions-container">
+  <div class="header">
+    <h2>Phân quyền nhóm người dùng</h2>
+  </div>
+  
+  <div class="search-bar">
+    <mat-form-field>
+      <mat-label>Tìm kiếm nhóm</mat-label>
+      <input matInput [(ngModel)]="searchText" (keyup)="searchUserGroups()">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container" [class.loading]="isLoading">
+    <table mat-table [dataSource]="userGroups" class="mat-elevation-z8">
+      <!-- User Group ID Column -->
+      <ng-container matColumnDef="userGroupId">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let userGroup">{{userGroup.userGroupId}}</td>
+      </ng-container>
+
+      <!-- Group Name Column -->
+      <ng-container matColumnDef="groupName">
+        <th mat-header-cell *matHeaderCellDef>Nhóm người dùng</th>
+        <td mat-cell *matCellDef="let userGroup">{{userGroup.groupName}}</td>
+      </ng-container>
+
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Tên nhóm</th>
+        <td mat-cell *matCellDef="let userGroup">{{userGroup.description || 'N/A'}}</td>
+      </ng-container>
+
+      <!-- List User Column -->
+      <ng-container matColumnDef="listUser">
+        <th mat-header-cell *matHeaderCellDef>Danh sách người dùng</th>
+        <td mat-cell *matCellDef="let userGroup">
+          <span class="users-display" [title]="userGroup.listUser">
+            {{getUsersDisplay(userGroup.listUser)}}
+          </span>
+        </td>
+      </ng-container>
+
+      <!-- Created At Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+        <td mat-cell *matCellDef="let userGroup">{{userGroup.createdAt | date}}</td>
+      </ng-container>
+
+      <!-- Permissions Column -->
+      <ng-container matColumnDef="permissions">
+        <th mat-header-cell *matHeaderCellDef>Phân quyền</th>
+        <td mat-cell *matCellDef="let userGroup">
+          <button mat-button color="primary" (click)="openPermissionDialog(userGroup)">
+            <mat-icon>admin_panel_settings</mat-icon> 
+            Phân quyền
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="loading-spinner" *ngIf="isLoading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </div>
+</div>

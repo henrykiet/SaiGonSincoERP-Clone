@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/31/2025 16:53:50" ReportInfo.Modified="09/19/2025 13:07:12" ReportInfo.CreatorVersion="2025.2.6.0">
+  <Dictionary>
+    <TableDataSource Name="contract" ReferenceName="ReportData.contract" DataType="System.Int32" Enabled="true" TableName="contract">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="customer_id" DataType="System.String"/>
+      <Column Name="number_ddh" DataType="System.String"/>
+      <Column Name="quotationCode" DataType="System.String"/>
+      <Column Name="voucherDate" DataType="System.DateTime"/>
+      <Column Name="customer_group_id" DataType="System.String"/>
+      <Column Name="customer_name" DataType="System.String"/>
+      <Column Name="representative" DataType="System.String"/>
+      <Column Name="position" DataType="System.String"/>
+      <Column Name="address" DataType="System.String"/>
+      <Column Name="phone" DataType="System.String"/>
+      <Column Name="account" DataType="System.String"/>
+      <Column Name="customer_account" DataType="System.String"/>
+      <Column Name="tax_code" DataType="System.String"/>
+      <Column Name="amount_total" DataType="System.Decimal"/>
+      <Column Name="amount_in_word" DataType="System.String"/>
+      <Column Name="delivery_note" DataType="System.String"/>
+      <Column Name="contract_note" DataType="System.String"/>
+      <Column Name="status" DataType="System.String"/>
+      <Column Name="user_id0" DataType="System.Int32"/>
+      <Column Name="user_id2" DataType="System.Int32"/>
+      <Column Name="datetime0" DataType="System.DateTime"/>
+      <Column Name="datetime2" DataType="System.DateTime"/>
+    </TableDataSource>
+    <TableDataSource Name="contractDetail" ReferenceName="ReportData.contractdetail" DataType="System.Int32" Enabled="true" TableName="contractDetail">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="line_nbr" DataType="System.Int32"/>
+      <Column Name="stt" DataType="System.Int32"/>
+      <Column Name="item_id" DataType="System.String"/>
+      <Column Name="item_name" DataType="System.String"/>
+      <Column Name="uomCode" DataType="System.String"/>
+      <Column Name="quantity" DataType="System.Decimal"/>
+      <Column Name="price" DataType="System.Decimal"/>
+      <Column Name="tax" DataType="System.Decimal"/>
+      <Column Name="amount" DataType="System.Decimal"/>
+      <Column Name="note" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="255.15" CanGrow="true">
+      <PictureObject Name="Picture1" Top="9.45" Width="718.2" Height="75.6" ImageLocation="Images\SaiGonSinco_logo2.png"/>
+      <TextObject Name="Text13" Top="85.05" Width="718.2" Height="37.8" Text="HỢP ĐỒNG KINH TẾ" HorzAlign="Center" VertAlign="Center" Font="Arial, 20pt, style=Bold"/>
+      <TextObject Name="Text54" Top="122.85" Width="718.2" Height="18.9" Text="(Số: [contract.number_ddh]/HĐKT-24)" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text55" Top="141.75" Width="718.2" Height="113.4" Text="- Căn cứ Bộ Luật Dân Sự số 91/2015/QH13 được Quốc hội nước Cộng hòa xã hội chủ nghĩa Việt Nam khóa XIII, kỳ họp thứ 10 thông qua ngày 24/11/2015 và có hiệu lực từ ngày 01/01/2017. &#13;&#10;- Căn cứ Luật Thương Mại số 36/2005/QH11 được Quốc Hội nước Cộng hòa xã hội chủ nghĩa Việt Nam khóa XI, kỳ họp thứ 7 thông qua ngày 14/06/2005 có hiệu lực từ ngày 01/01/2006.&#13;&#10;- Căn cứ vào nhu cầu thực tế của Bên mua và khả năng cung cấp của Bên bán.&#13;&#10;&#13;&#10;Hôm nay, ngày    [contract.voucherDate]   tháng      năm 2023, chúng tôi gồm:&#13;&#10;&#13;&#10;" Font="Arial, 10pt"/>
+    </ReportTitleBand>
+    <DataBand Name="MasterBand" Top="258.35" Width="718.2" Height="292.95" CanGrow="true" PrintOn="FirstPage" DataSource="contract">
+      <TextObject Name="Text14" Width="113.4" Height="18.9" Text="Bên mua (A):" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text19" Left="113.4" Top="18.9" Width="302.4" Height="18.9" CanGrow="true" Text="Ông/bà [contract.customer_id]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Top="37.8" Width="113.4" Height="18.9" Text="- Địa chỉ:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text25" Left="113.4" Top="37.8" Width="604.8" Height="18.9" Text="[contract.address]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Top="56.7" Width="113.4" Height="18.9" Text="- Điện thoại: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text27" Left="113.4" Top="56.7" Width="302.4" Height="18.9" Text="[contract.phone]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text30" Top="75.6" Width="113.4" Height="18.9" Text="- Tài khoản:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text31" Left="113.4" Top="75.6" Width="604.8" Height="18.9" Text="[contract.customer_account]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Top="94.5" Width="113.4" Height="18.9" Text="- MST: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text33" Left="113.4" Top="94.5" Width="604.8" Height="18.9" Text="[contract.tax_code]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text42" Left="415.8" Top="18.9" Width="75.6" Height="18.9" Text="Chức vụ:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text43" Left="491.4" Top="18.9" Width="226.8" Height="18.9" Text="......." VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Top="18.9" Width="113.4" Height="18.9" Text="- Đại diện: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text56" Top="113.4" Width="113.4" Height="18.9" Text="Bên bán (B):" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text57" Left="113.4" Top="132.3" Width="302.4" Height="18.9" CanGrow="true" Text="Ông/bà [contract.representative]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text58" Top="151.2" Width="113.4" Height="18.9" Text="- Địa chỉ:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text59" Left="113.4" Top="151.2" Width="604.8" Height="18.9" Text="489/9 Khu Phố 1, P. Bình Hưng Hoà A, Q. Bình Tân, TPHCM" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text60" Top="170.1" Width="113.4" Height="18.9" Text="- Điện thoại/Fax: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text61" Left="113.4" Top="170.1" Width="302.4" Height="18.9" Text="08 3750 2826 – 08 3504 2832  " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text62" Top="189" Width="113.4" Height="18.9" Text="- Tài khoản:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text63" Left="113.4" Top="189" Width="604.8" Height="18.9" Text="[contract.account]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text64" Top="207.9" Width="113.4" Height="18.9" Text="- MST: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text65" Left="113.4" Top="207.9" Width="604.8" Height="18.9" Text="0302262724 " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text66" Left="415.8" Top="132.3" Width="75.6" Height="18.9" Text="- Chức vụ:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text67" Left="491.4" Top="132.3" Width="226.8" Height="18.9" Text="[contract.position]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text68" Top="132.3" Width="113.4" Height="18.9" Text="- Đại diện: " VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text69" Left="113.4" Width="604.8" Height="18.9" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text70" Left="113.4" Top="113.4" Width="604.8" Height="18.9" Text="CÔNG TY TNHH TM &amp; XÂY LẮP CÔNG NGHIỆP SÀI GÒN" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text71" Left="415.8" Top="170.1" Width="75.6" Height="18.9" Text="- ĐT:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text72" Left="491.4" Top="170.1" Width="226.8" Height="18.9" Text="0946556058 - 0914510058" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text73" Top="226.8" Width="718.2" Height="18.9" Text="Sau khi đã thống nhất, hai bên quyết định ký kết hợp đồng mua bán với những điều khoản sau:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text74" Top="245.7" Width="718.2" Height="18.9" Text="ĐIỀU 1: PHẠM VI CUNG CẤP VÀ GIÁ CẢ" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text76" Top="264.6" Width="718.2" Height="28.35" CanGrow="true" Text="Bên Mua đồng ý mua và bên Bán đồng ý bán hàng hóa được liệt kê như sau:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text83" Left="415.8" Top="56.7" Width="75.6" Height="18.9" Text="- Fax:" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text84" Left="491.4" Top="56.7" Width="226.8" Height="18.9" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <DataBand Name="DetailHeaderBand" Top="554.5" Width="718.2" Height="18.9" CanGrow="true">
+      <TableObject Name="MaterialsHeader" Width="720.39" Height="18.9" Border.Lines="All">
+        <TableColumn Name="Column1" Width="42.23"/>
+        <TableColumn Name="Column3" Width="221.77"/>
+        <TableColumn Name="Column4" Width="80.03"/>
+        <TableColumn Name="Column5" Width="70.58"/>
+        <TableColumn Name="Column6" Width="98.93"/>
+        <TableColumn Name="Column8" Width="89.25"/>
+        <TableColumn Name="Column9" Width="117.6"/>
+        <TableRow Name="HeaderRow" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" CanGrow="true" Text="STT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" CanGrow="true" Text="Nội dung" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" CanGrow="true" Text="ĐVT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell5" Border.Lines="All" CanGrow="true" Text="Số lượng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell6" Border.Lines="All" CanGrow="true" Text="Đơn giá" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Thành tiền" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="Ghi chú" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="DetailBand" Top="576.6" Width="718.2" Height="18.9" CanGrow="true" CanShrink="true" CanBreak="true" DataSource="contractDetail">
+      <TableObject Name="Table1" Width="720.39" Height="18.9" Border.Lines="All">
+        <TableColumn Name="Column10" Width="42.23"/>
+        <TableColumn Name="Column12" Width="221.77"/>
+        <TableColumn Name="Column13" Width="80.03"/>
+        <TableColumn Name="Column14" Width="70.58"/>
+        <TableColumn Name="Column15" Width="98.93"/>
+        <TableColumn Name="Column17" Width="89.25"/>
+        <TableColumn Name="Column18" Width="117.6"/>
+        <TableRow Name="Row1" AutoSize="true">
+          <TableCell Name="Cell10" Border.Lines="All" CanGrow="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="All" CanGrow="true" Text="[contractDetail.item_id] - [contractDetail.item_name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Border.Lines="All" CanGrow="true" Text="[contractDetail.uomCode]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Border.Lines="All" CanGrow="true" Text="[contractDetail.quantity]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Border.Lines="All" CanGrow="true" Text="[contractDetail.price]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Border.Lines="All" CanGrow="true" Text="[contractDetail.amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Border.Lines="All" CanGrow="true" Text="[contractDetail.note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="OrderBand2" Top="598.7" Width="718.2" Height="56.7" CanGrow="true" CanShrink="true" CanBreak="true">
+      <TableObject Name="Table2" Width="720.39" Height="56.7" Border.Lines="All">
+        <TableColumn Name="Column19" Width="42.23"/>
+        <TableColumn Name="Column20" Width="221.77"/>
+        <TableColumn Name="Column21" Width="80.03"/>
+        <TableColumn Name="Column22" Width="70.58"/>
+        <TableColumn Name="Column23" Width="98.93"/>
+        <TableColumn Name="Column24" Width="89.25"/>
+        <TableColumn Name="Column25" Width="117.6"/>
+        <TableRow Name="Row2" AutoSize="true">
+          <TableCell Name="Cell19" Border.Lines="All" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell20" Border.Lines="All" CanGrow="true" Text="TỔNG" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell21" Border.Lines="Top, Bottom" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell22" Border.Lines="Top, Bottom" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell23" Border.Lines="Top, Bottom" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell24" Border.Lines="All" CanGrow="true" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell25" Border.Lines="All" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row3">
+          <TableCell Name="Cell26" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell27" Border.Lines="All" Text="VAT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell28" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell29" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell30" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell31" Border.Lines="All" Format="Percent" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.PercentSymbol="%" Format.PositivePattern="1" Format.NegativePattern="1" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell32" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+        <TableRow Name="Row4">
+          <TableCell Name="Cell33" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell34" Border.Lines="All" Text="TỔNG CỘNG" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell35" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell36" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell37" Border.Lines="Top, Bottom" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell38" Border.Lines="All" Text="[contract.amount_total]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell39" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="Data2" Top="658.6" Width="718.2" Height="510.3" CanGrow="true" DataSource="contract">
+      <TextObject Name="Text85" Width="718.2" Height="18.9" Text="Bằng chữ: [contractDetail.amount]" Font="Arial, 10pt, style=Italic"/>
+      <TextObject Name="Text34" Top="406.35" Width="359.1" Height="18.9" Text="ĐẠI DIỆN BÊN MUA" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text35" Top="425.25" Width="359.1" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text36" Left="359.1" Top="406.35" Width="359.1" Height="18.9" Text="ĐẠI DIỆN BÊN BÁN" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text39" Left="359.1" Top="425.25" Width="359.1" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text37" Left="359.1" Top="387.45" Width="359.1" Height="18.9" Text="[IIf(!String.IsNullOrEmpty([contract.address]), [contract.address].ToString().Substring([contract.address].ToString().IndexOf(&quot;,&quot;) + 1).Trim() + &quot;, &quot; + FormatDateTime([contract.voucherDate], &quot;dd/MM/yyyy&quot;), FormatDateTime([contract.voucherDate], &quot;dd/MM/yyyy&quot;))]&#13;&#10;" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text87" Top="444.15" Width="359.1" Height="56.7" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text88" Left="359.1" Top="444.15" Width="359.1" Height="56.7" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text89" Top="75.6" Width="718.2" Height="311.85" CanGrow="true" Text="ĐIỀU 2: ĐIỀU KIỆN KỸ THUẬT VÀ CHẤT LƯỢNG SẢN PHẨM&amp;#13;&amp;#10;&#13;&#10;    Sản phẩm bên B bán là hàng mới 100% (chưa sử dụng), do Schneider sản xuất đảm bảo chất lượng tốt, không bị khuyết tật.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 3: ĐIỀU KHOẢN THANH TOÁN&amp;#13;&amp;#10;&#13;&#10;    3.1/ Việc thanh toán giá trị hàng hóa sẽ được thực hiện theo các thời điểm sau:&amp;#13;&amp;#10;&#13;&#10;        - Đợt 1: Bên A tạm ứng 30% giá trị hợp đồng trong vòng 7 ngày kể từ ngày ký. Sau thời gian này, nếu Bên Mua chưa tạm ứng và đơn giá có biến động thì hợp đồng sẽ áp dụng theo giá tại thời điểm tạm ứng.&amp;#13;&amp;#10;&#13;&#10;        - Đợt 2: Thanh toán 70% giá trị còn lại của hợp đồng trước khi nhận hàng hoặc trả chậm trong vòng 30 ngày kể từ ngày nhận hàng. Việc trả chậm được đảm bảo bằng chứng thư bảo lãnh thanh toán không hủy ngang được phát hành bởi ngân hàng hợp pháp của Bên Mua. Hiệu lực bảo lãnh trong vòng 35 ngày kể từ ngày phát hành. Nội dung thư bảo lãnh được hai bên thống nhất trước khi phát hành bản chính. Bản chính bảo lãnh được gửi về địa chỉ VP bên B: 489/9 Mã Lò, Bình Hưng Hòa A, Bình Tân, Hồ Chí Minh trước khi giao hàng.&amp;#13;&amp;#10;&#13;&#10;        Hồ sơ thanh toán gồm:&amp;#13;&amp;#10;&#13;&#10;            + Đề nghị thanh toán &amp;#13;&amp;#10;&#13;&#10;            + Biên bản giao nhận có chữ ký của hai bên (Người nhận hàng có giấy giới thiệu từ Bên Mua&amp;#13;&amp;#10;&#13;&#10;            + Hóa đơn GTGT &amp;#13;&amp;#10;&#13;&#10;    3.2/ Tài khoản ngân hàng của bên Bán:&amp;#13;&amp;#10;&#13;&#10;        Tên người thụ hưởng:		  Công ty TNHH TM &amp;amp; XL Công Nghiệp Sài Gòn&amp;#13;&amp;#10;&#13;&#10;        Địa chỉ: 		  	489/9 Khu phố 1, Bình Hưng Hòa A, Bình Tân, HCM, VN&amp;#13;&amp;#10;&#13;&#10;        Số tài khoản: 			 	 12913269&amp;#13;&amp;#10;&#13;&#10;        Ngân hàng Người thụ hưởng: 	 ACB – Hội sở TP Hồ Chí Minh&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 4: THỜI GIAN VÀ PHƯƠNG THỨC GIAO NHẬN&amp;#13;&amp;#10;&#13;&#10;    4.1/ Thời gian giao nhận hàng: &amp;#13;&amp;#10;&#13;&#10;        - Hàng sẽ được giao hàng trong vòng   ngày kể từ ngày tạm ứng đợt 1 và khi Bên Mua sẵn sàng nhận hàng. Bên Mua sẽ thông báo cho Bên Bán ngày nhận hàng trước 03 ngày. &amp;#13;&amp;#10;&#13;&#10;        - Nếu quá 30 ngày kể từ ngày tạm ứng (đối với hàng có sẵn) hoặc quá 30 ngày kể từ ngày hàng có tại VN hoặc sản xuất xong (đối với hàng nhập khẩu hoặc đặt sản xuất) mà bên Mua vẫn chưa nhận hàng thì có thể thanh toán tiền và gửi hàng tại kho bên Bán. Trường hợp chưa thanh toán thì phần tiền còn lại sẽ cần tính thêm lãi suất theo lãi suất hiện hành của ngân hàng Vietinbank tại thời điểm thực hiện hợp đồng và trong trường hợp không có biến động về giá. Nếu có biến động về giá (giá tăng) Bên Mua thanh toán đủ phần còn lại để giữ giá đã ký kết. Sau 2 tháng vẫn chưa nhận hàng thì 2 bên sẽ bàn bạc, thống nhất theo tuỳ trường hợp cụ thể: tiếp tục thực hiện hợp đồng, tạm ngưng, huỷ... nhưng thời gian kéo dài không quá 3 tháng. Sau thời gian này, tiền tạm ứng sẽ không được hoàn lại. Nếu việc chậm nhận hàng rơi vào các trường hợp bất khả kháng thì thực hiện theo Điều 7 của hợp đồng.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    4.2/ Phương thức giao nhận:&amp;#13;&amp;#10;&#13;&#10;        Địa điểm giao hàng: Hàng sẽ được giao tại      , chi phí bốc dỡ hàng mỗi bên chịu một đầu.&amp;#13;&amp;#10;&#13;&#10;        Khi nhận hàng, bên A có trách nhiệm kiểm nhận phẩm chất, qui cách hàng hóa tại chỗ. Nếu phát hiện hàng thiếu hoặc không đúng tiêu chuẩn chất lượng thì lập biên bản tại chỗ yêu cầu bên B xác nhận.&amp;#13;&amp;#10;&#13;&#10;        Bên B sẽ cung cấp các chứng từ sau cho Bên A trong vòng 07 ngày kể từ ngày giao hàng và khi Bên B nhận đủ 100% tiền thanh toán từ Bên A.&amp;#13;&amp;#10;&#13;&#10;            + 01 bản gốc Hóa Đơn Thuế GTGT&amp;#13;&amp;#10;&#13;&#10;            + Phiếu xuất xưởng hàng hóa (hàng sản xuất tại VN)&amp;#13;&amp;#10;&#13;&#10;            + 01 bản sao CO, CQ (nếu hàng nhập khẩu)&amp;#13;&amp;#10;&#13;&#10;            + 01 bản Chứng Nhận Số lượng và Chất lượng của nhà sản xuất (bản chính hoặc sao y)&amp;#13;&amp;#10;&#13;&#10;            + 01 bản  Chứng Nhận Bảo Hành của nhà sản xuất (bản chính hoặc sao y)&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 5: ĐIỀU KIỆN BẢO HÀNH&amp;#13;&amp;#10;&#13;&#10;        1. Bên Bán chịu trách nhiệm bảo hành hàng hóa trong vòng 12 tháng kể từ ngày đóng điện nhưng không quá 18 tháng kể từ ngày giao hàng. Tùy theo điều kiện nào đến trước (Bảo hành thiết bị sự cố không bao gồm chi phí lắp đặt thiết bị sự cố).&amp;#13;&amp;#10;&#13;&#10;        2. Nếu có sự cố xảy ra Bên Mua giữ nguyên hiện trạng niêm chì và mời kỹ thuật hai Bên để cùng xác định nguyên nhân và kết luận. &amp;#13;&amp;#10;&#13;&#10;            Nếu: &amp;#13;&amp;#10;&#13;&#10;            + Lỗi do Bên Bán trong thời gian bảo hành, Bên Bán sửa chữa, Bên Mua không thanh toán chi phí (Đính kèm biên bản thử nghiệm trước khi vận hành của thiết bị, biên bản đóng điện nghiệm thu, biên bản sự cố của CTy Điện lực khu vực). &amp;#13;&amp;#10;&#13;&#10;            + Lỗi do Bên Mua, thì Bên Bán nhận sửa chữa và Bên Mua thanh toán chi phí cho Bên Bán.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 6: QUYỀN VÀ NGHĨA VỤ CỦA CÁC BÊN&amp;#13;&amp;#10;&#13;&#10;    Bên Mua:&amp;#13;&amp;#10;&#13;&#10;        - Từ chối nhận hàng khi Bên Bán thực hiện sai hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        - Yêu cầu Bên Bán cung cấp đầy đủ các hoá đơn, chứng từ và các giấy tờ hợp lệ liên quan đến hàng hoá cho bên Mua.&amp;#13;&amp;#10;&#13;&#10;        - Kiểm tra số lượng, chủng loại, phẩm chất, qui cách hàng hoá. Nếu phát hiện hàng thiếu hoặc không đúng chất lượng, thì lập biên bản tại chỗ yêu cầu Bên Bán xác nhận. &amp;#13;&amp;#10;&#13;&#10;        - Ký xác nhận đầy đủ các giấy tờ giao nhận hàng.&amp;#13;&amp;#10;&#13;&#10;        - Nhận hàng đúng hạn theo thỏa thuận tại Điều 4 của hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        - Thanh toán tiền đầy đủ và đúng hạn theo Điều 3 của hợp đồng này.&amp;#13;&amp;#10;&#13;&#10;    Bên Bán:&amp;#13;&amp;#10;&#13;&#10;        - Từ chối giao hàng nếu Bên Mua không thực hiện đúng hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        - Kết hợp với Bên Mua để việc giao nhận hàng hóa được thuận lợi.&amp;#13;&amp;#10;&#13;&#10;        - Giao hàng đúng chủng loại, quy cách, số lượng, thời gian, địa điểm như đã thoả thuận tại Điều 4 của hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        - Cung cấp đầy đủ các hoá đơn, chứng từ và các giấy tờ hợp lệ liên quan đến hàng hoá cho bên Mua.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 7: SỰ KIỆN BẤT KHẢ KHÁNG&amp;#13;&amp;#10;&#13;&#10;        1. Sự kiện bất khả kháng được quy định trong hợp đồng này là việc không quy trách nhiệm cho bên A hoặc bên B nếu có những trường hợp không thực hiện hợp đồng do: chiến tranh, đình công, bão, thiên tai, dịch bệnh, động đất, hỏa hoạn, thiếu hụt nguyên liệu toàn cầu,...v.v&amp;#13;&amp;#10;&#13;&#10;        2. Các giấy chứng nhận của Cơ quan có thẩm quyền hoặc Phòng thương mại cấp cho một trong hai bên là cơ sở pháp lý cho những sự kiện bất khả kháng này.&amp;#13;&amp;#10;&#13;&#10;        3. Khi gặp sự kiện bất khả kháng, bên bị ảnh hưởng có trách nhiệm:&amp;#13;&amp;#10;&#13;&#10;            - Thông báo cho bên Bán bằng văn bản trong 05 ngày kể từ khi sự kiện bất khả kháng xảy ra, thực hiện các biện pháp ngăn ngừa cần thiết và hợp lý để hạn chế tối đa ảnh hưởng do sự kiện bất khả kháng gây ra.&amp;#13;&amp;#10;&#13;&#10;        4. Thời gian xảy ra sự kiện bất khả kháng không được tính vào thời gian thực hiện hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        5. Trong trường hợp xảy xa sự kiện bất khả kháng, hai bên sẽ họp bản giải quyết các vấn đề phát sinh ngoài hợp đồng, thống nhất lập và ký kết phụ lục hợp đồng.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 8: ĐIỀU CHỈNH HỦY BỎ VÀ THANH LÝ HỢP ĐỒNG&amp;#13;&amp;#10;&#13;&#10;        - Mọi thay đổi, điều chỉnh, dừng hợp đồng phải được thỏa thuận bằng văn bản và có xác nhận của hai bên. Không bên nào có quyền đơn phương hủy bỏ hợp đồng ngoại trừ việc một trong hai bên vi phạm điều khoản của Hợp đồng.&amp;#13;&amp;#10;&#13;&#10;        - Hợp đồng được coi như thanh lý khi các bên đã thực hiện đầy đủ và kịp thời nghĩa vụ và trách nhiệm của mình thể hiện trong hợp đồng này.&amp;#13;&amp;#10;&#13;&#10;    &amp;#13;&amp;#10;&#13;&#10;    ĐIỀU 9: ĐIỀU KHOẢN CHUNG&amp;#13;&amp;#10;&#13;&#10;        Hai Bên cam kết thực hiện đúng các điều khoản đã ký kết. Trong quá trình thực hiện nếu gặp khó khăn hai Bên cùng nhau bàn bạc giải quyết trên tinh thần hợp tác. Trong trường hợp có tranh chấp không giải quyết bằng thảo luận bình đẳng, hai bên đồng ý yêu cầu sự phân xử của Toà Án Kinh Tế TPHCM.&amp;#13;&amp;#10;&#13;&#10;        Hợp đồng này được lập thành 03 bản, Bên Mua giữ 01 Bên Bán giữ 02 bản có giá trị pháp lý như nhau, có hiệu lực kể từ ngày ký.&amp;#13;&amp;#10;&#13;&#10;        Hợp đồng này có hiệu lực kể từ ngày Bên Mua tiến hành tạm ứng đợt 1 và hết hiệu lực vào ngày Bên Mua nhận đủ hàng và các chứng từ liên quan đến hàng hóa hoặc đến ngày .............. (3 tháng kể từ ngày ký hợp đồng + xem lại phù hợp với thời gian bảo lãnh) tùy thuộc vào thời gian nào đến trước. Nghĩa vụ bảo hành vẫn được thực hiện theo thỏa thuận tại Điều 5 của hợp đồng này.&amp;#13;&amp;#10;" Font="Arial, 10pt" TextRenderType="HtmlTags"/>
+      <TextObject Name="Text90" Top="37.8" Width="718.2" Height="37.8" CanGrow="true" Text="       - Sổ lý lịch và tài liệu hướng dẫn sử dụng sẽ được giao cùng với MBA, Quý công ty lưu ý để tránh làm thất lạc. &#13;&#10;       - Những lưu ý về MBA được đính kèm theo hợp đồng này." Font="Arial, 10pt, style=Italic"/>
+      <TextObject Name="Text91" Top="18.9" Width="718.2" Height="18.9" Text="Ghi chú:" Font="Arial, 10pt, style=Bold, Underline"/>
+    </DataBand>
+  </ReportPage>
+</Report>

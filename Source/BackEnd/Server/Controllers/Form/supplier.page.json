@@ -1,0 +1,236 @@
+﻿{
+	"controller": "supplier",
+	"type": "list",
+	"formId": "supplier",
+	"primaryKey": [
+		"supplier_id"
+	],
+	"idVC": "",
+	"VCDate": "",
+	"title": "Quản lý nhà cung cấp",
+	"class": "onSelectSupplierChange()",
+	"tabs": [
+		{
+			"title": "Thông tin nhà cung cấp",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"typeForm": "master",
+				"formId": "supplier",
+				"primaryKey": "supplier_id",
+				"title": "Thông tin nhà cung cấp",
+				"fields": [
+					{
+						"key": "supplier_id",
+						"label": "Mã nhà cung cấp",
+						"type": "text",
+						"required": true,
+						"disabled": false,
+						"placeholder": "Nhập mã nhà cung cấp(Mã số thuế)"
+					},
+					{
+						"key": "supplier_name",
+						"label": "Tên nhà cung cấp",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập tên nhà cung cấp"
+					},
+					{
+						"key": "supplier_type_id",
+						"label": "Loại nhà cung cấp",
+						"type": "lookup",
+						"multiple": false,
+						"required": false,
+						"default": {
+							"controller": "supplierType",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "industry_group_id",
+						"label": "Nhóm ngành hàng cung cấp",
+						"type": "lookup",
+						"multiple": false,
+						"required": false,
+						"default": {
+							"controller": "industryGroup",
+							"filter": []
+						}
+					},
+					{
+						"key": "phone_number",
+						"label": "Số điện thoại",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "email",
+						"label": "Email",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "address",
+						"label": "Địa chỉ",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "province",
+						"label": "Tỉnh/Thành phố",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "district",
+						"label": "Quận/Huyện",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Đang hoạt động",
+								"value": "1"
+							},
+							{
+								"label": "Không hoạt động",
+								"value": "0"
+							}
+						]
+					},
+					{
+						"key": "customer_id",
+						"label": "Liên kết khách hàng",
+						"type": "lookup",
+						"multiple": false,
+						"required": false,
+						"default": {
+							"controller": "customer",
+							"filter": []
+						}
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Thông tin liên hệ",
+					"controllerDetail": "supplierContact",
+					"formId": "supplierContact",
+					"foreignKey": "supplier_id",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "STT",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "contact_name",
+							"label": "Tên người liên hệ",
+							"type": "text"
+						},
+						{
+							"key": "contact_phone",
+							"label": "Số điện thoại liên hệ",
+							"type": "text"
+						},
+						{
+							"key": "contact_email",
+							"label": "Email liên hệ",
+							"type": "text"
+						},
+						{
+							"key": "contact_position",
+							"label": "Chức vụ",
+							"type": "text"
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"type": "text"
+						}
+					]
+				},
+				{
+					"title": "Thông tin chuyển khoản",
+					"controllerDetail": "supplierBankAccount",
+					"formId": "supplierBankAccount",
+					"foreignKey": "supplier_id",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "STT",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "bank_info",
+							"label": "Thông tin chuyển khoản",
+							"type": "text",
+							"required": true
+						},
+						{
+							"key": "bank_name",
+							"label": "Tên ngân hàng",
+							"type": "text",
+							"required": true
+						},
+						{
+							"key": "bank_account_number",
+							"label": "Số tài khoản",
+							"type": "text",
+							"required": true
+						},
+						{
+							"key": "beneficiary_name",
+							"label": "Tên người thụ hưởng",
+							"type": "text",
+							"required": true
+						},
+						{
+							"key": "bank_branch",
+							"label": "Chi nhánh ngân hàng",
+							"type": "text",
+							"required": true
+						},
+						{
+							"key": "is_default",
+							"label": "Ngân hàng mặc định",
+							"type": "select",
+							"options": [
+								{
+									"label": "Có",
+									"value": "0"
+								},
+								{
+									"label": "Không",
+									"value": "1"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

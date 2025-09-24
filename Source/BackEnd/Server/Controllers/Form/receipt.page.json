@@ -1,0 +1,259 @@
+{
+	"controller": "receipt",
+	"type": "voucher",
+	"formId": "receipt",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z07",
+	"VCDate": "voucherDate",
+	"title": "Phiếu thu",
+	"tabs": [
+		{
+			"title": "Phiếu thu",
+			"form": {
+				"title": "Thông tin phiếu thu",
+				"formId": "receipt",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "voucherCode",
+						"label": "Mã chứng từ",
+						"type": "hidden",
+						"default": "Z07"
+					},
+					{
+						"key": "voucherNumber",
+						"label": "Số phiếu",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "deliveryNoteNo",
+						"label": "Phiếu giao hàng",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "invoiceNumber",
+						"label": "Số hóa đơn",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày tạo",
+						"type": "date",
+						"required": true
+					},
+					{
+						"key": "customerCode",
+						"label": "Mã khách hàng",
+						"type": "lookup",
+						"required": true,
+						"multiple": false,
+						"default": {
+							"controller": "customer",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						},
+						"onChange": {
+							"api": "/api/CustomQuery/execute",
+							"params": [
+								"customer"
+							],
+							"dataType": [
+								"String"
+							],
+							"query": "select address as customerAddress from customer where customer_id = @customer",
+							"map": {
+								"customerAddress": "customerAddress"
+							}
+						}
+					},
+					{
+						"key": "customerAddress",
+						"label": "Địa chỉ Khách hàng",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "collectorCode",
+						"label": "Nhân viên thu",
+						"type": "lookup",
+						"required": true,
+						"multiple": false,
+						"default": {
+							"controller": "Employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "reason",
+						"label": "Lý do thu",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "amountTransfer",
+						"label": "Tiền CK",
+						"type": "number",
+						"currency": "VN",
+						"required": false
+					},
+					{
+						"key": "amountCash",
+						"label": "Tiền mặt",
+						"type": "number",
+						"currency": "VN",
+						"required": false
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text",
+						"required": false
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Tạo phiếu",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "total_amount",
+						"label": "Tổng tiền thu",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[total_amount] = SUM([amount])",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "datetime0",
+						"label": "Ngày tạo bản ghi",
+						"type": "hidden"
+					},
+					{
+						"key": "datetime2",
+						"label": "Ngày sửa bản ghi",
+						"type": "hidden"
+					},
+					{
+						"key": "user_id0",
+						"label": "Người tạo",
+						"type": "hidden"
+					},
+					{
+						"key": "user_id2",
+						"label": "Người sửa",
+						"type": "hidden"
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "receiptdetail",
+					"formId": "receiptdetail",
+					"foreignKey": "idGui,line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "accountReceiveCode",
+							"label": "Tài khoản nhận",
+							"type": "lookup",
+							"required": true,
+							"multiple": false,
+							"width": "220px",
+							"default": {
+								"controller": "AccountSinco",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "amount",
+							"label": "Số tiền",
+							"type": "number",
+							"currency": "VN",
+							"required": true,
+							"width": "160px"
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"type": "text",
+							"required": false,
+							"width": "260px"
+						}
+					],
+					"initialData": []
+				}
+			]
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "beforeUpdate",
+					"type": "sql01",
+					"query": "exec beforeUpdateReceipt N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				},
+				{
+					"step": "afterUpdate",
+					"type": "sql02",
+					"query": "exec afterUpdateReceipt N'@idGui', N'@voucherNumber', N'@voucherDate';"
+				}
+			]
+		}
+	}
+}

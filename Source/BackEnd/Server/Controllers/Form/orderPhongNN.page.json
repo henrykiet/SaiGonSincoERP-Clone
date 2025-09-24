@@ -1,0 +1,148 @@
+{
+  "controller": "orderPhongNN",
+  "type": "voucher",
+  "formId": "order",
+  "primaryKey": [ "idGui" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Đơn hàng PhongNN test",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "order",
+        "primaryKey": "idGui",
+        "title": "Thông tin đơn hàng",
+        "fields": [
+          {
+            "key": "idGui",
+            "label": "Key",
+            "type": "text",
+            "required": true,
+            "placeholder": ""
+          },
+          {
+            "key": "customerID",
+            "label": "Khách hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": ""
+          },
+          {
+            "key": "voucherNumber",
+            "label": "Số chứng từ",
+            "type": "text",
+            "required": true,
+            "placeholder": ""
+          },
+          {
+            "key": "voucherDate",
+            "label": "Ngày chứng từ",
+            "type": "date",
+            "placeholder": "Chọn ngày đặt hàng"
+          },
+          {
+            "key": "totalAmount",
+            "label": "Tổng tiền",
+            "type": "number",
+            "default": 0,
+            "placeholder": ""
+          },
+          {
+            "key": "totalTax",
+            "label": "Tổng thuế",
+            "type": "number",
+            "default": 0,
+            "placeholder": ""
+          },
+          {
+            "key": "totalPayment",
+            "label": "Tổng thanh toán",
+            "type": "number",
+            "default": 0,
+            "placeholder": ""
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": false,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Bị khóa",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      },
+      "detail": {
+        "title": "Chi tiết đơn hàng",
+        "entity": "orderDetail",
+        "foreignKey": "idGui, line_nbr",
+        "fields": [
+          {
+            "key": "idGui",
+            "label": "Key",
+            "type": "text"
+          },
+          {
+            "key": "line_nbr",
+            "label": "Stt",
+            "type": "number"
+          },
+          {
+            "key": "itemID",
+            "label": "Vật tư",
+            "type": "text"
+          },
+          {
+            "key": "uom",
+            "label": "Đvt",
+            "type": "text"
+          },
+          {
+            "key": "siteID",
+            "label": "Kho",
+            "type": "text"
+          },
+          {
+            "key": "amount",
+            "label": "Tiền",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập tiền"
+          },
+          {
+            "key": "tax",
+            "label": "Thuế",
+            "type": "number",
+            "placeholder": "Nhập thuế"
+          },
+          {
+            "key": "payment",
+            "label": "Thanh toán",
+            "type": "number",
+            "disabled": true,
+            "placeholder": "Nhập thanh toán"
+          }
+        ],
+        "initialData": [
+        ]
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "controller": "employee",
+  "formId": "employee",
+  "primaryKey": [ "employee_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "employee_id" ],
+  "fields": [
+    {
+      "field": "employee_id",
+      "header": "Mã nhân viên"
+    },
+    {
+      "field": "full_name",
+      "header": "Tên nhân viên"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+
+json đầu vào:
+{
+	"controller": "customer",
+	"language": "vn",
+	"unit": "CTY",
+	"userId": "1",
+	"filter": [
+		{"field":"status", "value":"1", "operator":"="}
+	]
+}
+
+Json đầu ra:
+
+{
+  "controller": "customer",
+  "formId": "customer",
+  "primaryKey": ["ma_kh"],
+  "language": "vn",
+  "unit": "CTY",
+  "type": "one",
+  "sort": ["ma_kh"],
+  "fields": [
+    {
+      "field": "ma_kh",
+      "header": "Mã khách hàng"
+    },
+    {
+      "field": "ten_kh",
+      "header": "Tên khách hàng"
+    },
+    {
+      "field": "ten_kh2",
+      "header": "Tên khách hàng (EN)"
+    }
+  ],
+  "datas": [
+	{"ma_kh": "KH001", "ten_kh": "Khách hàng 001", "ten_kh2": "Customer 001"},
+	{"ma_kh": "KH002", "ten_kh": "Khách hàng 002", "ten_kh2": "Customer 002"}
+  ]
+}

@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="07/02/2025 01:11:41" ReportInfo.Modified="07/04/2025 20:22:28" ReportInfo.CreatorVersion="2025.2.5.0">
+  <Dictionary>
+    <TableDataSource Name="customer" ReferenceName="ReportData.customer" DataType="System.Int32" Enabled="true" TableName="customer">
+      <Column Name="ma_kh" DataType="System.String"/>
+      <Column Name="ten_kh" DataType="System.String"/>
+      <Column Name="ten_kh2" DataType="System.String"/>
+      <Column Name="status" DataType="System.String"/>
+      <Column Name="userid0" DataType="System.Int32"/>
+      <Column Name="userid2" DataType="System.Int32"/>
+      <Column Name="datetime0" DataType="System.DateTime"/>
+      <Column Name="datetime2" DataType="System.DateTime"/>
+      <Column Name="dia_chi" DataType="System.String"/>
+      <Column Name="ma_so_thue" DataType="System.String"/>
+      <Column Name="so_cccd" DataType="System.String"/>
+      <Column Name="so_hc" DataType="System.String"/>
+      <Column Name="ngay_sinh" DataType="System.DateTime"/>
+      <Column Name="PhoneNumber" DataType="System.String"/>
+      <Column Name="Email" DataType="System.String"/>
+      <Column Name="dien_thoai" DataType="System.String"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <PageHeaderBand Name="PageHeader1" Width="718.2" Height="28.35">
+      <TextObject Name="Text1" Width="718.2" Height="28.35" Text="Khách Hàng" VertAlign="Center" Font="Arial, 18pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="30.64" Width="718.2" Height="18.9" CanGrow="true">
+      <TableObject Name="Table1" Width="718.26" Height="18.9">
+        <TableColumn Name="Column10" Width="40.17"/>
+        <TableColumn Name="Column18" Width="59.07"/>
+        <TableColumn Name="Column3" Width="77.97"/>
+        <TableColumn Name="Column5" Width="106.32"/>
+        <TableColumn Name="Column6" Width="96.87"/>
+        <TableColumn Name="Column7" Width="87.42"/>
+        <TableColumn Name="Column8" Width="106.32"/>
+        <TableColumn Name="Column9" Width="144.12"/>
+        <TableRow Name="Row1" AutoSize="true">
+          <TableCell Name="Cell37" CanGrow="true" Text="STT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell45" CanGrow="true" Text="Mã khách hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell3" CanGrow="true" Text="Tên khách hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell5" CanGrow="true" Text="Địa chỉ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell21" CanGrow="true" Text="Hạn mức công nợ" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell25" CanGrow="true" Text="Ngày sinh người đại diện" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell29" CanGrow="true" Text="Số điện thoại" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+          <TableCell Name="Cell33" CanGrow="true" Text="Email" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold" TextOutline.Color="RosyBrown"/>
+        </TableRow>
+      </TableObject>
+      <DataBand Name="Data2" Top="51.82" Width="718.2" Height="18.9" CanGrow="true" DataSource="customer">
+        <TableObject Name="Table3" Width="718.26" Height="18.9">
+          <TableColumn Name="Column20" Width="40.17"/>
+          <TableColumn Name="Column21" Width="59.07"/>
+          <TableColumn Name="Column22" Width="77.97"/>
+          <TableColumn Name="Column23" Width="106.32"/>
+          <TableColumn Name="Column24" Width="96.87"/>
+          <TableColumn Name="Column25" Width="87.42"/>
+          <TableColumn Name="Column26" Width="106.32"/>
+          <TableColumn Name="Column27" Width="144.12"/>
+          <TableRow Name="Row2" AutoSize="true" CanBreak="true">
+            <TableCell Name="Cell46" CanGrow="true" CanBreak="false" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell47" CanGrow="true" Text="[customer.customer_id]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell48" CanGrow="true" Text="[customer.customer_name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell49" CanGrow="true" Text="[customer.address]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell50" CanGrow="true" Text="[customer.debt_limit]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell51" CanGrow="true" Text="[customer.represent_birthday]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell52" CanGrow="true" Text="[customer.phone_number]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+            <TableCell Name="Cell53" CanGrow="true" Text="[customer.email]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          </TableRow>
+        </TableObject>
+      </DataBand>
+    </DataBand>
+  </ReportPage>
+</Report>

@@ -1,0 +1,37 @@
+{
+  "controller": "tax",
+  "type": "list",
+  "formId": "tax",
+  "primaryKey": [ "tax_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Danh mục thuế",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "tax",
+        "primaryKey": "tax_id",
+        "title": "Thông tin thuế",
+        "fields": [
+          {
+            "key": "tax_id",
+            "label": "Mã số thuế",
+            "type": "taxcode",
+            "required": true,
+            "placeholder": "Nhập mã thuế"
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="01/06/2025 22:49:11" ReportInfo.Modified="02/24/2025 20:06:31" ReportInfo.CreatorVersion="2025.1.10.0">
+  <Dictionary>
+    <MsSqlDataConnection Name="Connection" ConnectionString="rijcmlq+rW0RkboK+/8CKGGYUID3ctBV8q9SvKYxl3iiE7vBnh7Tgou0+4WFf3NfmPSvHVFpKrdJhfEsLYsDcoKKuTJDfEKdP9WIRAgJdShC/LOZKnR8ZNoWiP/v87E8JNoNACB/0udVfCuDyDuhBUyRu3fxlSBG4XQuA+xm04IRd1PrDgMvnMX37nxxKw2lM3qhNqM">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" SelectCommand="exec test1 '20260104', '20250104', '', '1', '0', '0'">
+        <Column Name="Id" DataType="System.String"/>
+        <Column Name="Title" DataType="System.String"/>
+        <Column Name="Content" DataType="System.String"/>
+        <Column Name="CreatedDate" DataType="System.DateTime"/>
+      </TableDataSource>
+    </MsSqlDataConnection>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text9" Left="160.65" Top="9.45" Width="378" Height="18.9" Text="Báo cáo demo" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="40.47" Width="718.2" Height="18.9">
+      <TextObject Name="Text2" Left="56.7" Width="94.5" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Id" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text4" Left="151.2" Width="236.25" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Title" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text6" Left="387.45" Width="170.1" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="Content" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text8" Left="557.55" Width="94.5" Height="18.9" Border.Lines="All" Fill.Color="PeachPuff" Text="CreatedDate" HorzAlign="Center" Font="Arial, 10pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="Data1" Top="62.03" Width="718.2" Height="18.9" DataSource="Table">
+      <TextObject Name="Text1" Left="56.7" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.Id]" Font="Arial, 10pt"/>
+      <TextObject Name="Text3" Left="151.2" Width="236.25" Height="18.9" Border.Lines="All" Text="[Table.Title]" Font="Arial, 10pt"/>
+      <TextObject Name="Text5" Left="387.45" Width="170.1" Height="18.9" Border.Lines="All" Text="[Table.Content]" Font="Arial, 10pt"/>
+      <TextObject Name="Text7" Left="557.55" Width="94.5" Height="18.9" Border.Lines="All" Text="[Table.CreatedDate]" Format="Date" Format.Format="d" Font="Arial, 10pt"/>
+    </DataBand>
+    <PageFooterBand Name="PageFooter1" Top="83.6" Width="718.2" Height="18.9"/>
+  </ReportPage>
+</Report>

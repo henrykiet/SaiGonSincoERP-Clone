@@ -1,0 +1,20 @@
+{
+  "controller": "item",
+  "formId": "item",
+  "primaryKey": [ "item_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "item_id" ],
+  "fields": [
+    {
+      "field": "item_id",
+      "header": "Mã vật tư"
+    },
+    {
+      "field": "item_name",
+      "header": "Tên vật tư"
+    }
+  ]
+}

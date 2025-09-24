@@ -1,0 +1,66 @@
+<div class="user-permission-container">
+  <div class="header">
+    <h2>Phân quyền người sử dụng</h2>
+    
+  </div>
+  
+  <div class="search-bar">
+    <mat-form-field>
+      <mat-label>Search Users</mat-label>
+      <input matInput [(ngModel)]="searchText" (keyup)="searchUsers()">
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+  </div>
+
+  <div class="table-container" [class.loading]="isLoading">
+    <table mat-table [dataSource]="users" class="mat-elevation-z8">
+      <!-- User ID Column -->
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let user">{{user.userId}}</td>
+      </ng-container>
+
+      <!-- Username Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef>Tên đăng nhập</th>
+        <td mat-cell *matCellDef="let user">{{user.userName}}</td>
+      </ng-container>
+
+      <!-- Full Name Column -->
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef>Họ và tên</th>
+        <td mat-cell *matCellDef="let user">{{user.fullName}}</td>
+      </ng-container>
+
+      <!-- Is Locked Column -->
+      <ng-container matColumnDef="isLocked">
+        <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+        <td mat-cell *matCellDef="let user">{{user.isLocked ? 'Khóa' : 'Hoạt động'}}</td>
+      </ng-container>
+
+      <!-- Created At Column -->
+      <ng-container matColumnDef="createdAt">
+        <th mat-header-cell *matHeaderCellDef>Ngày tạo</th>
+        <td mat-cell *matCellDef="let user">{{user.createdAt | date}}</td>
+      </ng-container>
+
+      <!-- Permissions Column -->
+      <ng-container matColumnDef="permissions">
+        <th mat-header-cell *matHeaderCellDef>Quyền</th>
+        <td mat-cell *matCellDef="let user">
+          <button mat-button color="primary" (click)="openPermissionDialog(user)">
+            <mat-icon>admin_panel_settings</mat-icon> 
+            Phân quyền
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div class="loading-spinner" *ngIf="isLoading">
+      <mat-spinner diameter="40"></mat-spinner>
+    </div>
+  </div>
+</div> 

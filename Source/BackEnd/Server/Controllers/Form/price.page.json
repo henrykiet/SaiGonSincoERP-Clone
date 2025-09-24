@@ -1,0 +1,193 @@
+﻿{
+	"controller": "price",
+	"formId": "price",
+	"type": "list",
+	"primaryKey": [
+		"price_id"
+	],
+	"idVC": "",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Danh mục giá bán",
+			"form": {
+				"typeForm": "master",
+				"formId": "price",
+				"primaryKey": "price_id",
+				"title": "Thông tin bảng giá",
+				"fields": [
+					{
+						"key": "price_id",
+						"label": "Mã bảng giá bán",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "price_name",
+						"label": "Tên bảng giá bán",
+						"type": "text",
+						"required": true
+					},
+					{
+						"key": "customer_id",
+						"label": "Mã khách hàng",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "customer",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						},
+						"required": true,
+						"onChange": {
+							"api": "/api/CustomQuery/execute",
+							"params": [
+								"customer_id"
+							],
+							"dataType": [
+								"String"
+							],
+							"query": "select customer_group_id as customer_group_id from customer where customer_id = @customer_id",
+							"map": {
+								"customer_group_id": "customer_group_id"
+							}
+						}
+					},
+					{
+						"key": "customer_group_id",
+						"label": "Nhóm khách hàng",
+						"type": "text"
+					},
+					{
+						"key": "effective_date",
+						"label": "Ngày hiệu lực",
+						"type": "date",
+						"required": true
+					},
+					{
+						"key": "expired_date",
+						"label": "Ngày hết hiệu lực",
+						"type": "date"
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text"
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"defaultValue": "1",
+						"options": [
+							{
+								"label": "Đang hoạt động",
+								"value": "1"
+							},
+							{
+								"label": "Không hoạt động",
+								"value": "0"
+							}
+						]
+					}
+				]
+			},
+			"detail": [
+				{
+					"title": "Chi tiết giá bán",
+					"controllerDetail": "priceDetail",
+					"formId": "priceDetail",
+					"foreignKey": "price_id, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text"
+						},
+						{
+							"key": "item_id",
+							"label": "Mã sản phẩm / vật tư",
+							"required": true,
+							"width": "450px",
+							"type": "lookup",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom from item where item_id = @item_id",
+								"map": {
+									"uom": "uom"
+								}
+							}
+						},
+						{
+							"key": "uom",
+							"label": "Đơn vị tính",
+							"type": "lookup",
+							"multiple": false,
+							"required": true,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "price",
+							"label": "Giá bán (VND)",
+							"currency": "VN",
+							"type": "number",
+							"required": true
+						},
+						{
+							"key": "apply_date",
+							"label": "Ngày áp dụng giá",
+							"type": "date"
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"type": "text"
+						}
+					],
+					"initialData": []
+				}
+			]
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

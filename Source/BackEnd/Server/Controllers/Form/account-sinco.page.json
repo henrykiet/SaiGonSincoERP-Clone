@@ -1,0 +1,112 @@
+{
+  "controller": "accountSinco",
+  "type": "list",
+  "formId": "accountSinco",
+  "primaryKey": [ "account_sinco_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Danh mục Tài khoản của Sinco",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin Tài khoản",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "accountSinco",
+        "primaryKey": "account_sinco_id",
+        "title": "Thông tin Tài khoản",
+        "fields": [
+          {
+            "key": "account_sinco_id",
+            "label": "Mã tài khoản Sinco",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã tài khoản"
+          },
+          {
+            "key": "account_sinco_name",
+            "label": "Tên tài khoản",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên tài khoản"
+          },
+          {
+            "key": "account_type",
+            "label": "Hình thức sử dụng",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Tiền mặt",
+                "value": "TM"
+              },
+              {
+                "label": "Chuyển khoản",
+                "value": "NH"
+              }
+            ],
+            "placeholder": "Chọn hình thức sử dụng"
+          },
+          {
+            "key": "bank_name",
+            "label": "Ngân hàng",
+            "type": "lookup",
+            "required": false,
+            "placeholder": "Chọn ngân hàng từ danh mục NCC",
+            "default": {
+              "controller": "supplier",
+              "filter": [
+              ]
+            }
+          },
+          {
+            "key": "account_number",
+            "label": "Số tài khoản",
+            "type": "text",
+            "required": false,
+            "placeholder": "Nhập số tài khoản"
+          },
+          {
+            "key": "bank_branch",
+            "label": "Chi nhánh ngân hàng",
+            "type": "text",
+            "required": false,
+            "placeholder": "Nhập chi nhánh ngân hàng"
+          },
+          {
+            "key": "note",
+            "label": "Ghi chú",
+            "type": "textarea",
+            "required": false,
+            "placeholder": "Nhập ghi chú (tối đa 500 ký tự)"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Không hoạt động",
+                "value": "0"
+              }
+            ],
+            "placeholder": "Chọn trạng thái"
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "icon": "fas fa-wallet",
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

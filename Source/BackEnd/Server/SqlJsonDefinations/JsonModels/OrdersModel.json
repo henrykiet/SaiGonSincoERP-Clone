@@ -1,0 +1,164 @@
+{
+  "model": "Orders",
+  "schema": {
+    "fields": [
+      {
+        "name": "OrderId",
+        "property": "orderId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "CustomerId",
+        "property": "customerId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "DocumentNumber",
+        "property": "documentNumber",
+        "type": "string",
+        "sqlType": "VARCHAR(100)"
+      },
+      {
+        "name": "UserId",
+        "property": "userId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "CreatedDate",
+        "property": "createdDate",
+        "type": "date",
+        "sqlType": "DATE"
+      },
+      {
+        "name": "Status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "TotalQuantity",
+        "property": "totalQuantity",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "TotalAmount",
+        "property": "totalAmount",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "Note",
+        "property": "note",
+        "type": "string",
+        "sqlType": "NVARCHAR(MAX)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Orders",
+    "columnMapping": [
+      {
+        "excelColumn": "OrderId",
+        "fieldName": "OrderId",
+        "required": true
+      },
+      {
+        "excelColumn": "CustomerId",
+        "fieldName": "CustomerId",
+        "required": true
+      },
+      {
+        "excelColumn": "DocumentNumber",
+        "fieldName": "DocumentNumber",
+        "required": false
+      },
+      {
+        "excelColumn": "UserId",
+        "fieldName": "UserId",
+        "required": true
+      },
+      {
+        "excelColumn": "CreatedDate",
+        "fieldName": "CreatedDate",
+        "required": false
+      },
+      {
+        "excelColumn": "Status",
+        "fieldName": "Status",
+        "required": false
+      },
+      {
+        "excelColumn": "TotalQuantity",
+        "fieldName": "TotalQuantity",
+        "required": false
+      },
+      {
+        "excelColumn": "TotalAmount",
+        "fieldName": "TotalAmount",
+        "required": false
+      },
+      {
+        "excelColumn": "Note",
+        "fieldName": "Note",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "OrderId",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "OrderId must be between 1 and 50 characters"
+      },
+      {
+        "fieldName": "Status",
+        "type": "pattern",
+        "pattern": "^(Pending|Processing|Completed|Cancelled)$",
+        "message": "Status must be one of: Pending, Processing, Completed, Cancelled"
+      },
+      {
+        "fieldName": "TotalQuantity",
+        "type": "range",
+        "min": "1",
+        "max": "1000",
+        "message": "TotalQuantity must be between 1 and 1000"
+      },
+      {
+        "fieldName": "TotalAmount",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "TotalAmount must be between 0 and 1 billion"
+      },
+      {
+        "fieldName": "OrderId",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE OrderId = @orderId",
+        "threshold": "0",
+        "message": "OrderId already exists in database"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF @orderId IS NULL OR @orderId = '' THROW 60001, 'OrderId is required', 1;\nIF EXISTS (SELECT 1 FROM Orders WHERE OrderId = @orderId) THROW 60002, 'Duplicate OrderId', 1;\nINSERT INTO Orders (OrderId, CustomerId, DocumentNumber, UserId, CreatedDate, Status, TotalQuantity, TotalAmount, Note) VALUES (@orderId, @customerId, @documentNumber, @userId, @createdDate, @status, @totalQuantity, @totalAmount, @note);",
+      "update": "IF @orderId IS NULL THROW 60003, 'OrderId is required for update', 1;\nIF NOT EXISTS (SELECT 1 FROM Orders WHERE OrderId = @orderId) THROW 60004, 'Order not found', 1;\nUPDATE Orders SET CustomerId = @customerId, DocumentNumber = @documentNumber, UserId = @userId, CreatedDate = @createdDate, Status = @status, TotalQuantity = @totalQuantity, TotalAmount = @totalAmount, Note = @note WHERE OrderId = @orderId;",
+      "delete": "IF @orderId IS NULL THROW 60005, 'OrderId is required for deletion', 1;\nIF NOT EXISTS (SELECT 1 FROM Orders WHERE OrderId = @orderId) THROW 60006, 'Order not found', 1;\nDELETE FROM Orders WHERE OrderId = @orderId;",
+      "myTableType": "CREATE TYPE dbo.OrderTableType AS TABLE (OrderId VARCHAR(50) PRIMARY KEY, CustomerId VARCHAR(50), DocumentNumber VARCHAR(100), UserId VARCHAR(50), CreatedDate DATE, Status VARCHAR(50), TotalQuantity INT, TotalAmount DECIMAL(18,2), Note TEXT);",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertOrder; DROP TYPE IF EXISTS dbo.OrderTableType;"
+    }
+  }
+}

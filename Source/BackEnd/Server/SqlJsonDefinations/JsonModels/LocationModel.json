@@ -1,0 +1,196 @@
+{
+  "model": "location",
+  "schema": {
+    "partition": false,
+    "fields": [
+      {
+        "name": "province_code",
+        "property": "province_code",
+        "type": "string",
+        "sqlType": "VARCHAR(16)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "district_code",
+        "property": "district_code",
+        "type": "string",
+        "sqlType": "VARCHAR(16)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "ward_code",
+        "property": "ward_code",
+        "type": "string",
+        "sqlType": "VARCHAR(16)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "province_name",
+        "property": "province_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)",
+        "required": true
+      },
+      {
+        "name": "district_name",
+        "property": "district_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)",
+        "required": true
+      },
+      {
+        "name": "ward_name",
+        "property": "ward_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)",
+        "required": true
+      },
+      {
+        "name": "unit_type",
+        "property": "unit_type",
+        "type": "string",
+        "sqlType": "NVARCHAR(50)",
+        "required": true
+      },
+      {
+        "name": "ward_code_old",
+        "property": "ward_code_old",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "district_code_old",
+        "property": "district_code_old",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "province_code_old",
+        "property": "province_code_old",
+        "type": "string",
+        "sqlType": "VARCHAR(16)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "CHAR(1)",
+        "required": true
+      },
+      {
+        "name": "last_update_date",
+        "property": "last_update_date",
+        "type": "string",
+        "sqlType": "DATE"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Location",
+    "columnMapping": [
+      {
+        "excelColumn": "Mã tỉnh thành",
+        "fieldName": "province_code",
+        "required": true,
+        "clauseForiegn": "SELECT province_code, province_name FROM province where status = '1'"
+      },
+      {
+        "excelColumn": "Tên tỉnh thành",
+        "fieldName": "province_name",
+        "required": true
+      },
+      {
+        "excelColumn": "Mã quận huyện",
+        "fieldName": "district_code",
+        "required": true,
+        "clauseForiegn": "SELECT district_code, district_name FROM district where status = '1'"
+      },
+      {
+        "excelColumn": "Tên quận huyện",
+        "fieldName": "district_name",
+        "required": true
+      },
+      {
+        "excelColumn": "Mã xã phường",
+        "fieldName": "ward_code",
+        "required": true,
+        "clauseForiegn": "SELECT ward_code, ward_name FROM ward where status = '1'"
+      },
+      {
+        "excelColumn": "Tên xã phường",
+        "fieldName": "ward_name",
+        "required": true
+      },
+      {
+        "excelColumn": "Loại đơn vị hành chính(Phường,Xã,Thị trấn)",
+        "fieldName": "unit_type",
+        "required": true
+      }
+      //{
+      //  "excelColumn": "ward_code_old",
+      //  "fieldName": "ward_code_old"
+      //},
+      //{
+      //  "excelColumn": "district_code_old",
+      //  "fieldName": "district_code_old"
+      //},
+      //{
+      //  "excelColumn": "province_code_old",
+      //  "fieldName": "province_code_old"
+      //},
+      //{
+      //  "excelColumn": "status",
+      //  "fieldName": "status",
+      //  "required": true
+      //},
+      //{
+      //  "excelColumn": "last_update_date",
+      //  "fieldName": "last_update_date"
+      //}
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "province_code",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE province_code = @province_code AND district_code = @district_code AND ward_code = @ward_code",
+        "threshold": "0",
+        "message": "Bản ghi vị trí đã tồn tại trong hệ thống."
+      },
+      {
+        "fieldName": "province_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Tên tỉnh thành không được để trống và tối đa 256 ký tự."
+      },
+      {
+        "fieldName": "district_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Tên quận huyện không được để trống và tối đa 256 ký tự."
+      },
+      {
+        "fieldName": "ward_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Tên xã phường không được để trống và tối đa 256 ký tự."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {}
+  },
+  "foriegnModel": []
+}

@@ -1,0 +1,20 @@
+{
+  "controller": "itemGroup",
+  "formId": "itemGroup",
+  "primaryKey": [ "item_group_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "item_group_id" ],
+  "fields": [
+    {
+      "field": "item_group_id",
+      "header": "Mã nhóm vật tư"
+    },
+    {
+      "field": "item_group_name",
+      "header": "Tên nhóm vật tư"
+    }
+  ]
+}

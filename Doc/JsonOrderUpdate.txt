@@ -1,0 +1,71 @@
+{
+	"controller": "order",
+	"formId": "order",
+	"action": "update",
+	"type": "voucher",
+	"userId": "1",
+	"unit": "CTY",
+	"language": "vn",
+	"VCDate": "2025-06-09",
+	"idVC": "",
+	"primaryKey": "idGui",
+	"data": {
+		"idGui": "GUI2025060001",
+		"customerID": "KH001",
+		"voucherNumer": "Test001",
+		"voucherDate": "2025-06-09",
+		"note": "PhongNN xdđ",
+		"totalAmount": "500000",
+		"totalTax": "50000",
+		"totalPayment": "550000",
+		"status": "1",
+		"userid0": "1",
+		"userid2": "1",
+		"datetime0": "2025-06-09",
+		"datetime2": "2025-06-07",
+		"details": [
+			{
+				"controllerDetail": "orderDetail",
+				"formIdDetail": "orderDetail",
+				"foreignKey": "idGui, line_nbr",
+				"data": [
+					{
+						"idGui": "GUI2025060001",
+						"line_nbr": "1",
+						"voucherNumer": "Test001",
+						"voucherDate": "2025-06-09",
+						"itemID": "VT001",
+						"uom": "psc",
+						"siteID": "KHO001",
+						"amount": "300000",
+						"tax": "30000",
+						"payment": "330000"
+					},
+					{
+						"idGui": "GUI2025060001",
+						"line_nbr": "2",
+						"voucherNumer": "Test001",
+						"voucherDate": "2025-06-09",
+						"itemID": "VT002",
+						"uom": "psc",
+						"siteID": "KHO002",
+						"amount": "200000",
+						"tax": "20000",
+						"payment": "220000"
+					}
+				]
+			}
+		]
+	},
+	"dataProcessing": {
+		"actions": {
+			"post": [
+				{
+					"step": "soKho",
+					"type": "sql",
+					"query": "exec postLedger 'KH001', 'Test001', '20250609', 'update', 'GUI2025060001';"
+				}
+			]
+		}
+	}
+}

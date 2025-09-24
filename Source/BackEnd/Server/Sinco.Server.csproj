@@ -1,0 +1,112 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<!-- coppy json to output  -->
+	<ItemGroup>
+		<None Include="JsonModels\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="Controllers\Config\**" />
+		<Content Remove="Controllers\Config\**" />
+		<EmbeddedResource Remove="Controllers\Config\**" />
+		<None Remove="Controllers\Config\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Controllers\FastReport\quotationpaper.frx~RF15c1bdf1.TMP" />
+	  <None Remove="Controllers\FastReport\quotationpaper.frx~RF714e83f.TMP" />
+	  <None Remove="Controllers\FastReport\quotationpaper.frx~RF75e5b0b.TMP" />
+	  <None Remove="Controllers\FastReport\Report.frx~RF768a67b.TMP" />
+	  <None Remove="Repositories\BaseRepository\BaseRepository.cs~RF111d8fde.TMP" />
+	  <None Remove="Repositories\BaseRepository\BaseRepository.cs~RF1875dc50.TMP" />
+	  <None Remove="Repositories\DataService.cs~RF3111d383.TMP" />
+	  <None Remove="Repositories\FileService.cs~RF2d27a1.TMP" />
+	  <None Remove="Repositories\FileService.cs~RF543f8df.TMP" />
+	  <None Remove="SqlJsonDefinations\JsonModels\OrderModel.json~RFc37117a.TMP" />
+	  <None Remove="SqlJsonDefinations\JsonModels\QuotationPaperModel.json~RFac62d.TMP" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Controllers\FastReport\contract.frx" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<PackageReference Include="ClosedXML" Version="0.105.0" />
+
+		<PackageReference Include="Dapper" Version="2.1.66" />
+
+		<PackageReference Include="ExcelDataReader" Version="3.7.0" />
+
+		<PackageReference Include="ExcelDataReader.DataSet" Version="3.7.0" />
+
+		<PackageReference Include="FastReport.Blazor.Wasm.Demo" Version="2025.1.10" />
+		<PackageReference Include="FastReport.Data.MsSql" Version="2025.1.10" />
+		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="FastReport.Net.Demo" Version="2025.1.0" />
+		<PackageReference Include="FastReport.OpenSource" Version="2025.1.0" />
+		<PackageReference Include="FastReport.OpenSource.Data.MsSql" Version="2021.4.0" />
+		<PackageReference Include="FastReport.OpenSource.Export.PdfSimple" Version="2025.1.0" />
+		<PackageReference Include="AutoMapper" Version="12.0.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+		<PackageReference Include="FuzzySharp" Version="2.0.2" />
+		<PackageReference Include="log4net" Version="3.0.3" />
+		<PackageReference Include="MailKit" Version="4.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.36" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Common" Version="4.13.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.20">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.20" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.20">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.ML" Version="4.0.2" />
+		<PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.22.1" />
+		<PackageReference Include="Microsoft.PowerBI.Api" Version="4.22.0" />
+		<PackageReference Include="MudBlazor" Version="6.21.0" />
+		<PackageReference Include="PDFsharp" Version="6.2.0" />
+		<PackageReference Include="Portable.Licensing" Version="1.0.0" />
+		<PackageReference Include="ReportViewerCore.NETCore" Version="15.1.26" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.5.0" />
+		<PackageReference Include="System.Drawing.Common" Version="10.0.0-preview.5.25277.114" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.36.0" />
+		<PackageReference Include="System.Management" Version="9.0.7" />
+		<PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
+		<PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Shared\Sinco.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="SqlJsonDefinations\JsonModels\CustomerModel.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Update="SqlJsonDefinations\JsonModels\UsersModel.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\" />
+	</ItemGroup>
+
+
+</Project>

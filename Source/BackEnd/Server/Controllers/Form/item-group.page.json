@@ -1,0 +1,94 @@
+{
+  "controller": "item-group",
+  "type": "list",
+  "formId": "itemGroup",
+  "primaryKey": [ "item_group_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Danh mục Nhóm Vật Tư",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Danh mục Nhóm Vật Tư",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "itemGroup",
+        "primaryKey": "item_group_id",
+        "title": "Thông tin nhóm vật tư",
+        "fields": [
+          {
+            "key": "item_group_id",
+            "label": "Mã nhóm",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã nhóm"
+          },
+          {
+            "key": "item_group_name",
+            "label": "Tên nhóm",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên nhóm"
+          },
+          {
+            "key": "group_index",
+            "label": "Thứ tự hiển thị",
+            "type": "number",
+            "required": false,
+            "placeholder": "Nhập thứ tự hiển thị"
+          },
+          {
+            "key": "industry_group_id",
+            "label": "Nhóm ngành hàng",
+            "type": "lookup",
+            "required": true,
+            "multiple": false,
+            "default": {
+              "controller": "industryGroup",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            }
+          },
+          {
+            "key": "note",
+            "label": "Ghi chú",
+            "type": "text",
+            "required": false,
+            "placeholder": "Nhập ghi chú"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "placeholder": "Nhập Trạng thái",
+            "defaultValue": "1",
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Không hoạt động",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      },
+      "detail": []
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

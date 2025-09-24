@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/23/2025 17:13:37" ReportInfo.Modified="06/29/2025 14:03:00" ReportInfo.CreatorVersion="2025.2.5.0">
+	<Dictionary>
+		<TableDataSource Name="customer" ReferenceName="ReportData.customer" DataType="System.Int32" Enabled="true">
+			<Column Name="customerId" DataType="System.String"/>
+			<Column Name="name" DataType="System.String"/>
+			<Column Name="email" DataType="System.String"/>
+			<Column Name="phoneNumber" DataType="System.String"/>
+			<Column Name="taxNumber" DataType="System.String"/>
+			<Column Name="note" DataType="System.String"/>
+			<Column Name="deliveryAddress" DataType="System.String"/>
+		</TableDataSource>
+		<TableDataSource Name="materials" ReferenceName="ReportData.materials" DataType="System.Int32" Enabled="true">
+			<Column Name="materialId" DataType="System.String"/>
+			<Column Name="name" DataType="System.String"/>
+			<Column Name="warehouseId" DataType="System.String"/>
+			<Column Name="lotId" DataType="System.String"/>
+			<Column Name="locationId" DataType="System.String"/>
+			<Column Name="unitId" DataType="System.String"/>
+			<Column Name="productGroup" DataType="System.String"/>
+			<Column Name="manufacturer" DataType="System.String"/>
+			<Column Name="note" DataType="System.String"/>
+		</TableDataSource>
+	</Dictionary>
+	<ReportPage Name="warehouseReceipt" Watermark.Font="Arial, 60pt">
+		<ReportTitleBand Name="ReportTitle1" Width="718.2" Height="103.95">
+			<PictureObject Name="Picture1" Left="18.9" Top="18.9" Width="113.4" Height="75.6" ImageLocation="Images\SaiGonSinco_logo.png"/>
+			<TextObject Name="Text2" Left="141.75" Top="18.9" Width="557.55" Height="18.9" Text="CTY TNHH TM &amp; XL Công nghiệp Sài Gòn" VertAlign="Center" Font="Arial, 12pt, style=Bold"/>
+			<TextObject Name="Text3" Left="141.75" Top="37.8" Width="56.7" Height="18.9" Text="Địa chỉ: " VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text5" Left="198.45" Top="37.8" Width="500.85" Height="18.9" Text="489/9 Mã Lò, P.Bình Hưng Hoà A, Bình Tân, TP.HCM" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text4" Left="141.75" Top="56.7" Width="56.7" Height="18.9" Text="ĐT:" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text7" Left="198.45" Top="56.7" Width="255.15" Height="18.9" Text="(028) 3767 2061            (028) 5426 4890" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text8" Left="453.6" Top="56.7" Width="75.6" Height="18.9" Text="-   Fax: " VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text9" Left="529.2" Top="56.7" Width="170.1" Height="18.9" Text="(028) 3750 2826" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text10" Left="198.45" Top="75.6" Width="255.15" Height="28.35" CanGrow="true" Text="saigon_sinco@yahoo.com,&#13;&#10;saigonsinco@gmail.com" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text6" Left="141.75" Top="75.6" Width="56.7" Height="18.9" Text="Email: " VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text11" Left="453.6" Top="75.6" Width="75.6" Height="18.9" Text="-   Website:" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text12" Left="529.2" Top="75.6" Width="170.1" Height="18.9" Text="www.saigonsinco.com" VertAlign="Center" Font="Arial, 8pt"/>
+		</ReportTitleBand>
+		<PageHeaderBand Name="PageHeader1" Top="107.15" Width="718.2" Height="37.8">
+			<TextObject Name="Text13" Left="113.4" Width="491.4" Height="37.8" Text="PHIẾU NHẬP KHO" HorzAlign="Center" VertAlign="Center" Font="Arial, 20pt, style=Bold"/>
+		</PageHeaderBand>
+		<DataBand Name="CustomerBand" Top="148.15" Width="718.2" Height="189" DataSource="customer">
+			<TextObject Name="Text14" Left="18.9" Top="9.45" Width="132.3" Height="18.9" Text="Tên nhà cung cấp: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text16" Left="151.2" Top="9.45" Width="321.3" Height="18.9" Text="[customer.name]" HorzAlign="Justify" VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text15" Left="18.9" Top="28.35" Width="132.3" Height="18.9" Text="Địa chỉ: " VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text19" Left="151.2" Top="28.35" Width="321.3" Height="18.9" CanGrow="true" Text="[customer.deliveryAddress]" VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text17" Left="472.5" Top="9.45" Width="75.6" Height="18.9" Text="Ngày: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text18" Left="548.1" Top="9.45" Width="151.2" Height="18.9" Text="20/11/2023" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text20" Left="472.5" Top="28.35" Width="75.6" Height="37.8" Text="Số phiếu: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text21" Left="548.1" Top="28.35" Width="151.2" Height="37.8" Text="125362" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text22" Left="472.5" Top="66.15" Width="75.6" Height="18.9" Text="Loại tiền: " VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text23" Left="548.1" Top="66.15" Width="151.2" Height="18.9" Text="VND" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text24" Left="18.9" Top="66.15" Width="132.3" Height="18.9" Text="Mã số Thuế: " VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text25" Left="151.2" Top="66.15" Width="321.3" Height="18.9" Text="[customer.taxNumber]" VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text26" Left="18.9" Top="85.05" Width="132.3" Height="18.9" Text="Điện thoại: " VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text27" Left="151.2" Top="85.05" Width="321.3" Height="18.9" Text="[customer.phoneNumber]" VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text28" Left="18.9" Top="122.85" Width="132.3" Height="18.9" Text="Diễn giải: " VertAlign="Center" Font="Arial, 10pt"/>
+			<TextObject Name="Text30" Left="472.5" Top="85.05" Width="75.6" Height="18.9" Text="Fax:" Font="Arial, 10pt"/>
+			<TextObject Name="Text31" Left="548.1" Top="85.05" Width="151.2" Height="18.9" Text="023651158" Font="Arial, 10pt"/>
+			<TextObject Name="Text32" Left="18.9" Top="103.95" Width="132.3" Height="18.9" Text="Email: " Font="Arial, 10pt"/>
+			<TextObject Name="Text33" Left="151.2" Top="103.95" Width="548.1" Height="18.9" Text="[customer.email]" Font="Arial, 10pt"/>
+			<TextObject Name="Text41" Left="151.2" Top="122.85" Width="548.1" Height="18.9" CanGrow="true" Text="[customer.note]" VertAlign="Center" Font="Arial, 10pt"/>
+		</DataBand>
+		<DataBand Name="MaterialsHeaderBand" Top="340.35" Width="718.2" Height="18.9" CanGrow="true">
+			<TableObject Name="MaterialsHeader" Left="18.9" Width="680.42" Height="18.9" Border.Lines="All">
+				<TableColumn Name="Column1" Width="58.28"/>
+				<TableColumn Name="Column2" Width="77.18"/>
+				<TableColumn Name="Column3" Width="171.67"/>
+				<TableColumn Name="Column4" Width="96.08"/>
+				<TableColumn Name="Column5" Width="67.73"/>
+				<TableColumn Name="Column6" Width="209.48"/>
+				<TableRow Name="HeaderRow" AutoSize="true">
+					<TableCell CanGrow="true" Text="STT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+					<TableCell CanGrow="true" Text="Mã hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+					<TableCell CanGrow="true" Text="Tên hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+					<TableCell CanGrow="true" Text="ĐVT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+					<TableCell CanGrow="true" Text="Số lượng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+					<TableCell CanGrow="true" Text="Ghi chú" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+				</TableRow>
+			</TableObject>
+		</DataBand>
+		<DataBand Name="MaterialsBand" Top="362.45" Width="718.2" Height="18.9" CanGrow="true" DataSource="materials">
+			<TableObject Name="MaterialsTable" Left="18.9" Width="680.42" Height="18.9" Border.Lines="All">
+				<TableColumn Name="Column1" Width="58.28"/>
+				<TableColumn Name="Column2" Width="77.18"/>
+				<TableColumn Name="Column3" Width="171.67"/>
+				<TableColumn Name="Column4" Width="96.08"/>
+				<TableColumn Name="Column5" Width="67.73"/>
+				<TableColumn Name="Column6" Width="209.48"/>
+				<TableRow Name="DataRow" AutoSize="true">
+					<TableCell CanGrow="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+					<TableCell CanGrow="true" Text="[materials.materialId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+					<TableCell CanGrow="true" Text="[materials.name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+					<TableCell CanGrow="true" Text="[materials.unitId]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+					<TableCell CanGrow="true" Text="[materials.productGroup]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+					<TableCell CanGrow="true" Text="[materials.note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+				</TableRow>
+			</TableObject>
+		</DataBand>
+		<PageFooterBand Name="PageFooter1" Top="384.55" Width="718.2" Height="400">
+			
+			<TextObject Name="Text37" Left="453.6" Top="285" Width="189" Height="18.9" Text="Ngày 28 Tháng 05 Năm 2025" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+			<TextObject Name="Text34" Left="75.6" Top="304" Width="189" Height="18.9" Text="Người nhận" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text35" Left="75.6" Top="322.9" Width="189" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+			<TextObject Name="Text36" Left="453.6" Top="304" Width="189" Height="18.9" Text="Người lập" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+			<TextObject Name="Text39" Left="453.6" Top="322.9" Width="189" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+			<TextObject Name="Text40" Left="453.6" Top="370" Width="189" Height="18.9" Text="[Customer.Name]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+		</PageFooterBand>
+	</ReportPage>
+</Report>

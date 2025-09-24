@@ -1,0 +1,20 @@
+{
+  "controller": "employeeRole",
+  "formId": "employeeRole",
+  "primaryKey": [ "employee_role_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "employee_role_id" ],
+  "fields": [
+    {
+      "field": "employee_role_id",
+      "header": "ID Role"
+    },
+    {
+      "field": "role_name",
+      "header": "Tên role"
+    }
+  ]
+}

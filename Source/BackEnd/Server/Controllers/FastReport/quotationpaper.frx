@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReportInfo.Created="06/23/2025 17:13:37" ReportInfo.Modified="09/23/2025 20:05:42" ReportInfo.CreatorVersion="2025.2.6.0">
+  <Dictionary>
+    <TableDataSource Name="quotationpaper" ReferenceName="ReportData.quotationpaper" DataType="System.Int32" Enabled="true">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="voucherDate" DataType="System.DateTime"/>
+      <Column Name="voucherNumber" DataType="System.String"/>
+      <Column Name="customerCode" DataType="System.String"/>
+      <Column Name="jobCode" DataType="System.String"/>
+      <Column Name="contactPerson" DataType="System.String"/>
+      <Column Name="phonePerson" DataType="System.String"/>
+      <Column Name="emailPerson" DataType="System.String"/>
+      <Column Name="status" DataType="System.Int32"/>
+      <Column Name="orderAddress" DataType="System.String"/>
+      <Column Name="phone" DataType="System.String"/>
+      <Column Name="fax" DataType="System.String"/>
+      <Column Name="email" DataType="System.String"/>
+      <Column Name="note" DataType="System.String"/>
+      <Column Name="employeeName" DataType="System.String"/>
+    </TableDataSource>
+    <TableDataSource Name="quotationpaperdetail" ReferenceName="ReportData.quotationpaperdetail" DataType="System.Int32" Enabled="true">
+      <Column Name="idGui" DataType="System.String"/>
+      <Column Name="line_nbr" DataType="System.Int32"/>
+      <Column Name="itemNameCustomer" DataType="System.String"/>
+      <Column Name="itemCode" DataType="System.String"/>
+      <Column Name="uom" DataType="System.String"/>
+      <Column Name="quantity" DataType="System.Decimal"/>
+      <Column Name="price" DataType="System.Decimal"/>
+      <Column Name="purchasePrice" DataType="System.Decimal"/>
+      <Column Name="amount" DataType="System.Decimal"/>
+      <Column Name="vat" DataType="System.Decimal"/>
+      <Column Name="paymentVat" DataType="System.Decimal"/>
+      <Column Name="payment" DataType="System.String"/>
+      <Column Name="note" DataType="System.String"/>
+      <Column Name="DienThoai" DataType="System.String"/>
+      <Column Name="total" DataType="System.Decimal"/>
+      <Column Name="tax_rate" DataType="System.Decimal"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="85.05">
+      <PictureObject Name="Picture1" Top="18.9" Width="122.85" Height="66.15" ImageLocation="Images\SaiGonSinco_logo.png"/>
+      <TextObject Name="Text2" Left="122.85" Top="18.9" Width="595.35" Height="18.9" Text="CTY TNHH TM &amp; XL Công nghiệp Sài Gòn" VertAlign="Center" Font="Arial, 11pt, style=Bold"/>
+      <TextObject Name="Text3" Left="122.85" Top="37.8" Width="595.35" Height="47.25" Text="Địa chỉ: 489/0 Mã Lò, P.Bình Hưng Hòa A, Bình Tân, TP.HCM&#13;&#10;ĐT: (028) 3767 2061            (028) 5426 4890     -     Fax: (028) 37502826&#13;&#10;Email: saigon_sinco@yahoo.com, saigonsinco@gmail.com          -  Website: www.saigonsinco.com       &#13;&#10;" Font="Arial, 8pt"/>
+    </ReportTitleBand>
+    <PageHeaderBand Name="PageHeader1" Top="88.25" Width="718.2" Height="37.8" PrintOn="FirstPage, SinglePage">
+      <TextObject Name="Text13" Left="-9.45" Width="737.1" Height="37.8" Text="BẢNG BÁO GIÁ" HorzAlign="Center" VertAlign="Center" Font="Arial, 20pt, style=Bold"/>
+    </PageHeaderBand>
+    <DataBand Name="CustomerBand" Top="129.25" Width="718.2" Height="132.3" CanGrow="true">
+      <TextObject Name="Text14" Width="94.5" Height="18.9" Text="Kính gửi: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text16" Left="94.5" Width="321.3" Height="18.9" CanGrow="true" Text="[quotationpaper.contactPerson]" HorzAlign="Justify" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text15" Top="18.9" Width="94.5" Height="18.9" Text="Người nhận: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text19" Left="94.5" Top="18.9" Width="321.3" Height="18.9" CanGrow="true" Text="[quotationpaper.contactPerson]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text17" Left="415.8" Top="18.9" Width="94.5" Height="18.9" Text="Người gửi:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text18" Left="510.3" Top="18.9" Width="207.9" Height="18.9" CanGrow="true" Text="[quotationpaper.employeeName]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text20" Left="415.8" Top="37.8" Width="94.5" Height="18.9" Text="ĐT: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text21" Left="510.3" Top="37.8" Width="207.9" Height="18.9" CanGrow="true" Text="[quotationpaper.phone]" Format="Custom" Format.Format="(000) 000-0000" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text22" Left="415.8" Top="75.6" Width="94.5" Height="18.9" Text="Mail: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text23" Left="510.3" Top="75.6" Width="207.9" Height="18.9" CanGrow="true" Text="[quotationpaper.email]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text24" Top="37.8" Width="94.5" Height="18.9" Text="Địa chỉ:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text25" Left="94.5" Top="37.8" Width="321.3" Height="18.9" CanGrow="true" Text="[quotationpaper.orderAddress]" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text26" Top="56.7" Width="94.5" Height="18.9" Text="Điện thoại: " VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text27" Left="94.5" Top="56.7" Width="321.3" Height="18.9" CanGrow="true" Text="[quotationpaper.phonePerson]" Format="Custom" Format.Format="(000) 000-0000" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text28" Top="94.5" Width="718.2" Height="18.9" CanGrow="true" Text="Cảm ơn quý khách hàng đã quan tâm đến các sản phẩm của công ty chúng tôi." VertAlign="Bottom" Font="Arial, 10pt"/>
+      <TextObject Name="Text30" Left="415.8" Top="56.7" Width="94.5" Height="18.9" Text="Fax:" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text31" Left="510.3" Top="56.7" Width="207.9" Height="18.9" CanGrow="true" Text="[quotationpaper.fax]" Font="Arial, 10pt"/>
+      <TextObject Name="Text32" Top="75.6" Width="94.5" Height="18.9" Text="Email: " Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text33" Left="94.5" Top="75.6" Width="321.3" Height="18.9" CanGrow="true" Text="[quotationpaper.emailPerson]" Font="Arial, 10pt"/>
+      <TextObject Name="Text41" Top="113.4" Width="718.2" Height="18.9" CanGrow="true" Text="Sau đây là bảng báo giá các thiết bị và vật tư mà Quý Công ty yêu cầu:&#13;&#10;" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text42" Left="415.8" Width="94.5" Height="18.9" Text="Số báo giá:" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text43" Left="510.3" Width="207.9" Height="18.9" CanGrow="true" Text="[quotationpaper.voucherNumber]" VertAlign="Center" Font="Arial, 10pt"/>
+    </DataBand>
+    <DataBand Name="MasterHeaderBand" Top="264.75" Width="718.2" Height="18.9" CanGrow="true" CanShrink="true">
+      <TableObject Name="MaterialsHeader" Width="718.22" Height="18.9" Border.Lines="All">
+        <TableColumn Name="Column1" Width="40.13"/>
+        <TableColumn Name="Column2" Width="115.73"/>
+        <TableColumn Name="Column3" Width="59.02"/>
+        <TableColumn Name="Column4" Width="77.93"/>
+        <TableColumn Name="Column5" Width="68.48"/>
+        <TableColumn Name="Column6" Width="96.83"/>
+        <TableColumn Name="Column7" Width="76.35"/>
+        <TableColumn Name="Column8" Width="96.6"/>
+        <TableColumn Name="Column9" Width="87.15"/>
+        <TableRow Name="HeaderRow" AutoSize="true">
+          <TableCell Name="Cell1" Border.Lines="All" CanGrow="true" Text="STT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell2" Border.Lines="All" CanGrow="true" Text="Tên vật tư thiết bị" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell3" Border.Lines="All" CanGrow="true" Text="Đơn vị" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell4" Border.Lines="All" CanGrow="true" Text="Số lượng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell5" Border.Lines="All" CanGrow="true" Text="Đơn giá" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell6" Border.Lines="All" CanGrow="true" Text="Thành tiền" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell7" Border.Lines="All" Text="Thuế VAT" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="Tổng cộng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="Ghi chú" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="DetailBand" Top="286.85" Width="718.2" Height="18.9" CanGrow="true" DataSource="quotationpaperdetail" KeepTogether="true">
+      <TableObject Name="Table1" Width="718.22" Height="18.9" Border.Lines="All" CanBreak="false">
+        <TableColumn Name="Column10" Width="40.13"/>
+        <TableColumn Name="Column11" Width="115.73"/>
+        <TableColumn Name="Column12" Width="59.02"/>
+        <TableColumn Name="Column13" Width="77.93"/>
+        <TableColumn Name="Column14" Width="68.48"/>
+        <TableColumn Name="Column15" Width="96.83"/>
+        <TableColumn Name="Column16" Width="76.35"/>
+        <TableColumn Name="Column17" Width="96.6"/>
+        <TableColumn Name="Column18" Width="87.15"/>
+        <TableRow Name="Row1" AutoSize="true">
+          <TableCell Name="Cell10" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[Row#]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell11" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.itemNameCustomer]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell12" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.uom]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell13" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.quantity]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell14" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.price]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell15" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.amount]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell16" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.tax_rate]%" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell17" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[ToDecimal([quotationpaperdetail.payment])]" Format="Number" Format.UseLocale="false" Format.DecimalDigits="0" Format.DecimalSeparator="." Format.GroupSeparator="." Format.NegativePattern="2" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+          <TableCell Name="Cell18" Border.Lines="Left, Right, Bottom" CanGrow="true" Text="[quotationpaperdetail.note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+        </TableRow>
+      </TableObject>
+    </DataBand>
+    <DataBand Name="Data1" Top="308.95" Width="718.2" Height="189" CanGrow="true" DataSource="quotationpaper">
+      <TextObject Name="Text44" Width="718.2" Height="28.35" Text="Ghi chú:" AllowExpressions="false" VertAlign="Center" WordWrap="false" Font="Arial, 10pt, style=Bold, Underline"/>
+      <TextObject Name="Text34" Top="56.7" Width="415.8" Height="18.9" Text="Ý kiến của Quý Khách hàng" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text36" Left="415.8" Top="75.6" Width="302.4" Height="18.9" Text="Người lập" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt, style=Bold"/>
+      <TextObject Name="Text39" Left="415.8" Top="94.5" Width="302.4" Height="18.9" Text="(Ký, ghi rõ họ tên)" HorzAlign="Center" Font="Arial, 7pt, style=Italic"/>
+      <TextObject Name="Text40" Left="415.8" Top="170.1" Width="302.4" Height="18.9" Text="[quotationpaper.contactPerson]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text37" Left="415.8" Top="56.7" Width="302.4" Height="18.9" CanGrow="true" Text="[Format(&quot;{0}, {1}&quot;, &quot;Bình Tân, TP.HCM&quot;, FormatDateTime([quotationpaper.voucherDate], &quot;dd/MM/yyyy&quot;))]" HorzAlign="Center" VertAlign="Center" Font="Arial, 8pt"/>
+      <TextObject Name="Text45" Top="28.35" Width="718.2" Height="18.9" CanGrow="true" Text="[quotationpaper.note]" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text46" Top="75.6" Width="415.8" Height="113.4" CanGrow="true" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text49" Left="415.8" Top="113.4" Width="302.4" Height="56.7" HorzAlign="Center" VertAlign="Center" Font="Arial, 10pt"/>
+      <TextObject Name="Text50" Top="28.35" Width="718.2" Height="28.35" Font="Arial, 10pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>

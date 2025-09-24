@@ -1,0 +1,465 @@
+{
+  "model": "contract",
+  "schema": {
+    "foriegn": [ "contractDetail" ],
+    "foriegnKey": [ "idGui" ],
+    "partition": true,
+    "fields": [
+      {
+        "name": "idGui",
+        "property": "idGui",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "customer_id",
+        "property": "customerId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "Customer",
+          "key": "customer_id"
+        }
+      },
+      {
+        "name": "number_ddh",
+        "property": "numberDdh",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "quotationCode",
+        "property": "quotationCode",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "voucherDate",
+        "property": "voucherDate",
+        "type": "date",
+        "sqlType": "DATE"
+      },
+      {
+        "name": "customer_group_id",
+        "property": "customerGroupId",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "customer_name",
+        "property": "customerName",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "representative",
+        "property": "representative",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "position",
+        "property": "position",
+        "type": "string",
+        "sqlType": "NVARCHAR(100)"
+      },
+      {
+        "name": "address",
+        "property": "address",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)"
+      },
+      {
+        "name": "phone",
+        "property": "phone",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "account",
+        "property": "account",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "customer_account",
+        "property": "customerAccount",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "tax_code",
+        "property": "taxCode",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "delivery_note",
+        "property": "deliveryNote",
+        "type": "string",
+        "sqlType": "TEXT"
+      },
+      {
+        "name": "contract_note",
+        "property": "contractNote",
+        "type": "string",
+        "sqlType": "TEXT"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "amount_total",
+        "property": "amountTotal",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "amount_in_word",
+        "property": "amountInWord",
+        "type": "string",
+        "sqlType": "NVARCHAR(500)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Contract",
+    "columnMapping": [
+      {
+        "excelColumn": "idGui",
+        "fieldName": "idGui",
+        "required": false
+      },
+      {
+        "excelColumn": "customer_id",
+        "fieldName": "customer_id",
+        "required": false
+      },
+      {
+        "excelColumn": "number_ddh",
+        "fieldName": "number_ddh",
+        "required": true
+      },
+      {
+        "excelColumn": "quotationCode",
+        "fieldName": "quotationCode",
+        "required": false
+      },
+      {
+        "excelColumn": "voucherDate",
+        "fieldName": "voucherDate",
+        "required": false
+      },
+      {
+        "excelColumn": "customer_group_id",
+        "fieldName": "customer_group_id",
+        "required": false
+      },
+      {
+        "excelColumn": "customer_name",
+        "fieldName": "customer_name",
+        "required": false
+      },
+      {
+        "excelColumn": "representative",
+        "fieldName": "representative",
+        "required": false
+      },
+      {
+        "excelColumn": "position",
+        "fieldName": "position",
+        "required": false
+      },
+      {
+        "excelColumn": "address",
+        "fieldName": "address",
+        "required": false
+      },
+      {
+        "excelColumn": "phone",
+        "fieldName": "phone",
+        "required": false
+      },
+      {
+        "excelColumn": "account",
+        "fieldName": "account",
+        "required": false
+      },
+      {
+        "excelColumn": "customer_account",
+        "fieldName": "customer_account",
+        "required": false
+      },
+      {
+        "excelColumn": "tax_code",
+        "fieldName": "tax_code",
+        "required": false
+      },
+      {
+        "excelColumn": "delivery_note",
+        "fieldName": "delivery_note",
+        "required": false
+      },
+      {
+        "excelColumn": "contract_note",
+        "fieldName": "contract_note",
+        "required": false
+      },
+      {
+        "excelColumn": "status",
+        "fieldName": "status",
+        "required": false
+      },
+      {
+        "excelColumn": "amount_total",
+        "fieldName": "amount_total",
+        "required": false
+      },
+      {
+        "excelColumn": "amount_in_word",
+        "fieldName": "amount_in_word",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "idGui",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE idGui = @idGui",
+        "threshold": "0",
+        "message": "idGui đã tồn tại trong hệ thống"
+      },
+      {
+        "fieldName": "quotationCode",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "Mã báo giá phải có độ dài từ 1 đến 50 ký tự"
+      },
+      {
+        "fieldName": "status",
+        "type": "length",
+        "minLength": "0",
+        "maxLength": "50",
+        "message": "Trạng thái không được vượt quá 50 ký tự"
+      },
+      {
+        "fieldName": "amount_total",
+        "type": "range",
+        "min": "0",
+        "max": "100000000000",
+        "message": "Tổng cộng phải lớn hơn hoặc bằng 0"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF EXISTS (SELECT 1 FROM Contract WHERE idGui = @idGui) THROW 51001, 'Trùng idGui', 1;\nINSERT INTO Contract (idGui, customer_id, number_ddh, quotationCode, voucherDate, customer_group_id, customer_name, representative, position, address, phone, account, customer_account, tax_code, delivery_note, contract_note, status, amount_total, amount_in_word) VALUES (@idGui, @customer_id, @number_ddh, @quotationCode, @voucherDate, @customer_group_id, @customer_name, @representative, @position, @address, @phone, @account, @customer_account, @tax_code, @delivery_note, @contract_note, @status, @amount_total, @amount_in_word);",
+      "update": "IF NOT EXISTS (SELECT 1 FROM Contract WHERE idGui = @idGui) THROW 51002, 'Hợp đồng không tồn tại', 1;\nUPDATE Contract SET customer_id = @customer_id, number_ddh = @number_ddh, quotationCode = @quotationCode, voucherDate = @voucherDate, customer_group_id = @customer_group_id, customer_name = @customer_name, representative = @representative, position = @position, address = @address, phone = @phone, account = @account, customer_account = @customer_account, tax_code = @tax_code, delivery_note = @delivery_note, contract_note = @contract_note, status = @status, amount_total = @amount_total, amount_in_word = @amount_in_word WHERE idGui = @idGui;",
+      "delete": "IF NOT EXISTS (SELECT 1 FROM Contract WHERE idGui = @idGui) THROW 51003, 'Hợp đồng không tồn tại để xóa', 1;\nDELETE FROM Contract WHERE idGui = @idGui;",
+      "getAll": "SELECT idGui, customer_id, number_ddh, quotationCode, voucherDate, customer_group_id, customer_name, representative, position, address, phone, account, customer_account, tax_code, delivery_note, contract_note, status, amount_total, amount_in_word FROM Contract;",
+      "getById": "SELECT idGui, customer_id, number_ddh, quotationCode, voucherDate, customer_group_id, customer_name, representative, position, address, phone, account, customer_account, tax_code, delivery_note, contract_note, status, amount_total, amount_in_word FROM Contract WHERE idGui = @idGui;",
+      "myTableType": "CREATE TYPE dbo.ContractTableType AS TABLE (idGui VARCHAR(50) PRIMARY KEY, customer_id VARCHAR(50), number_ddh VARCHAR(50), quotationCode VARCHAR(50), voucherDate DATE, customer_group_id VARCHAR(50), customer_name NVARCHAR(256), representative NVARCHAR(256), position NVARCHAR(100), address NVARCHAR(500), phone VARCHAR(50), account VARCHAR(50), customer_account VARCHAR(50), tax_code VARCHAR(50), delivery_note TEXT, contract_note TEXT, status VARCHAR(50), amount_total DECIMAL(18,2), amount_in_word NVARCHAR(500));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertContract; DROP TYPE IF EXISTS dbo.ContractTableType;"
+    }
+  },
+  "foriegnModel": [
+    {
+      "model": "contractDetail",
+      "schema": {
+        "partition": true,
+        "fields": [
+          {
+            "name": "idGui",
+            "property": "idGui",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "line_nbr",
+            "property": "lineNbr",
+            "type": "number",
+            "sqlType": "INT"
+          },
+          {
+            "name": "item_id",
+            "property": "itemId",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "item_name",
+            "property": "itemName",
+            "type": "string",
+            "sqlType": "NVARCHAR(256)"
+          },
+          {
+            "name": "uomCode",
+            "property": "uomCode",
+            "type": "string",
+            "sqlType": "VARCHAR(50)"
+          },
+          {
+            "name": "quantity",
+            "property": "quantity",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "tax",
+            "property": "tax",
+            "type": "number",
+            "sqlType": "DECIMAL(5,2)"
+          },
+          {
+            "name": "price",
+            "property": "price",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "amount",
+            "property": "amount",
+            "type": "number",
+            "sqlType": "DECIMAL(18,2)"
+          },
+          {
+            "name": "note",
+            "property": "note",
+            "type": "string",
+            "sqlType": "TEXT"
+          }
+        ]
+      },
+      "excelIntegration": {
+        "sheetName": "ContractDetail",
+        "columnMapping": [
+          {
+            "excelColumn": "idGui",
+            "fieldName": "idGui",
+            "required": false
+          },
+          {
+            "excelColumn": "line_nbr",
+            "fieldName": "line_nbr",
+            "required": true
+          },
+          {
+            "excelColumn": "item_id",
+            "fieldName": "item_id",
+            "required": false
+          },
+          {
+            "excelColumn": "item_name",
+            "fieldName": "item_name",
+            "required": true
+          },
+          {
+            "excelColumn": "uomCode",
+            "fieldName": "uomCode",
+            "required": true
+          },
+          {
+            "excelColumn": "quantity",
+            "fieldName": "quantity",
+            "required": false
+          },
+          {
+            "excelColumn": "tax",
+            "fieldName": "tax",
+            "required": false
+          },
+          {
+            "excelColumn": "price",
+            "fieldName": "price",
+            "required": false
+          },
+          {
+            "excelColumn": "amount",
+            "fieldName": "amount",
+            "required": false
+          },
+          {
+            "excelColumn": "note",
+            "fieldName": "note",
+            "required": false
+          }
+        ],
+        "templateRules": {
+          "fileFormat": "xlsx",
+          "firstRowData": 2,
+          "maxRows": 20000
+        }
+      },
+      "checking": {
+        "rules": [
+          {
+            "fieldName": "idGui",
+            "type": "databaseCheck",
+            "checkQuery": "WHERE idGui = @idGui AND line_nbr = @lineNbr",
+            "threshold": "0",
+            "message": "Chi tiết hợp đồng đã tồn tại"
+          },
+          {
+            "fieldName": "item_name",
+            "type": "length",
+            "minLength": "1",
+            "maxLength": "256",
+            "message": "Tên hàng không được để trống và tối đa 256 ký tự"
+          },
+          {
+            "fieldName": "uomCode",
+            "type": "length",
+            "minLength": "1",
+            "maxLength": "50",
+            "message": "Đơn vị tính tối đa 50 ký tự"
+          },
+          {
+            "fieldName": "quantity",
+            "type": "range",
+            "min": "0",
+            "max": "1000000",
+            "message": "Số lượng phải từ 0 đến 1 triệu"
+          },
+          {
+            "fieldName": "price",
+            "type": "range",
+            "min": "0",
+            "max": "1000000000",
+            "message": "Đơn giá phải từ 0 đến 1 tỷ"
+          },
+          {
+            "fieldName": "amount",
+            "type": "range",
+            "min": "0",
+            "max": "100000000000",
+            "message": "Thành tiền phải >= 0"
+          }
+        ]
+      },
+      "dataProcessing": {
+        "sqlStatements": {
+          "insert": "IF EXISTS (SELECT 1 FROM ContractDetail WHERE idGui = @idGui AND line_nbr = @lineNbr) THROW 51001, 'Trùng chi tiết hợp đồng', 1;\nINSERT INTO ContractDetail (idGui, line_nbr, item_id, item_name, uomCode, quantity, tax, price, amount, note) VALUES (@idGui, @lineNbr, @item_id, @item_name, @uomCode, @quantity, @tax, @price, @amount, @note);",
+          "update": "IF NOT EXISTS (SELECT 1 FROM ContractDetail WHERE idGui = @idGui AND line_nbr = @lineNbr) THROW 51002, 'Chi tiết hợp đồng không tồn tại', 1;\nUPDATE ContractDetail SET item_id = @item_id, item_name = @item_name, uomCode = @uomCode, quantity = @quantity, tax = @tax, price = @price, amount = @amount, note = @note WHERE idGui = @idGui AND line_nbr = @lineNbr;",
+          "delete": "IF NOT EXISTS (SELECT 1 FROM ContractDetail WHERE idGui = @idGui AND line_nbr = @lineNbr) THROW 51003, 'Chi tiết hợp đồng không tồn tại để xóa', 1;\nDELETE FROM ContractDetail WHERE idGui = @idGui AND line_nbr = @lineNbr;",
+          "getAll": "SELECT idGui, line_nbr, item_id, item_name, uomCode, quantity, tax, price, amount, note FROM ContractDetail;",
+          "getById": "SELECT idGui, line_nbr, item_id, item_name, uomCode, quantity, tax, price, amount, note FROM ContractDetail WHERE idGui = @idGui AND line_nbr = @lineNbr;",
+          "myTableType": "CREATE TYPE dbo.ContractDetailTableType AS TABLE (idGui VARCHAR(50), line_nbr INT, item_id VARCHAR(50), item_name NVARCHAR(256), uomCode VARCHAR(50), quantity DECIMAL(18,2), tax DECIMAL(5,2), price DECIMAL(18,2), amount DECIMAL(18,2), note TEXT);",
+          "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertContractDetail; DROP TYPE IF EXISTS dbo.ContractDetailTableType;"
+        }
+      }
+    }
+  ]
+}

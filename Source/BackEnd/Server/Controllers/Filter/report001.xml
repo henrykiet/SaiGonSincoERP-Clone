@@ -1,0 +1,8 @@
+<Report>
+<storeProc>GetReportsWithFilters</storeProc>
+  <Filters>
+    <Filter name="fromDate" type="date" />
+    <Filter name="toDate" type="date" />
+    <Filter name="reportId" type="" />
+  </Filters>
+</Report>

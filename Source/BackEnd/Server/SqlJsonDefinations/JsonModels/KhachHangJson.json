@@ -1,0 +1,194 @@
+{
+  "model": "KhachHang",
+  "schema": {
+    "fields": [
+      {
+        "name": "MaKhachHang",
+        "property": "maKhachHang",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "Ten",
+        "property": "ten",
+        "type": "string",
+        "sqlType": "NVARCHAR(255)",
+        "primaryKey": false
+      },
+      {
+        "name": "NgayThanhLap",
+        "property": "ngayThanhLap",
+        "type": "date",
+        "sqlType": "DATE"
+      },
+      {
+        "name": "NgaySinhNguoiDaiDien",
+        "property": "ngaySinhNguoiDaiDien",
+        "type": "date",
+        "sqlType": "DATE"
+      },
+      {
+        "name": "DiaChiDangKy",
+        "property": "diaChiDangKy",
+        "type": "string",
+        "sqlType": "VARCHAR(255)"
+      },
+      {
+        "name": "DiaChiGiaoHang",
+        "property": "diaChiGiaoHang",
+        "type": "string",
+        "sqlType": "VARCHAR(255)"
+      },
+      {
+        "name": "SoDienThoai",
+        "property": "soDienThoai",
+        "type": "string",
+        "sqlType": "VARCHAR(20)"
+      },
+      {
+        "name": "Email",
+        "property": "email",
+        "type": "string",
+        "sqlType": "VARCHAR(100)"
+      },
+      {
+        "name": "HanMucCongNo",
+        "property": "hanMucCongNo",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "GhiChu",
+        "property": "ghiChu",
+        "type": "string",
+        "sqlType": "TEXT"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "KhachHang",
+    "columnMapping": [
+      {
+        "excelColumn": "MaKhachHang",
+        "fieldName": "MaKhachHang",
+        "required": true
+      },
+      {
+        "excelColumn": "Ten",
+        "fieldName": "Ten",
+        "required": true,
+        "default": ""
+      },
+      {
+        "excelColumn": "NgayThanhLap",
+        "fieldName": "NgayThanhLap",
+        "required": false
+      },
+      {
+        "excelColumn": "NgaySinhNguoiDaiDien",
+        "fieldName": "NgaySinhNguoiDaiDien",
+        "required": false
+      },
+      {
+        "excelColumn": "DiaChiDangKy",
+        "fieldName": "DiaChiDangKy",
+        "required": false
+      },
+      {
+        "excelColumn": "DiaChiGiaoHang",
+        "fieldName": "DiaChiGiaoHang",
+        "required": false
+      },
+      {
+        "excelColumn": "SoDienThoai",
+        "fieldName": "SoDienThoai",
+        "required": false
+      },
+      {
+        "excelColumn": "Email",
+        "fieldName": "Email",
+        "required": false
+      },
+      {
+        "excelColumn": "HanMucCongNo",
+        "fieldName": "HanMucCongNo",
+        "required": false,
+        "default": 0
+      },
+      {
+        "excelColumn": "GhiChu",
+        "fieldName": "GhiChu",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "MaKhachHang",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "MaKhachHang phải có độ dài từ 1 đến 50 ký tự"
+      },
+      {
+        "fieldName": "Ten",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "255",
+        "message": "Ten phải từ 1 đến 255 ký tự"
+      },
+      {
+        "fieldName": "SoDienThoai",
+        "type": "pattern",
+        "pattern": "[0-9+- ]%",
+        "message": "Số điện thoại không hợp lệ"
+      },
+      {
+        "fieldName": "Email",
+        "type": "pattern",
+        "pattern": "%@%.%",
+        "message": "Email không hợp lệ"
+      },
+      {
+        "fieldName": "HanMucCongNo",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "HanMucCongNo phải từ 0 đến 1 tỷ"
+      },
+      {
+        "fieldName": "Ten",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE Ten = @ten",
+        "threshold": "1",
+        "message": "Ten already exists in database"
+      },
+      {
+        "fieldName": "MaKhachHang",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE MaKhachHang = @maKhachHang",
+        "threshold": "0",
+        "message": "MaKhachHang already exists in database"
+      }
+
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF @maKhachHang IS NULL OR @maKhachHang = '' THROW 50001, 'MaKhachHang là bắt buộc', 1;\nIF EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @maKhachHang) THROW 50002, 'Trùng MaKhachHang', 1;\nINSERT INTO KhachHang (MaKhachHang, Ten, NgayThanhLap, NgaySinhNguoiDaiDien, DiaChiDangKy, DiaChiGiaoHang, SoDienThoai, Email, HanMucCongNo, GhiChu) VALUES (@maKhachHang, @ten, @ngayThanhLap, @ngaySinhNguoiDaiDien, @diaChiDangKy, @diaChiGiaoHang, @soDienThoai, @email, @hanMucCongNo, @ghiChu);",
+      "update": "IF @maKhachHang IS NULL THROW 50003, 'MaKhachHang là bắt buộc để cập nhật', 1;\nIF NOT EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @maKhachHang) THROW 50004, 'KhachHang không tồn tại', 1;\nUPDATE KhachHang SET Ten = @ten, NgayThanhLap = @ngayThanhLap, NgaySinhNguoiDaiDien = @ngaySinhNguoiDaiDien, DiaChiDangKy = @diaChiDangKy, DiaChiGiaoHang = @diaChiGiaoHang, SoDienThoai = @soDienThoai, Email = @email, HanMucCongNo = @hanMucCongNo, GhiChu = @ghiChu WHERE MaKhachHang = @maKhachHang;",
+      "delete": "IF @maKhachHang IS NULL THROW 50005, 'MaKhachHang là bắt buộc để xóa', 1;\nIF NOT EXISTS (SELECT 1 FROM KhachHang WHERE MaKhachHang = @maKhachHang) THROW 50006, 'KhachHang không tồn tại', 1;\nDELETE FROM KhachHang WHERE MaKhachHang = @maKhachHang;",
+      "getAll": "SELECT MaKhachHang, Ten, NgayThanhLap, NgaySinhNguoiDaiDien, DiaChiDangKy, DiaChiGiaoHang, SoDienThoai, Email, HanMucCongNo, GhiChu FROM KhachHang;",
+      "getById": "IF @maKhachHang IS NULL THROW 50007, 'MaKhachHang là bắt buộc để lấy dữ liệu', 1;\nSELECT MaKhachHang, Ten, NgayThanhLap, NgaySinhNguoiDaiDien, DiaChiDangKy, DiaChiGiaoHang, SoDienThoai, Email, HanMucCongNo, GhiChu FROM KhachHang WHERE MaKhachHang = @maKhachHang;",
+      "myTableType": "CREATE TYPE dbo.KhachHangTableType AS TABLE (MaKhachHang VARCHAR(50) PRIMARY KEY, Ten NVARCHAR(255), NgayThanhLap DATE, NgaySinhNguoiDaiDien DATE, DiaChiDangKy VARCHAR(255), DiaChiGiaoHang VARCHAR(255), SoDienThoai VARCHAR(20), Email VARCHAR(100), HanMucCongNo DECIMAL(18,2), GhiChu TEXT);",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertKhachHang; DROP TYPE IF EXISTS dbo.KhachHangTableType;"
+    }
+  }
+}

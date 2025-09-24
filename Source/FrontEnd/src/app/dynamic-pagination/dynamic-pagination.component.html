@@ -1,0 +1,52 @@
+<div class="flex justify-end mt-4 space-x-2" *ngIf="totalPages >= 1">
+  <!-- First Page -->
+  <button
+    (click)="handlePageClick(1)"
+    [ngClass]="{
+      'bg-gray-200': currentPage === 1,
+      'bg-gray-100 cursor-pointer': currentPage !== 1
+    }"
+    class="w-[40px] p-1 rounded"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 ml-3 h-5 w-5"
+      [ngClass]="{
+        'text-gray-400': currentPage === 1,
+        'text-gray-700': currentPage !== 1
+      }"
+      fill="currentColor" viewBox="0 0 20 20">
+      <path d="M8.16016 1.41L3.58016 6L8.16016 10.59L6.75016 12L0.750156 6L6.75016 0L8.16016 1.41Z" />
+    </svg>
+  </button>
+
+  <!-- Page Numbers -->
+  <button
+    *ngFor="let page of getPaginationRange()"
+    (click)="handlePageClick(page)"
+    [ngClass]="{
+      'bg-gray-200 text-indigo-500 border border-indigo-500': page === currentPage,
+      'bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer': page !== currentPage
+    }"
+    class="w-[40px] p-1 rounded"
+  >
+    {{ page }}
+  </button>
+
+  <!-- Last Page -->
+  <button
+    (click)="handlePageClick(totalPages)"
+    [ngClass]="{
+      'bg-gray-200': currentPage === totalPages,
+      'bg-gray-100 cursor-pointer': currentPage !== totalPages
+    }"
+    class="w-[40px] p-1 rounded"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" class="mt-2 ml-3 h-5 w-5"
+      [ngClass]="{
+        'text-gray-400': currentPage === totalPages,
+        'text-gray-700': currentPage !== totalPages
+      }"
+      fill="currentColor" viewBox="0 0 20 20">
+      <path d="M0.839844 1.41L5.41984 6L0.839844 10.59L2.24984 12L8.24984 6L2.24984 0L0.839844 1.41Z" />
+    </svg>
+  </button>
+</div>

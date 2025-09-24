@@ -1,0 +1,175 @@
+{
+  "model": "DonHang",
+  "schema": {
+    "fields": [
+      {
+        "name": "MaDonHang",
+        "property": "maDonHang",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "MaKhachHang",
+        "property": "maKhachHang",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "KhachHang",
+          "key": "MaKhachHang"
+        }
+      },
+      {
+        "name": "SoChungTu",
+        "property": "soChungTu",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "MaNguoiDung",
+        "property": "maNguoiDung",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "Users",
+          "key": "UserId"
+        }
+      },
+      {
+        "name": "NgayTao",
+        "property": "ngayTao",
+        "type": "date",
+        "sqlType": "DATE"
+      },
+      {
+        "name": "TrangThai",
+        "property": "trangThai",
+        "type": "string",
+        "sqlType": "VARCHAR(50)"
+      },
+      {
+        "name": "TongSoLuong",
+        "property": "tongSoLuong",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "TongTien",
+        "property": "tongTien",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "GhiChu",
+        "property": "ghiChu",
+        "type": "string",
+        "sqlType": "TEXT"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "DonHang",
+    "columnMapping": [
+      {
+        "excelColumn": "MaDonHang",
+        "fieldName": "MaDonHang",
+        "required": true
+      },
+      {
+        "excelColumn": "MaKhachHang",
+        "fieldName": "MaKhachHang",
+        "required": true
+      },
+      {
+        "excelColumn": "SoChungTu",
+        "fieldName": "SoChungTu",
+        "required": true
+      },
+      {
+        "excelColumn": "MaNguoiDung",
+        "fieldName": "MaNguoiDung",
+        "required": true
+      },
+      {
+        "excelColumn": "NgayTao",
+        "fieldName": "NgayTao",
+        "required": false
+      },
+      {
+        "excelColumn": "TrangThai",
+        "fieldName": "TrangThai",
+        "required": false
+      },
+      {
+        "excelColumn": "TongSoLuong",
+        "fieldName": "TongSoLuong",
+        "required": false
+      },
+      {
+        "excelColumn": "TongTien",
+        "fieldName": "TongTien",
+        "required": false
+      },
+      {
+        "excelColumn": "GhiChu",
+        "fieldName": "GhiChu",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "MaDonHang",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE MaDonHang = @maDonHang",
+        "threshold": "0",
+        "message": "MaDonHang đã tồn tại trong hệ thống"
+      },
+      {
+        "fieldName": "SoChungTu",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "50",
+        "message": "SoChungTu phải có độ dài từ 1 đến 50 ký tự"
+      },
+      {
+        "fieldName": "TrangThai",
+        "type": "length",
+        "minLength": "0",
+        "maxLength": "50",
+        "message": "TrangThai không được vượt quá 50 ký tự"
+      },
+      {
+        "fieldName": "TongSoLuong",
+        "type": "range",
+        "min": "0",
+        "max": "1000000",
+        "message": "TongSoLuong phải từ 0 đến 1 triệu"
+      },
+      {
+        "fieldName": "TongTien",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "TongTien phải từ 0 đến 1 tỷ"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF EXISTS (SELECT 1 FROM DonHang WHERE MaDonHang = @maDonHang) THROW 51001, 'Trùng MaDonHang', 1;\nINSERT INTO DonHang (MaDonHang, MaKhachHang, SoChungTu, MaNguoiDung, NgayTao, TrangThai, TongSoLuong, TongTien, GhiChu) VALUES (@maDonHang, @maKhachHang, @soChungTu, @maNguoiDung, @ngayTao, @trangThai, @tongSoLuong, @tongTien, @ghiChu);",
+      "update": "IF NOT EXISTS (SELECT 1 FROM DonHang WHERE MaDonHang = @maDonHang) THROW 51002, 'Đơn hàng không tồn tại', 1;\nUPDATE DonHang SET MaKhachHang = @maKhachHang, SoChungTu = @soChungTu, MaNguoiDung = @maNguoiDung, NgayTao = @ngayTao, TrangThai = @trangThai, TongSoLuong = @tongSoLuong, TongTien = @tongTien, GhiChu = @ghiChu WHERE MaDonHang = @maDonHang;",
+      "delete": "IF NOT EXISTS (SELECT 1 FROM DonHang WHERE MaDonHang = @maDonHang) THROW 51003, 'Đơn hàng không tồn tại để xóa', 1;\nDELETE FROM DonHang WHERE MaDonHang = @maDonHang;",
+      "getAll": "SELECT MaDonHang, MaKhachHang, SoChungTu, MaNguoiDung, NgayTao, TrangThai, TongSoLuong, TongTien, GhiChu FROM DonHang;",
+      "getById": "SELECT MaDonHang, MaKhachHang, SoChungTu, MaNguoiDung, NgayTao, TrangThai, TongSoLuong, TongTien, GhiChu FROM DonHang WHERE MaDonHang = @maDonHang;",
+      "myTableType": "CREATE TYPE dbo.DonHangTableType AS TABLE (MaDonHang VARCHAR(50) PRIMARY KEY, MaKhachHang VARCHAR(50), SoChungTu VARCHAR(50), MaNguoiDung VARCHAR(50), NgayTao DATE, TrangThai VARCHAR(50), TongSoLuong INT, TongTien DECIMAL(18,2), GhiChu TEXT);",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertDonHang; DROP TYPE IF EXISTS dbo.DonHangTableType;"
+    }
+  }
+}

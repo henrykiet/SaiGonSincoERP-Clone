@@ -1,0 +1,20 @@
+{
+  "controller": "note",
+  "formId": "note",
+  "primaryKey": [ "note_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "note_id" ],
+  "fields": [
+    {
+      "field": "note_id",
+      "header": "Mã ghi chú"
+    },
+    {
+      "field": "note_content",
+      "header": "Tên ghi chú"
+    }
+  ]
+}

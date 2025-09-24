@@ -1,0 +1,20 @@
+{
+  "controller": "accountSinco",
+  "formId": "accountSinco",
+  "primaryKey": [ "account_sinco_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "account_sinco_id" ],
+  "fields": [
+    {
+      "field": "account_sinco_id",
+      "header": "Mã tài khoản Sinco"
+    },
+    {
+      "field": "account_sinco_name",
+      "header": "Tên tài khoản Sinco"
+    }
+  ]
+}

@@ -1,0 +1,178 @@
+{
+	"controller": "purchase",
+	"type": "list",
+	"formId": "purchase",
+	"primaryKey": [
+		"purchase_id"
+	],
+	"idVC": "",
+	"VCDate": "",
+	"title": "Quản lý bảng giá mua",
+	"tabs": [
+		{
+			"title": "Thông tin bảng giá mua",
+			"form": {
+				"typeForm": "master",
+				"formId": "purchase",
+				"primaryKey": "purchase_id",
+				"title": "Thông tin bảng giá mua",
+				"fields": [
+					{
+						"key": "purchase_id",
+						"label": "Mã bảng giá mua",
+						"type": "text",
+						"required": true,
+						"disabled": false,
+						"placeholder": "Nhập mã bảng giá mua"
+					},
+					{
+						"key": "purchase_name",
+						"label": "Tên bảng giá mua",
+						"type": "text",
+						"required": true,
+						"placeholder": "Nhập tên bảng giá mua (tối đa 100 ký tự)",
+						"maxLength": 100
+					},
+					{
+						"key": "supplier_id",
+						"label": "Nhà cung cấp",
+						"type": "lookup",
+						"required": true,
+						"default": {
+							"controller": "supplier",
+							"filter": []
+						}
+					},
+					{
+						"key": "start_date",
+						"label": "Ngày hiệu lực",
+						"type": "date",
+						"required": true
+					},
+					{
+						"key": "end_date",
+						"label": "Ngày hết hiệu lực",
+						"type": "date",
+						"required": false
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "textarea",
+						"required": false,
+						"maxLength": 1000
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Đang hoạt động",
+								"value": "0"
+							},
+							{
+								"label": "Không hoạt động",
+								"value": "1"
+							}
+						]
+					}
+				]
+			},
+			"detail": [
+				{
+					"title": "Chi tiết giá mua",
+					"controllerDetail": "purchaseDetail",
+					"formId": "purchaseDetail",
+					"foreignKey": "purchase_id",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "STT",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "item_id",
+							"label": "Mã vật tư",
+							"required": true,
+							"width": "450px",
+							"type": "lookup",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom as unit_id from item where item_id = @item_id",
+								"map": {
+									"unit_id": "unit_id"
+								}
+							}
+						},
+						{
+							"key": "unit_id",
+							"label": "Đơn vị tính",
+							"type": "lookup",
+							"multiple": false,
+							"required": true,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "price",
+							"label": "Giá mua (VND)",
+							"type": "number",
+							"required": true,
+							"min": 0.01
+						},
+						{
+							"key": "apply_date",
+							"label": "Ngày áp dụng giá",
+							"type": "date",
+							"required": false
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"type": "text",
+							"required": false,
+							"maxLength": 1000
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

@@ -1,0 +1,94 @@
+{
+  "controller": "delivery-location",
+  "type": "list",
+  "formId": "deliveryLocation",
+  "primaryKey": [ "delivery_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin nơi giao hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "deliveryLocation",
+        "primaryKey": "delivery_id",
+        "title": "Thông tin nơi giao hàng",
+        "fields": [
+          {
+            "key": "delivery_id",
+            "label": "Mã nơi giao hàng",
+            "type": "text",
+            "required": true,
+            "readonly": true,
+            "placeholder": "Tự sinh theo định dạng NGH + số"
+          },
+          {
+            "key": "delivery_name",
+            "label": "Tên nơi giao hàng",
+            "type": "text",
+            "required": true,
+            "maxLength": 500,
+            "placeholder": "Nhập tên nơi giao hàng"
+          },
+          {
+            "key": "address",
+            "label": "Địa chỉ",
+            "type": "textarea",
+            "required": true,
+            "maxLength": 500,
+            "placeholder": "Nhập địa chỉ nơi giao hàng"
+          },
+          {
+            "key": "phone_number",
+            "label": "Số điện thoại",
+            "type": "text",
+            "required": true,
+            "maxLength": 200,
+            "placeholder": "Nhập số điện thoại"
+          },
+          {
+            "key": "note",
+            "label": "Ghi chú",
+            "type": "textarea",
+            "required": false,
+            "maxLength": 500,
+            "placeholder": "Ghi chú thêm (nếu có)"
+          },
+          {
+            "key": "location",
+            "label": "Khu vực giao hàng",
+            "type": "select",
+            "required": false,
+            "placeholder": "Chọn khu vực",
+            "source": "dm_phuong_xa"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Bị khóa",
+                "value": "0"
+              }
+            ]
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

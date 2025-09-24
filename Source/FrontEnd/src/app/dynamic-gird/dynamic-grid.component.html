@@ -1,0 +1,186 @@
+
+<div class="p-8 mt-10">
+  <!-- Title -->
+  <h1 class="text-xl font-semibold mb-4">{{girdData.title ?? "" | translate}}</h1>
+  <!-- Loading/Error -->
+  <div *ngIf="!response" class="text-gray-500">{{"COMMON.LOADING" | translate}}</div>
+
+  <!--<div class="language-switcher flex items-center gap-2">
+    <span class="text-sm text-gray-600">{{ 'COMMON.LANGUAGE' | translate }}:</span>
+    <button type="button"
+            class="px-3 py-1 text-sm rounded border"
+            [class.bg-blue-500]="currentLanguage === 'vi'"
+            [class.text-white]="currentLanguage === 'vi'"
+            [class.bg-gray-100]="currentLanguage !== 'vi'"
+            (click)="switchLanguage('vi')">
+      Tiếng Việt
+    </button>
+    <button type="button"
+            class="px-3 py-1 text-sm rounded border"
+            [class.bg-blue-500]="currentLanguage === 'en'"
+            [class.text-white]="currentLanguage === 'en'"
+            [class.bg-gray-100]="currentLanguage !== 'en'"
+            (click)="switchLanguage('en')">
+      English
+    </button>
+  </div>-->
+  <!-- Table -->
+  <div *ngIf="response">
+    <app-advanced-filter [fields]="girdData.headers" [autoApply]="true" [showStats]="true" [showExport]="true"
+                         (filtersApplied)="onFiltersApplied($event)" [initialFilters]="initFilter">
+    </app-advanced-filter>
+    <!-- Advanced Filter Component -->
+    <div class="flex flex-wrap gap-2 sm:gap-4 items-center my-4">
+      <!-- Thêm mới (kích thước nhỏ gọn) -->
+      <button (click)="handleClickAdd()"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition min-w-fit">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        {{ "COMMON.ADD_NEW" | translate }}
+      </button>
+      <button (click)="handleMultiDeleted()"
+              class="flex items-center gap-2 px-4 py-2 text-sm font-medium bg-green-600 text-white rounded-lg hover:bg-green-700 transition min-w-fit">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        {{ "COMMON.DELETE" | translate }}
+      </button>
+      <!-- File Handler -->
+
+      <app-file-handle *ngIf="isFileHandle" #fileHandler [minimalMode]="true" [user]="userData" [controll]="controll" [exportData]="exportData" (importCompleted)="ngOnInit()"
+        class="w-full sm:w-auto"></app-file-handle>
+
+
+      <!-- Dynamic Buttons -->
+      <ng-container *ngFor="let btn of girdData.actions">
+        <button *ngIf="selectedOptions && (objectKeys(selectedOptions).length > 0)"
+                class="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg transition w-full sm:w-auto"
+                [ngClass]="getButtonClasses(btn.color)" (click)="onGridButtonClick(btn)">
+          {{ btn.label | translate }}
+        </button>
+      </ng-container>
+    </div>
+
+    <div class="overflow-x-auto rounded-lg shadow">
+      <div class="overflow-x-auto">
+        <table class="w-full table-auto border-collapse hidden md:table">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">
+                {{ "COMMON.ACTION" | translate }}
+              </th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-10">#</th>
+              <ng-container *ngFor="let header of girdData.headers">
+                <th *ngIf="!header.hidden"
+
+                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"  [style.width]="getFieldWidth(header.key)">
+
+                  <div class="flex items-center justify-between">
+                    <span>{{ header.label | translate }}</span>
+                  </div>
+                </th>
+              </ng-container>
+
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let data of response.data; let i = index"
+                class="cursor-pointer hover:bg-gray-50 transition-colors">
+              <td class="px-4 py-3 text-sm text-center">
+                <div class="flex justify-center gap-2">
+                  <button (click)="handleClickUpdate(data)"
+                          class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-1 px-3 rounded-md shadow-sm transition-all duration-200">
+                    {{ 'COMMON.EDIT' | translate }}
+                  </button>
+                  <button (click)="handleClickDelete(data)"
+                          class="bg-red-500 hover:bg-red-600 text-white font-medium py-1 px-3 rounded-md shadow-sm transition-all duration-200">
+                    {{ 'COMMON.DELETE' | translate }}
+                  </button>
+                  <button (click)="handleClickView(data)"
+                          class="bg-purple-500 hover:bg-purple-600 text-white text-xs font-medium py-1 px-2 rounded">
+                    {{ 'COMMON.VIEW' | translate }}
+                  </button>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm text-gray-500">
+                <input type="checkbox"
+                       [checked]="selectedOptions[data[girdData.query.formId.primaryKey[0]]] !== undefined"
+                       (change)="handleSelection($event, data)" />
+              </td>
+              <ng-container *ngFor="let header of girdData.headers">
+                <td *ngIf="!header.hidden" class="px-4 py-3 text-sm">
+                  <span *ngIf="header.type === 'date'; else normalDisplay">
+                    {{ data[header.key] | date:'dd-MM-yyyy' }}
+                  </span>
+                  <ng-template #normalDisplay>
+                    {{ data[header.key] }}
+                  </ng-template>
+                </td>
+              </ng-container>
+
+            </tr>
+
+            <tr *ngIf="response.data.length === 0">
+              <td [attr.colspan]="girdData.headers.length + 2" class="px-4 py-8 text-center text-gray-500">
+                <div class="flex flex-col items-center">
+                  <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  <p class="text-lg font-medium">Không có dữ liệu</p>
+                  <p class="text-xs mt-2 text-gray-500">
+                    Có {{ response.total }} dòng dữ liệu gốc
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Mobile View -->
+        <div class="md:hidden space-y-4">
+          <div *ngFor="let data of response.data" class="bg-white shadow-sm rounded-md p-4 border border-gray-200">
+            <div class="flex items-center justify-between mb-2">
+              <label class="flex items-center space-x-2">
+                <input type="checkbox" class="form-checkbox"
+                       [checked]="selectedOptions[data[girdData.query.formId.primaryKey[0]]] !== undefined"
+                       (change)="handleSelection($event, data)" />
+                <span class="text-sm font-medium text-gray-700">Đã chọn</span>
+              </label>
+              <div class="flex gap-2">
+                <button (click)="handleClickUpdate(data)"
+                        class="bg-blue-500 hover:bg-blue-600 text-white text-xs font-medium py-1 px-2 rounded">
+                  Sửa
+                </button>
+                <button (click)="handleClickDelete(data)"
+                        class="bg-red-500 hover:bg-red-600 text-white text-xs font-medium py-1 px-2 rounded">
+                  Xóa
+                </button>
+                <button (click)="handleClickView(data)"
+                        class="bg-purple-500 hover:bg-purple-600 text-white text-xs font-medium py-1 px-2 rounded">
+                  Xem
+                </button>
+              </div>
+            </div>
+            <div class="space-y-1 text-sm">
+              <div *ngFor="let header of girdData.headers">
+                <div class="text-gray-500">{{ header.label }}:</div>
+                <div class="text-gray-800 font-medium break-words">{{ data[header.key] }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="response.data.length === 0" class="text-center text-gray-500 py-10 border rounded-md">
+            <p class="text-lg font-medium">Không có dữ liệu</p>
+            <p class="text-xs mt-2 text-gray-500">Có {{ response.total }} dòng dữ liệu gốc</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <app-dynamic-pagination [totalItems]="response.total || 0" [itemsPerPage]="response.pageSize"
+                            [currentPage]="response.page" (pageChange)="onPageChange($event)">
+    </app-dynamic-pagination>
+  </div>
+</div>

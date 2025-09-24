@@ -1,0 +1,9 @@
+<Report>
+  <Grids>
+    <Grid id ="Id" name="Id" type="" />
+    <Grid id ="Title" name="Title" type="" />
+    <Grid id ="Content" name="Content" type="" />
+	<Grid id ="CreatedDate" name="CreatedDate" type="date" />
+	<Grid id ="status" name="Status" type="checkbox" />
+  </Grids>
+</Report>

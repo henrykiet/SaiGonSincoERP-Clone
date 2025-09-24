@@ -1,0 +1,211 @@
+Fixed Grid Master Template
+<ng-container *ngIf="formMetadata">
+  <div class="min-h-screen bg-gray-50 p-6">
+
+    <!-- Header Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 mb-6 p-6">
+      <h1 class="text-2xl font-bold text-gray-800 mb-2">{{ formMetadata.title }}</h1>
+      <p class="text-gray-600">Hiển thị tất cả dữ liệu trong bảng với bộ lọc nâng cao</p> 
+    </div>
+
+    <!-- Advanced Filter Component -->
+    <app-advanced-filter [data]="detailRows"
+                         [fields]="filterFields"
+                         [autoApply]="true"
+                         [showStats]="true"
+                         [showExport]="true"
+                         (filtersApplied)="onFiltersApplied($event)">
+    </app-advanced-filter>
+
+    <!-- Data Table Section -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+      <!-- Table Container -->
+      <div class="overflow-x-auto" *ngIf="getDetailFields().length > 0; else noFieldsTemplate">
+        <table class="w-full">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="width: 40px;">
+                #
+              </th>
+              <th *ngFor="let field of getDetailFields()"
+                  class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <div class="flex items-center justify-between">
+                  <span>{{ getFieldLabel(field.key) }}</span>
+                  <span *ngIf="field.required" class="text-red-500 ml-1">*</span>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Data Rows - Now using filteredDetailRows instead of detailRows -->
+            <tr *ngFor="let row of filteredDetailRows; let i = index"
+                class="hover:bg-gray-50 transition-colors"
+                [class.bg-red-50]="row.status === 'out_of_stock'"
+                [class.bg-yellow-50]="row.status === 'expiring_soon'">
+
+              <!-- Row Number -->
+              <td class="px-4 py-3 text-sm text-gray-500">
+                {{ i + 1 }}
+              </td>
+
+              <!-- Dynamic Fields -->
+              <td *ngFor="let field of getDetailFields()"
+                  class="px-4 py-3 text-sm"
+                  [class.text-right]="field.type === 'number'"
+                  [class.text-gray-900]="field.type !== 'number'"
+                  [class.font-medium]="field.key === 'total' || field.key === 'total_value'"
+                  [class.text-green-600]="field.key === 'total' || field.key === 'total_value'">
+
+                <!-- Number fields -->
+                <span *ngIf="field.type === 'number'"
+                      [class.text-red-600]="field.key === 'quantity' && row[field.key] <= 0"
+                      [class.text-yellow-600]="field.key === 'quantity' && row[field.key] > 0 && row.min_stock && row[field.key] <= row.min_stock">
+
+                  <span *ngIf="field.key.includes('price') || field.key.includes('total') || field.key.includes('value')">
+                    {{ formatCurrency(row[field.key] || 0) }}
+                  </span>
+                  <span *ngIf="!field.key.includes('price') && !field.key.includes('total') && !field.key.includes('value')">
+                    {{ formatNumber(row[field.key] || 0) }}
+                  </span>
+                </span>
+
+                <!-- Select fields with options -->
+                <span *ngIf="field.type === 'select'"
+                      class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium"
+                      [ngClass]="{
+                        'bg-blue-100 text-blue-800': field.key === 'category' && row[field.key] === 'raw_material',
+                        'bg-green-100 text-green-800': field.key === 'category' && row[field.key] === 'finished_product',
+                        'bg-yellow-100 text-yellow-800': field.key === 'category' && row[field.key] === 'semi_finished',
+                        'bg-purple-100 text-purple-800': field.key === 'category' && row[field.key] === 'accessory',
+                        'bg-gray-100 text-gray-800': field.key === 'category' && row[field.key] === 'tool',
+                        'bg-red-100 text-red-800': field.key === 'category' && row[field.key] === 'consumable'
+                      }">
+                  {{ getOptionLabel(field.key, row[field.key]) || '-' }}
+                </span>
+
+                <!-- Text and other fields -->
+                <span *ngIf="field.type === 'text' || (!field.type && field.type !== 'number' && field.type !== 'select')"
+                      [class.font-mono]="field.key.includes('code') || field.key.includes('location')">
+                  {{ row[field.key] || '-' }}
+                </span>
+
+                <!-- Date fields -->
+                <span *ngIf="field.type === 'date'">
+                  {{ row[field.key] ? (row[field.key] | date:'dd/MM/yyyy') : '-' }}
+                </span>
+              </td>
+            </tr>
+
+            <!-- Empty State - No data at all -->
+            <tr *ngIf="detailRows.length === 0">
+              <td [attr.colspan]="getDetailFields().length + 1" class="px-4 py-8 text-center text-gray-500">
+                <div class="flex flex-col items-center">
+                  <svg class="w-12 h-12 text-gray-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                  </svg>
+                  <p class="text-lg font-medium">Không có dữ liệu</p>
+                  <p class="text-sm">Chưa có dữ liệu nào để hiển thị</p>
+                </div>
+              </td>
+            </tr>
+
+            <!-- No results after filtering -->
+            <tr *ngIf="detailRows.length > 0 && filteredDetailRows.length === 0">
+              <td [attr.colspan]="getDetailFields().length + 1" class="px-4 py-8 text-center text-yellow-600">
+                <div class="flex flex-col items-center">
+                  <svg class="w-12 h-12 text-yellow-300 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.732 15.5c-.77.833.192 2.5 1.732 2.5z">
+                    </path>
+                  </svg>
+                  <p class="text-lg font-medium">Không tìm thấy kết quả</p>
+                  <p class="text-sm">Bộ lọc hiện tại không tìm thấy dữ liệu phù hợp</p>
+                  <p class="text-xs mt-2 text-gray-500">Có {{ detailRows.length }} dòng dữ liệu gốc</p>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table Footer -->
+      <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="text-sm text-gray-500">
+            <span *ngIf="filteredDetailRows.length === detailRows.length">
+              Hiển thị {{ detailRows.length }} dòng dữ liệu
+            </span>
+            <span *ngIf="filteredDetailRows.length !== detailRows.length">
+              Hiển thị {{ filteredDetailRows.length }} của {{ detailRows.length }} dòng dữ liệu
+              <span class="text-blue-600 font-medium">(đã lọc)</span>
+            </span>
+          </div>
+
+          <div class="flex items-center gap-6">
+            <!-- Filtered Value (if filtered) -->
+            <div *ngIf="filteredDetailRows.length !== detailRows.length" class="text-sm text-blue-700">
+              <span class="font-medium">Giá trị đã lọc:</span>
+              <span class="font-bold text-blue-600 ml-1">{{ formatCurrency(calculateFilteredValue()) }}</span>
+            </div>
+
+            <!-- Total Value -->
+            <div class="text-sm text-gray-700">
+              <span class="font-medium">Tổng giá trị:</span>
+              <span class="font-bold text-green-600 ml-1">{{ formatCurrency(calculateTotalValue()) }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter Summary (if filters are active) -->
+        <div *ngIf="activeFilterCount > 0" class="mt-3 pt-3 border-t border-gray-200">
+          <div class="flex items-center justify-between text-xs text-gray-600">
+            <span>
+              <span class="font-medium text-blue-600">{{ activeFilterCount }}</span> bộ lọc đang hoạt động
+            </span>
+            <span>
+              Hiển thị <span class="font-medium">{{ calculateFilteredPercentage() }}%</span> tổng giá trị
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- No Fields Template -->
+    <ng-template #noFieldsTemplate>
+      <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+        <div class="text-center py-8 bg-gray-50 rounded-lg border border-gray-200">
+          <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4">
+            </path>
+          </svg>
+          <p class="text-gray-600 mb-4 text-lg font-medium">Không tìm thấy định nghĩa trường dữ liệu</p>
+          <p class="text-gray-500 text-sm mb-4">Vui lòng kiểm tra cấu hình metadata</p>
+          <button type="button"
+                  class="btn-modern btn-primary btn-small"
+                  (click)="loadInitialDetailData()">
+            🔄 Tải lại dữ liệu
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Debug Info (remove in production) -->
+    <div *ngIf="false" class="mt-6 bg-gray-100 rounded-lg p-4 text-xs text-gray-600">
+      <h4 class="font-medium mb-2">Debug Information:</h4>
+      <div class="space-y-1">
+        <div>Detail Fields Count: {{ detailFields.length }}</div>
+        <div>Filter Fields Count: {{ filterFields.length }}</div>
+        <div>Detail Rows: {{ detailRows.length }}</div>
+        <div>Filtered Rows: {{ filteredDetailRows.length }}</div>
+        <div>Active Filters: {{ activeFilterCount }}</div>
+        <div class="mt-2">
+          <strong>Filter Fields:</strong>
+          <pre class="mt-1 text-xs">{{ filterFields | json }}</pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

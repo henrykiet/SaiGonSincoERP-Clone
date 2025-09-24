@@ -1,0 +1,350 @@
+﻿{
+  "title": "Quản lý khách hàng & đơn hàng",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Khách hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "title": "Thông tin khách hàng",
+        "fields": [
+          {
+            "key": "name",
+            "label": "Tên",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên khách hàng"
+          },
+          {
+            "key": "email",
+            "label": "Email",
+            "type": "email",
+            "placeholder": "example@gmail.com"
+          },
+          {
+            "key": "phone",
+            "label": "SĐT",
+            "type": "text",
+            "placeholder": "Nhập số điện thoại"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Đơn hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "title": "Thông tin đơn hàng",
+        "class": "",
+        "fields": [
+          {
+            "key": "order_code",
+            "label": "Mã đơn",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã đơn hàng"
+          },
+          {
+            "key": "order_date",
+            "label": "Ngày đặt",
+            "type": "date",
+            "placeholder": "Chọn ngày đặt hàng"
+          },
+          {
+            "key": "shipping_fee",
+            "label": "Phí vận chuyển",
+            "type": "number",
+            "default": 50000,
+            "placeholder": "Nhập phí vận chuyển"
+          }
+        ]
+      },
+      "detail": {
+        "title": "Chi tiết đơn hàng",
+        "entity": "OrderItem",
+        "foreignKey": "order_code",
+        "fields": [
+          {
+            "key": "product_code",
+            "label": "Mã sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "product",
+            "label": "Sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "quantity",
+            "label": "Số lượng",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "price",
+            "label": "Đơn giá",
+            "type": "number",
+            "placeholder": "Nhập đơn giá"
+          },
+          {
+            "key": "total",
+            "label": "Thành tiền",
+            "type": "number",
+            "disabled": true,
+            "placeholder": "Tự động tính"
+          }
+        ],
+        "initialData": [
+          {
+            "item_id": 1,
+            "product_code": "SP001",
+            "product": "laptop_dell",
+            "quantity": 2,
+            "price": 25000000,
+            "total": 50000000,
+            "note_item": "Laptop Dell XPS 13 - Intel Core i7"
+          },
+          {
+            "item_id": 2,
+            "product_code": "SP0011",
+            "product": "iphone_15",
+            "quantity": 1,
+            "price": 35000000,
+            "total": 35000000,
+            "note_item": "iPhone 15 Pro Max 256GB - Natural Titanium"
+          },
+          {
+            "item_id": 3,
+            "product_code": "SP003",
+            "product": "samsung_s24",
+            "quantity": 3,
+            "price": 22000000,
+            "total": 66000000,
+            "note_item": "Samsung Galaxy S24 Ultra 512GB"
+          },
+          {
+            "item_id": 4,
+            "product_code": "SP004",
+            "product": "macbook_pro",
+            "quantity": 1,
+            "price": 55000000,
+            "total": 55000000,
+            "note_item": "MacBook Pro 14-inch M3 Pro 18GB RAM"
+          },
+          {
+            "item_id": 5,
+            "product_code": "SP005",
+            "product": "airpods_pro",
+            "quantity": 5,
+            "price": 6500000,
+            "total": 32500000,
+            "note_item": "AirPods Pro 2nd Generation với MagSafe"
+          }
+        ]
+      }
+    },
+    {
+      "title": "Đơn hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "title": "Thông tin đơn hàng",
+        "class": "",
+        "fields": [
+          {
+            "key": "order_code",
+            "label": "Mã đơn",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã đơn hàng"
+          },
+          {
+            "key": "order_date",
+            "label": "Ngày đặt",
+            "type": "date",
+            "placeholder": "Chọn ngày đặt hàng"
+          },
+          {
+            "key": "shipping_fee",
+            "label": "Phí vận chuyển",
+            "type": "number",
+            "default": 50000,
+            "placeholder": "Nhập phí vận chuyển"
+          }
+        ]
+      },
+      "detail": {
+        "title": "Chi tiết đơn hàng",
+        "entity": "OrderItem",
+        "foreignKey": "order_code",
+        "fields": [
+          {
+            "key": "product_code",
+            "label": "Mã sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "product",
+            "label": "Sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "quantity",
+            "label": "Số lượng",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "price",
+            "label": "Đơn giá",
+            "type": "number",
+            "placeholder": "Nhập đơn giá"
+          },
+          {
+            "key": "total",
+            "label": "Thành tiền",
+            "type": "number",
+            "disabled": true,
+            "placeholder": "Tự động tính"
+          }
+        ],
+        "initialData": [
+          {
+            "item_id": 1,
+            "product_code": "SP001",
+            "product": "laptop_dell",
+            "quantity": 2,
+            "price": 25000000,
+            "total": 50000000,
+            "note_item": "Laptop Dell XPS 13 - Intel Core i7"
+          },
+          {
+            "item_id": 2,
+            "product_code": "SP0011",
+            "product": "iphone_15",
+            "quantity": 1,
+            "price": 35000000,
+            "total": 35000000,
+            "note_item": "iPhone 15 Pro Max 256GB - Natural Titanium"
+          },
+          {
+            "item_id": 3,
+            "product_code": "SP003",
+            "product": "samsung_s24",
+            "quantity": 3,
+            "price": 22000000,
+            "total": 66000000,
+            "note_item": "Samsung Galaxy S24 Ultra 512GB"
+          },
+          {
+            "item_id": 4,
+            "product_code": "SP004",
+            "product": "macbook_pro",
+            "quantity": 1,
+            "price": 55000000,
+            "total": 55000000,
+            "note_item": "MacBook Pro 14-inch M3 Pro 18GB RAM"
+          },
+          {
+            "item_id": 5,
+            "product_code": "SP005",
+            "product": "airpods_pro",
+            "quantity": 5,
+            "price": 6500000,
+            "total": 32500000,
+            "note_item": "AirPods Pro 2nd Generation với MagSafe"
+          }
+        ]
+      }
+    },
+
+    {
+      "title": "Đơn hàng",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "title": "Thông tin đơn hàng",
+        "class": "",
+        "fields": [
+          {
+            "key": "order_code",
+            "label": "Mã đơn",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã đơn hàng"
+          },
+          {
+            "key": "order_date",
+            "label": "Ngày đặt",
+            "type": "date",
+            "placeholder": "Chọn ngày đặt hàng"
+          },
+          {
+            "key": "shipping_fee",
+            "label": "Phí vận chuyển",
+            "type": "number",
+            "default": 50000,
+            "placeholder": "Nhập phí vận chuyển"
+          }
+        ]
+      },
+      "detail": {
+        "title": "Chi tiết đơn hàng",
+        "entity": "OrderItem",
+        "foreignKey": "order_code",
+        "fields": [
+          {
+            "key": "product_code",
+            "label": "Mã sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "product",
+            "label": "Sản phẩm",
+            "type": "text"
+          },
+          {
+            "key": "quantity",
+            "label": "Số lượng",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "quantity_trf",
+            "label": "Số lượng quy đổi",
+            "type": "number",
+            "min": 1,
+            "placeholder": "Nhập số lượng"
+          },
+          {
+            "key": "price",
+            "label": "Đơn giá",
+            "type": "number",
+            "placeholder": "Nhập đơn giá"
+          },
+          {
+            "key": "total",
+            "label": "Thành tiền",
+            "type": "number",
+            "disabled": true,
+            "placeholder": "Tự động tính"
+          }
+        ],
+        "initialData": [
+          {
+            "item_id": 1,
+            "product_code": "SP001",
+            "product": "laptop_dell",
+            "quantity": 2,
+            "quanquan_trf": 20,
+            "price": 25000000,
+            "total": 50000000,
+            "note_item": "Laptop Dell XPS 13 - Intel Core i7"
+          }
+
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "controller": "position",
+  "type": "list",
+  "formId": "position",
+  "primaryKey": [ "position_id" ],
+  "idVC": "",
+  "VCDate": "",
+  "title": "Danh mục Chức vụ",
+  "class": "onSelectChange()",
+  "tabs": [
+    {
+      "title": "Thông tin Chức vụ",
+      "class": "text-[48px] px-4 py-2 focus:outline-none",
+      "form": {
+        "typeForm": "master",
+        "formId": "position",
+        "primaryKey": "positionCode",
+        "title": "Thông tin Chức vụ",
+        "fields": [
+          {
+            "key": "position_id",
+            "label": "Mã chức vụ",
+            "type": "text",
+            "required": true,
+         
+            "placeholder": "Mã chức vụ"
+          },
+          {
+            "key": "position_name",
+            "label": "Tên chức vụ",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên chức vụ"
+          },
+          {
+            "key": "position_group_id",
+            "label": "Nhóm chức vụ",
+            "type": "lookup",
+            "required": false,
+            "default": {
+              "controller": "positionGroup",
+              "filter": [
+                {
+                  "field": "status",
+                  "value": "1",
+                  "operator": "="
+                }
+              ]
+            },
+            "placeholder": "Chọn nhóm chức vụ"
+          },
+          {
+            "key": "level",
+            "label": "Cấp bậc",
+            "type": "select",
+            "required": false,
+            "options": [
+              {
+                "label": "Cấp 1",
+                "value": "1"
+              },
+              {
+                "label": "Cấp 2",
+                "value": "2"
+              },
+              {
+                "label": "Cấp 3",
+                "value": "3"
+              },
+              {
+                "label": "Cấp 4",
+                "value": "4"
+              },
+              {
+                "label": "Cấp 5",
+                "value": "5"
+              }
+            ],
+            "placeholder": "Chọn cấp bậc"
+          },
+          {
+            "key": "description",
+            "label": "Mô tả chức vụ",
+            "type": "textarea",
+            "required": false,
+            "placeholder": "Nhập mô tả (tối đa ký tự cho phép)"
+          },
+          {
+            "key": "status",
+            "label": "Trạng thái",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Đang hoạt động",
+                "value": "1"
+              },
+              {
+                "label": "Ngừng hoạt động",
+                "value": "0"
+              }
+            ],
+            "placeholder": "Chọn trạng thái"
+          },
+          {
+            "key": "display_order",
+            "label": "Thứ tự hiển thị",
+            "type": "number",
+            "required": false,
+            "placeholder": "Nhập thứ tự hiển thị"
+          }
+        ],
+        "initialData": {}
+      }
+    }
+  ],
+  "dataProcessing": {
+    "actions": {
+      "post": []
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "controller": "positionGroup",
+  "formId": "positionGroup",
+  "primaryKey": [ "position_group_id" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "position_group_id" ],
+  "fields": [
+    {
+      "field": "position_group_id",
+      "header": "Mã Nhóm chức vụ"
+    },
+    {
+      "field": "position_group_name",
+      "header": "Tên nhóm chức vụ"
+    }
+  ]
+}

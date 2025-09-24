@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.step-box {
+  @apply flex flex-col items-center justify-center text-center border border-gray-300 rounded-lg p-4 bg-white shadow;
+}
+
+.step-box img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 0.5rem;
+}
+.container {
+  overflow-x: visible; /* Đảm bảo không bị cắt tiêu đề */
+}
+
+h1 {
+  white-space: normal; /* Cho phép xuống dòng nếu cần */
+  max-width: 100%; /* Đảm bảo không vượt quá container */
+}

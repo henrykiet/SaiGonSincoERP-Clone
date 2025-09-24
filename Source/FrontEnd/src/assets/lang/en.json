@@ -1,0 +1,186 @@
+{
+  "FILTER": {
+    "CLEAR_FILTER": "🗑️ Clear filter",
+    "MODE": "Filter mode:",
+    "ADD_ROW": "+ Add row",
+    "EMPTY_ADD_ROW": "No data yet. Click 'Add row' to start.",
+    "ACTION": "Action",
+    "NOT_FOUND": "No results match the filter.",
+    "REMOVE_ALL": "🗑️ Remove all filters",
+    "CLEAR_ALL": "🗑️ Remove all filter",
+    "ADD_FILTER": "🗑️ Add filter",
+    "NO_FILTERS_APPLIED": "No Data Filters",
+    "SELECT_COLUMN": "Select column",
+    "COLUMN": "Column",
+    "OPERATOR": "Operator",
+    "VALUE": "Value",
+    "SELECT_OPERATOR": "Select Operator",
+    "OPERATORS": {
+      "CONTAINS": "Contains",
+      "NOT_CONTAINS": "Does not contain",
+      "EQUALS": "Equals",
+      "NOT_EQUALS": "Does not equal",
+      "STARTS_WITH": "Starts with",
+      "ENDS_WITH": "Ends with",
+      "IS_EMPTY": "Is empty",
+      "IS_NOT_EMPTY": "Is not empty",
+      "GREATER_THAN": "Greater than",
+      "GREATER_EQUAL": "Greater than or equal",
+      "LESS_THAN": "Less than",
+      "LESS_EQUAL": "Less than or equal",
+      "BETWEEN": "Between",
+      "ON": "On",
+      "NOT_ON": "Not on",
+      "AFTER": "After",
+      "ON_AFTER": "On or after",
+      "BEFORE": "Before",
+      "ON_BEFORE": "On or before",
+      "IS": "Is",
+      "IS_NOT": "Is not"
+    }
+  },
+  "GRID": {
+    "CUSTOMER": "Customer",
+    "CUSTOMER_GROUP": "Customer Group",
+    "COMPANY": "Company",
+    "ITEM": "Item",
+    "QUOTATION_PAPER": "Quotation",
+    "ORDER": "Order",
+    "UOM": "Measure"
+  },
+  "COMMON": {
+    "ACTION": "Action",
+    "STATUS": "Status",
+    "VIEW": "View",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "ADD_NEW": "Add new",
+    "IMPORT": "Import data",
+    "EXPORT": "Export data",
+    "DOWNLOAD_TEMPLATE": "Download template",
+    "UPLOAD_FILE": "Select file",
+    "LOADING": "Loading....",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "SELECT": "Select",
+    "LANGUAGE": "Language",
+    "ENTER": "Enter"
+  },
+  "POPUP": {
+    "CUSTOMER": {
+      "CODE": "Customer Code",
+      "NAME_VN": "Customer Name (Vietnamese)",
+      "NAME_EN": "Customer Name (English)",
+      "NAME": "Customer Name",
+      "GROUP": "Customer Group / Type",
+      "PHONE": "Phone Number",
+      "EMAIL": "Email",
+      "ADDRESS": "Registered Address",
+      "CITY": "City/Province",
+      "DISTRICT": "District",
+      "STATUS": "Status"
+    },
+    "CUSTOMER_GROUP": {
+      "ID": "Group Code",
+      "NAME": "Group Name",
+      "NOTE": "Note",
+      "STATUS": "Status"
+    },
+    "COMPANY": {
+      "ID": "Company Code",
+      "NAME": "Company Name",
+      "ADDRESS": "Address",
+      "PHONE_NUMBER": "Phone Number",
+      "FAX_NUMBER": "FAX Number",
+      "MST": "Tax Code"
+    },
+    "ITEM": {
+      "ID": "Item Code",
+      "NAME": "Item Name",
+      "GROUP_ID": "Group Code",
+      "GROUP_NAME": "Group Name",
+      "UOM": "Unit of Measure",
+      "PURCHASE_PRICE": "Purchase Price",
+      "SALE_PRICE": "Sale Price",
+      "MIN_INVENTORY": "Minimum Inventory",
+      "MAX_INVENTORY": "Maximum Inventory",
+      "STATUS": "Status"
+    },
+    "UOM": {
+      "TITLE": "Unit of Measure Catalog",
+      "FORM_TITLE": "Unit of Measure Information",
+      "CODE": "UoM Code",
+      "NAME": "UoM Name",
+      "NAME_VN": "UoM Name (VN)",
+      "NAME_EN": "UoM Name (EN)",
+      "ALIAS": "Alternative Name",
+      "STATUS": "Status",
+      "ACTIVE": "Active",
+      "LOCKED": "Locked",
+      "PLACEHOLDER_CODE": "Enter UoM",
+      "PLACEHOLDER_NAME": "Enter UoM name",
+      "PLACEHOLDER_ALIAS": "Enter alternative name"
+    },
+    "QUOTATION_PAPER": {
+      "VOUCHER_DATE": "Quotation Date",
+      "VOUCHER_NUMBER": "Quotation Number",
+      "CUSTOMER_CODE": "Customer",
+      "JOB_CODE": "Project",
+      "CONTACT_PERSON": "Contact Person",
+      "PHONE_PERSON": "Phone",
+      "EMAIL_PERSON": "Email",
+      "STATUS": "Status"
+    },
+    "ORDER": {
+      "VOUCHER_DATE": "Quotation Date",
+      "VOUCHER_NUMBER": "Quotation Number",
+      "CUSTOMER_ID": "Customer",
+      "JOB_CODE": "Project",
+      "DELIVERY_DATE": "Order Date",
+      "DELIVERY_CUST": "Order Information",
+      "DELIVERY_ADDRESS": "Address",
+      "STATUS": "Status"
+    },
+    "receipt": {
+      "title": "Receipt",
+      "voucherDate": "Creation Date",
+      "voucherNumber": "Receipt Number",
+      "customerCode": "Customer Code",
+      "invoiceNumber": "Invoice Number",
+      "status": "Status"
+    },
+    "ACCOUNT_SINCO": {
+      "CODE": "Sinco Account Code",
+      "NAME": "Account Name",
+      "TYPE": "Usage Type",
+      "BANK_NAME": "Bank",
+      "ACCOUNT_NUMBER": "Account Number",
+      "BANK_BRANCH": "Bank Branch",
+      "NOTE": "Note",
+      "STATUS": "Status"
+    },
+    "INCOME_EXPENDITURE": {
+      "TYPE": "Income/Expenditure Type",
+      "CODE": "Income/Expenditure Code",
+      "NAME_VN": "Income/Expenditure Name (VN)",
+      "NAME_EN": "Income/Expenditure Name (EN)",
+      "SERIAL": "Sort Order",
+      "STATUS": "Status"
+    },
+    "LOCATION": {
+      "PROVINCE_CODE": "Province Code (New)",
+      "PROVINCE_NAME": "Province Name",
+      "DISTRICT_CODE": "District Code (New)",
+      "DISTRICT_NAME": "District Name",
+      "WARD_CODE": "Ward Code (New)",
+      "WARD_NAME": "Ward Name",
+      "UNIT_TYPE": "Administrative Unit Type",
+      "STATUS": "Status"
+    },
+    "EMPLOYEE_ROLE": {
+      "CODE": "Role Code",
+      "NAME": "Role Name",
+      "STATUS": "Status"
+    }
+  }
+}   

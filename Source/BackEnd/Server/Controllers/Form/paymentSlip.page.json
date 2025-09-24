@@ -1,0 +1,245 @@
+﻿{
+	"controller": "PaymentSlip",
+	"type": "voucher",
+	"formId": "paymentSlip",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z06",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Phiếu chi",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"title": "Thông tin phiếu chi",
+				"class": "",
+				"formId": "paymentSlip",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "voucherNumber",
+						"label": "Số phiếu",
+						"type": "text",
+						"required": true,
+						"placeholder": "Số phiếu"
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày chứng từ",
+						"required": true,
+						"type": "date",
+						"placeholder": "Chọn ngày chứng từ"
+					},
+					{
+						"key": "receiptCode",
+						"label": "Phiếu nhập hàng",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "employeeCode",
+						"label": "Nhân viên nhận tiền",
+						"type": "lookup",
+						"required": true,
+						"multiple": false,
+						"default": {
+							"controller": "employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "createdDate",
+						"label": "Ngày tạo",
+						"required": true,
+						"type": "date",
+						"placeholder": "Chọn ngày báo giá"
+					},
+					{
+						"key": "supplierCode",
+						"label": "Mã NCC",
+						"type": "lookup",
+						"required": true,
+						"multiple": false,
+						"default": {
+							"controller": "supplier",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+
+					{
+						"key": "invoiceNumber",
+						"label": "Số hóa đơn",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "cashier",
+						"label": "Nhân viên chi",
+						"type": "lookup",
+						"required": true,
+						"multiple": false,
+						"default": {
+							"controller": "employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "reason",
+						"label": "Lý do chi",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "spentMoney",
+						"label": "Đã chi",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Chưa chi",
+								"value": "0"
+							},
+							{
+								"label": "Đã chi",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "amountTransfer",
+						"label": "Tiền CK",
+						"type": "number",
+						"currency": "VN"
+					},
+					{
+						"key": "amountCash",
+						"label": "Tiền mặt",
+						"type": "number",
+						"currency": "VN"
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Tạo phiếu",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "total_amount",
+						"label": "Tổng cộng",
+						"type": "number",
+						"disabled": true,
+						"currency": "VN",
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[total_amount] = SUM([amount]) ",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "PaymentSlipDetail",
+					"formId": "paymentSlipdetail",
+					"foreignKey": "idGui, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "accountPaymentCode",
+							"label": "Tài khoản chi",
+							"type": "lookup",
+							"required": true,
+							"multiple": false,
+							"default": {
+								"controller": "AccountSinco",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "amount",
+							"label": "Số tiền",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number"
+						},
+						{
+							"key": "note",
+							"label": "Ghi chú",
+							"width": "150px",
+							"type": "text"
+						}
+					],
+					"initialData": []
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

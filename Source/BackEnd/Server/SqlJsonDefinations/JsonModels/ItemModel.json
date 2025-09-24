@@ -1,0 +1,233 @@
+{
+  "model": "item",
+  "schema": {
+    "partition": false,
+    "fields": [
+      {
+        "name": "item_id",
+        "property": "item_id",
+        "type": "string",
+        "sqlType": "VARCHAR(64)",
+        "primaryKey": true,
+        "required": true
+      },
+      {
+        "name": "item_name",
+        "property": "item_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)",
+        "required": true
+      },
+      {
+        "name": "group_item_id",
+        "property": "group_item_id",
+        "type": "string",
+        "sqlType": "VARCHAR(64)"
+      },
+      {
+        "name": "group_item_name",
+        "property": "group_item_name",
+        "type": "string",
+        "sqlType": "NVARCHAR(256)"
+      },
+      {
+        "name": "uom",
+        "property": "uom",
+        "type": "string",
+        "sqlType": "VARCHAR(32)",
+        "required": true
+      },
+      {
+        "name": "purchase_price",
+        "property": "purchase_price",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)",
+        "required": false
+      },
+      {
+        "name": "sale_price",
+        "property": "sale_price",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)",
+        "required": false
+      },
+      {
+        "name": "is_raw_material",
+        "property": "is_raw_material",
+        "type": "string",
+        "sqlType": "CHAR(1)",
+        "required": true
+      },
+      {
+        "name": "is_finished_good",
+        "property": "is_finished_good",
+        "type": "string",
+        "sqlType": "CHAR(1)",
+        "required": true
+      },
+      {
+        "name": "description",
+        "property": "description",
+        "type": "string",
+        "sqlType": "NVARCHAR(512)"
+      },
+      {
+        "name": "status",
+        "property": "status",
+        "type": "string",
+        "sqlType": "CHAR(1)",
+        "required": false
+      },
+      {
+        "name": "min_inventory",
+        "property": "min_inventory",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "origin",
+        "property": "origin",
+        "type": "string",
+        "sqlType": "NVARCHAR(128)"
+      },
+      {
+        "name": "max_inventory",
+        "property": "max_inventory",
+        "type": "number",
+        "sqlType": "NUMERIC(19,4)"
+      },
+      {
+        "name": "manufacturer",
+        "property": "manufacturer",
+        "type": "string",
+        "sqlType": "NVARCHAR(128)"
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "Item",
+    "columnMapping": [
+      {
+        "excelColumn": "item_id",
+        "fieldName": "item_id",
+        "required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "item_name",
+        "fieldName": "item_name",
+        "required": true
+      },
+      {
+        "excelColumn": "Nhóm vật tư",
+        "fieldName": "group_item_id",
+        "clauseForiegn": "SELECT item_group_id FROM itemGroup WHERE status = '1'",
+		"required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "group_item_name",
+        "fieldName": "group_item_name",
+        "hide": true
+      },
+      {
+        "excelColumn": "uom",
+        "fieldName": "uom",
+        "required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "purchase_price",
+        "fieldName": "purchase_price",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "sale_price",
+        "fieldName": "sale_price",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Nguyên liệu thô (0: có, 1: không)",
+        "fieldName": "is_raw_material",
+        "required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "Thành phẩm (0: có, 1: không)",
+        "fieldName": "is_finished_good",
+        "required": true,
+        "hide": false
+      },
+      {
+        "excelColumn": "Mô tả",
+        "fieldName": "description"
+      },
+      {
+        "excelColumn": "Trạng thái(0: Không hoạt động, 1: Đang hoạt động)",
+        "fieldName": "status",
+        "required": false,
+        "hide": true
+      },
+      {
+        "excelColumn": "Tồn kho tối thiểu",
+        "fieldName": "min_inventory"
+      },
+      {
+        "excelColumn": "Xuất xứ",
+        "fieldName": "origin",
+        "hide": true
+      },
+      {
+        "excelColumn": "Tồn kho tối đa",
+        "fieldName": "max_inventory"
+      },
+      {
+        "excelColumn": "Nhà sản xuất",
+        "fieldName": "manufacturer",
+        "hide": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "item_name",
+        "type": "length",
+        "minLength": "1",
+        "maxLength": "256",
+        "message": "Tên vật tư không được để trống và tối đa 256 ký tự."
+      },
+      {
+        "fieldName": "item_id",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE item_id = @item_id",
+        "overWrite": true,
+        "threshold": "0",
+        "message": "Id đã tồn tại trong hệ thống."
+      },
+      {
+        "tableName": "itemGroup",
+        "type": "queryCheck",
+        "checkQuery": "item_group_id = @group_item_id", //item_group_id đúng tên key trong bảng itemGroup, @group_item_id đugns tên cột trong bảng item
+        "threshold": "0",
+        "message": "ID nhóm vật tư không trùng trong hệ thống."
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {}
+  },
+  "foriegnModel": [
+    {
+
+    }
+  ]
+
+}

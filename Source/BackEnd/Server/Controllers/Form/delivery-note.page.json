@@ -1,0 +1,543 @@
+﻿{
+	"controller": "DeliveryNote",
+	"type": "voucher",
+	"formId": "deliveryNote",
+	"primaryKey": [
+		"idGui"
+	],
+	"idVC": "Z05",
+	"VCDate": "",
+	"title": "",
+	"class": "onSelectChange()",
+	"tabs": [
+		{
+			"title": "Phiếu xuất hàng",
+			"class": "text-[48px] px-4 py-2 focus:outline-none",
+			"form": {
+				"title": "Thông tin phiếu xuất hàng",
+				"class": "",
+				"formId": "deliveryNote",
+				"fields": [
+					{
+						"key": "idGui",
+						"label": "Key",
+						"type": "hidden"
+					},
+					{
+						"key": "voucherNumber",
+						"label": "Số phiếu",
+						"type": "text",
+						"required": true,
+						"placeholder": "Số phiếu"
+					},
+					{
+						"key": "invoiceVAT",
+						"label": "Hóa đơn tax",
+						"required": false,
+						"type": "text",
+						"placeholder": ""
+					},
+					{
+						"key": "voucherDate",
+						"label": "Ngày tạo",
+						"required": true,
+						"type": "date",
+						"placeholder": "Chọn ngày tạo"
+					},
+					{
+						"key": "number_ddh",
+						"label": "Số ĐĐH",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "number_quotation",
+						"label": "Số báo giá",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "number_contract",
+						"label": "Số hợp đồng",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "jobCode",
+						"label": "Dự án",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "job",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "deliveryDate",
+						"label": "Ngày giao",
+						"required": false,
+						"type": "date",
+						"placeholder": ""
+					},
+					{
+						"key": "customer_id",
+						"label": "Mã khách hàng",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "customer",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						},
+						"onChange": {
+							"api": "/api/CustomQuery/execute",
+							"params": [
+								"customer_id"
+							],
+							"dataType": [
+								"String"
+							],
+							"query": "select address as orderAddress from customer where customer_id = @customer_id",
+							"map": {
+								"orderAddress": "orderAddress"
+							}
+						}
+					},
+					{
+						"key": "contactPerson",
+						"label": "Người liên hệ giao hàng",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "phonePerson",
+						"label": "Điện thoại",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "orderAddress",
+						"label": "Địa chỉ",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "emailPerson",
+						"label": "Email",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "employee_id",
+						"label": "Nhân viên KD",
+						"required": true,
+						"type": "lookup",
+						"multiple": false,
+						"default": {
+							"controller": "Employee",
+							"filter": [
+								{
+									"field": "status",
+									"value": "1",
+									"operator": "="
+								}
+							]
+						}
+					},
+					{
+						"key": "phonePersonCreate",
+						"label": "Điện thoại người tạo",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "faxPersonCreate",
+						"label": "Số Fax",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "mailFrom",
+						"label": "Mail (Người gửi)",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "term",
+						"label": "Kỳ hạn thanh toán",
+						"type": "number",
+						"placeholder": ""
+					},
+					{
+						"key": "amoutFare",
+						"label": "Tiền cước",
+						"type": "number",
+						"currency": "VN",
+						"placeholder": ""
+					},
+					{
+						"key": "truck_id",
+						"label": "Chành xe",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "addresstruck",
+						"label": "Địa chỉ chành",
+						"type": "text",
+						"required": true,
+						"placeholder": ""
+					},
+					{
+						"key": "note",
+						"label": "Ghi chú",
+						"type": "text",
+						"required": false,
+						"placeholder": ""
+					},
+					{
+						"key": "status",
+						"label": "Trạng thái",
+						"type": "select",
+						"required": true,
+						"options": [
+							{
+								"label": "Lập chứng từ",
+								"value": "0"
+							},
+							{
+								"label": "Xuất hàng",
+								"value": "1"
+							}
+						]
+					},
+					{
+						"key": "totalQuantity",
+						"label": "Tổng số lượng",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalQuantity] = SUM([quantity])",
+									"dependencies": [
+										"quantity"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalAmount",
+						"label": "Tổng tiền",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalAmount] = SUM([amount])",
+									"dependencies": [
+										"amount"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalTax",
+						"label": "Tổng thuế",
+						"type": "number",
+						"currency": "VN",
+						"disabled": true,
+						"subtotal": true,
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalTax] = SUM([tax])",
+									"dependencies": [
+										"tax"
+									],
+									"precision": 2
+								}
+							]
+						}
+					},
+					{
+						"key": "totalPayment",
+						"label": "Tổng tiền sau thuế",
+						"type": "number",
+						"disabled": true,
+						"subtotal": true,
+						"currency": "VN",
+						"calculation": {
+							"calculations": [
+								{
+									"formula": "[totalPayment] = SUM([payment])",
+									"dependencies": [
+										"payment"
+									],
+									"precision": 2
+								}
+							]
+						}
+					}
+				],
+				"initialData": {}
+			},
+			"detail": [
+				{
+					"title": "Chi tiết",
+					"controllerDetail": "deliveryNoteDetail",
+					"formId": "deliveryNoteDetail",
+					"foreignKey": "idGui, line_nbr",
+					"fields": [
+						{
+							"key": "line_nbr",
+							"label": "Stt",
+							"disabled": true,
+							"type": "text",
+							"width": "80px"
+						},
+						{
+							"key": "itemNameCustomer",
+							"label": "Tên Vật tư KH",
+							"type": "text",
+							"width": "250px"
+						},
+						{
+							"key": "uomCustomer",
+							"label": "Đvt Vật tư KH",
+							"type": "text",
+							"width": "150px"
+						},
+						{
+							"key": "item_id",
+							"label": "Mã vật tư",
+							"required": true,
+							"type": "lookup",
+							"width": "250px",
+							"multiple": false,
+							"default": {
+								"controller": "item",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"item_id"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select uom from item where item_id = @item_id",
+								"map": {
+									"uom": "uom"
+								}
+							}
+						},
+						{
+							"key": "uom",
+							"label": "Đơn vị tính",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "uom",
+								"filter": [
+									{
+										"field": "status",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							}
+						},
+						{
+							"key": "quantity",
+							"label": "Số lượng",
+							"required": true,
+							"type": "number",
+							"width": "150px",
+							"trigger": [
+								"amount",
+								"tax",
+								"payment"
+							]
+						},	
+						{
+							"key": "price",
+							"label": "Đơn giá",
+							"type": "number",
+							"width": "150px",
+							"currency": "VN",
+							"trigger": [
+								"amount",
+								"tax",
+								"payment"
+							]
+						},
+						{
+							"key": "purchasePrice",
+							"label": "Giá mua",
+							"currency": "VN",
+							"width": "150px",
+							"type": "number"
+						},
+						{
+							"key": "amount",
+							"label": "Thành tiền",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"trigger": [
+								"tax",
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[amount] = [quantity] * [price]",
+										"dependencies": [
+											"quantity",
+											"price"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "taxCode",
+							"label": "Mã thuế",
+							"required": true,
+							"type": "lookup",
+							"width": "150px",
+							"multiple": false,
+							"default": {
+								"controller": "tax",
+								"filter": [
+									{
+										"field": "1",
+										"value": "1",
+										"operator": "="
+									}
+								]
+							},
+							"onChange": {
+								"api": "/api/CustomQuery/execute",
+								"params": [
+									"taxCode"
+								],
+								"dataType": [
+									"String"
+								],
+								"query": "select tax_number as tax_rate from tax where tax_id = @taxCode",
+								"map": {
+									"tax_rate": "tax_rate"
+								}
+							}
+						},
+						{
+							"key": "tax_rate",
+							"label": "Thuế suất",
+							"required": true,
+							"width": "150px",
+							"type": "number",
+							"trigger": [
+								"tax",
+								"payment"
+							]
+						},
+						{
+							"key": "tax",
+							"label": "Thuế tax",
+							"type": "number",
+							"currency": "VN",
+							"width": "150px",
+							"trigger": [
+								"payment"
+							],
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[tax] = [amount] * [tax_rate] / 100",
+										"dependencies": [
+											"amount",
+											"tax_rate"
+										],
+										"precision": 0
+									}
+								]
+							}
+						},
+						{
+							"key": "payment",
+							"label": "Tổng cộng",
+							"width": "150px",
+							"currency": "VN",
+							"type": "number",
+							"calculation": {
+								"calculations": [
+									{
+										"formula": "[payment] = [amount] + [tax]",
+										"dependencies": [
+											"amount",
+											"tax"
+										],
+										"precision": 0
+									}
+								]
+							}
+						}
+					],
+					"initialData": []
+				}
+			]
+		},
+		{
+			"title": "Tệp đính kèm",
+			"type": "file-attachment"
+		}
+	],
+	"dataProcessing": {
+		"actions": {
+			"post": []
+		}
+	}
+}

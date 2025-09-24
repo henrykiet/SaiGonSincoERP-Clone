@@ -1,0 +1,20 @@
+{
+  "controller": "ward",
+  "formId": "ward",
+  "primaryKey": [ "ward_code" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "ward_code" ],
+  "fields": [
+    {
+      "field": "ward_code",
+      "header": "Mã xã phường"
+    },
+    {
+      "field": "ward_name",
+      "header": "Tên xã phường"
+    }
+  ]
+}

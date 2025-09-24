@@ -1,0 +1,51 @@
+.container {
+  padding: 60px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-bar {
+  margin-bottom: 20px;
+  width: 300px;
+}
+
+table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 120px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-buttons button[mat-icon-button] {
+  transition: background 0.2s, color 0.2s;
+}
+
+.action-buttons button[mat-icon-button]:hover {
+  background: #e3f2fd; /* light blue for edit */
+}
+
+.action-buttons button[mat-icon-button][color="warn"]:hover {
+  background: #ffebee; /* light red for delete */
+}
+
+.action-buttons button[mat-icon-button]:hover mat-icon {
+  color: #1976d2; /* blue for edit */
+}
+
+.action-buttons button[mat-icon-button][color="warn"]:hover mat-icon {
+  color: #d32f2f; /* red for delete */
+} 

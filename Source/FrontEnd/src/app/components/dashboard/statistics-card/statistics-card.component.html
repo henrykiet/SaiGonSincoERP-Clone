@@ -1,0 +1,133 @@
+<div class="statistics-card" [style.border-left-color]="color">
+  <div class="card-content">
+    <div class="card-header">
+      <div class="icon-container" [style.background-color]="color + '20'">
+        <i [class]="icon" [style.color]="color"></i>
+      </div>
+      <div class="trend-container" [ngClass]="{'trend-up': trendUp, 'trend-down': !trendUp}">
+        <i [class]="trendUp ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
+        <span>{{ trend }}%</span>
+      </div>
+    </div>
+    
+    <div class="card-body">
+      <h3 class="card-title">{{ title }}</h3>
+      <div class="card-value">{{ value }}</div>
+      <div class="card-trend">
+        <span [ngClass]="{'text-success': trendUp, 'text-danger': !trendUp}">
+          {{ trendUp ? '+' : '-' }}{{ trend }}% {{ trendText }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.statistics-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  border: 1px solid #f0f0f0;
+  border-left: 4px solid;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.statistics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.card-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.trend-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.trend-up {
+  background-color: #e8f5e8;
+  color: #4caf50;
+}
+
+.trend-down {
+  background-color: #ffeaea;
+  color: #f44336;
+}
+
+.card-body {
+  flex: 1;
+}
+
+.card-title {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666;
+  line-height: 1.4;
+}
+
+.card-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.card-trend {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.text-success {
+  color: #4caf50;
+}
+
+.text-danger {
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .statistics-card {
+    padding: 16px;
+  }
+  
+  .card-value {
+    font-size: 24px;
+  }
+  
+  .icon-container {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
+</style>

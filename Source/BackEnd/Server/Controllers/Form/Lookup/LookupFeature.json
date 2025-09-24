@@ -1,0 +1,20 @@
+{
+  "controller": "feature",
+  "formId": "feature",
+  "primaryKey": [ "feature_code" ],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": [ "feature_code" ],
+  "fields": [
+    {
+      "field": "feature_code",
+      "header": "Mã tính năng"
+    },
+    {
+      "field": "feature_name",
+      "header": "Tên tính năng"
+    }
+  ]
+}

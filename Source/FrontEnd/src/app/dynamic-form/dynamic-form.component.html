@@ -1,0 +1,87 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 mx-5 my-5">
+
+  <div *ngFor="let field of metadata.fields" class="flex flex-col gap-1">
+    <label class="font-semibold">
+      {{ field.label }}
+      <span *ngIf="field.required" class="text-red-500">*</span>
+    </label>
+
+    <input *ngIf="['text', 'email', 'password'].includes(field.type)" [type]="field.type" [formControlName]="field.key"
+      [placeholder]="field.placeholder" class="border p-2 rounded w-full" />
+
+    <input *ngIf="field.type === 'number'" [type]="field.type" [formControlName]="field.key" [placeholder]="0"
+      class="border p-2 rounded w-full" />
+
+    <textarea *ngIf="field.type === 'textarea'" [formControlName]="field.key" [placeholder]="field.placeholder"
+      [rows]="field.rows || 3" [cols]="field.cols" class="border p-2 rounded w-full {{field.class}}"></textarea>
+
+    <select *ngIf="field.type === 'select'" [formControlName]="field.key" class="border p-2 rounded w-full">
+      <option value="" disabled selected hidden>{{field.placeholder}}</option>
+      <option *ngFor="let option of field.options" [value]="option.value">
+        {{ option.label }}
+      </option>
+    </select>
+
+    <select *ngIf="field.type === 'multi-select'" [formControlName]="field.key" multiple
+      class="border p-2 rounded w-full">
+      <option *ngFor="let opt of field.options" [value]="opt.value">
+        {{ opt.label }}
+      </option>
+    </select>
+
+    <div *ngIf="field.type === 'radio'" class="flex flex-col gap-1">
+      <div *ngFor="let option of field.options" class="flex items-center gap-2">
+        <input type="radio" [formControlName]="field.key" [value]="option.value" [disabled]="field.disabled" />
+        <label [for]="field.key + '_' + option.value">{{ option.label }}</label>
+      </div>
+    </div>
+
+    <div *ngIf="field.type === 'checkboxes'" class="flex flex-col gap-1">
+      <div *ngFor="let option of field.options;" class="flex items-center gap-2">
+        <input type="checkbox" [formControlName]="field.key" [disabled]="field.disabled" />
+        <label [for]="field.key + '_' + option.value">{{ option.label }}</label>
+      </div>
+    </div>
+
+    <label *ngIf="field.type === 'checkbox'" class="inline-flex items-center gap-2">
+      <input type="checkbox" [formControlName]="field.key" />
+      {{ field.label }}
+    </label>
+    <div *ngIf="field.type === 'date'" class="flex flex-col gap-1">
+      <input type="date" [formControlName]="field.key" [id]="field.key" [placeholder]="field.placeholder"
+        class="border p-2 rounded w-full" />
+    </div>
+    <div *ngIf="field.type === 'range'" class="flex flex-col gap-1">
+      <input type="range" [formControlName]="field.key" [id]="field.key" [min]="field.min" [max]="field.max"
+        [step]="field.step" class="w-full" />
+    </div>
+
+    <div *ngIf="field.type === 'toggle'" class="flex items-center gap-2">
+      <label class="flex items-center cursor-pointer">
+        <input type="checkbox" [formControlName]="field.key" [disabled]="field.disabled" value="" class="sr-only peer">
+        <div
+          class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600">
+        </div>
+        <span class="ml-3 text-gray-800">{{ field.label }}</span>
+      </label>
+    </div>
+
+    <div *ngIf="field.type === 'color'" class="flex items-center gap-3">
+      <label [for]="field.key" class="w-40">{{ field.label }}</label>
+      <input type="color" [id]="field.key" [formControlName]="field.key" [disabled]="field.disabled"
+        class="h-10 w-16 p-0 border-none bg-transparent cursor-pointer" />
+    </div>
+
+    <!-- Example teample for multi file -->
+    <app-file-attachment *ngIf="field.type === 'file'" (filesChange)="handleFileChange(field.key, $event)">
+    </app-file-attachment>
+
+    <div *ngIf="getErrorMessage(field.key)" class="text-red-600 text-sm mt-1">
+      {{ getErrorMessage(field.key) }}
+    </div>
+  </div>
+
+  <button type="submit" class="bg-blue-600 text-white mx-auto py-2 px-4 rounded hover:bg-blue-700">
+    Gửi
+  </button>
+</form>

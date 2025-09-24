@@ -1,0 +1,40 @@
+<div class="flex items-center gap-2">
+    <!-- Input -->
+    <input type="text"
+        class="border border-gray-300 rounded px-3 py-2 flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [required]="required" [ngModel]="value" (ngModelChange)="onValueChange($event)" />
+
+    <!-- Button -->
+    <button type="button" class="px-3 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        (click)="validateTaxCode()">
+        🔍
+    </button>
+</div>
+
+<!-- Overlay + Popup -->
+<div *ngIf="showPopup" class="fixed inset-0 flex justify-center items-center z-50 bg-[#01162583] bg-opacity-50"
+    (click)="closePopup()">
+    <div class="bg-white rounded-lg p-6 shadow-lg max-w-lg w-full relative" (click)="$event.stopPropagation()">
+        <h2 class="text-xl font-semibold mb-4">Thông tin Mã số thuế</h2>
+
+        <div *ngIf="taxInfo; else errorTpl">
+            <p><strong>MST:</strong> {{ taxInfo.taxCode }}</p>
+            <p><strong>Tên DN:</strong> {{ taxInfo.companyName }}</p>
+            <p><strong>Tên quốc tế:</strong> {{ taxInfo.internationalName }}</p>
+            <p><strong>Tên viết tắt:</strong> {{ taxInfo.shortName }}</p>
+            <p><strong>Địa chỉ:</strong> {{ taxInfo.address }}</p>
+        </div>
+
+        <ng-template #errorTpl>
+            <p class="text-red-600">{{ errorMessage }}</p>
+        </ng-template>
+
+        <ng-template #errorTpl>
+            <p class="text-red-600">Không tìm thấy thông tin MST.</p>
+        </ng-template>
+
+        <div class="mt-4 flex justify-end gap-2">
+            <button class="px-3 py-2 bg-gray-400 rounded text-white" (click)="closePopup()">Đóng</button>
+        </div>
+    </div>
+</div>

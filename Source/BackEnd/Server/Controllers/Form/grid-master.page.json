@@ -1,0 +1,362 @@
+﻿{
+  "title": "Quản lý kho hàng",
+  "class": "inventory-management",
+  "tabs": [
+    {
+      "title": "Thông tin kho",
+      "class": "warehouse-info-tab",
+      "form": {
+        "title": "Thông tin kho hàng",
+        "fields": [
+          {
+            "key": "warehouse_code",
+            "label": "Mã kho",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã kho",
+            "validators": {
+              "minLength": 3,
+              "maxLength": 20,
+              "pattern": "^[A-Z0-9]+$"
+            }
+          },
+          {
+            "key": "warehouse_name",
+            "label": "Tên kho",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên kho",
+            "validators": {
+              "minLength": 5,
+              "maxLength": 100
+            }
+          },
+          {
+            "key": "location",
+            "label": "Địa điểm",
+            "type": "text",
+            "placeholder": "Nhập địa điểm kho",
+            "validators": {
+              "maxLength": 200
+            }
+          },
+          {
+            "key": "manager",
+            "label": "Quản lý kho",
+            "type": "text",
+            "placeholder": "Nhập tên quản lý",
+            "validators": {
+              "maxLength": 50
+            }
+          },
+          {
+            "key": "contact_phone",
+            "label": "Số điện thoại liên hệ",
+            "type": "text",
+            "placeholder": "Nhập số điện thoại",
+            "validators": {
+              "pattern": "^[0-9]{10,11}$"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "title": "Danh sách hàng hóa",
+      "class": "inventory-list-tab",
+      "detail": {
+        "title": "Danh sách nguyên vật liệu",
+        "entity": "InventoryItem",
+        "foreignKey": "warehouse_code",
+        "fields": [
+          {
+            "key": "item_code",
+            "label": "Mã hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập mã hàng",
+            "validators": {
+              "minLength": 3,
+              "maxLength": 20,
+              "pattern": "^[A-Z0-9]+$"
+            }
+          },
+          {
+            "key": "item_name",
+            "label": "Tên mặt hàng",
+            "type": "text",
+            "required": true,
+            "placeholder": "Nhập tên mặt hàng",
+            "validators": {
+              "minLength": 3,
+              "maxLength": 100
+            }
+          },
+          {
+            "key": "unit",
+            "label": "Đvt",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Bao",
+                "value": "bao"
+              },
+              {
+                "label": "Thùng",
+                "value": "thung"
+              },
+              {
+                "label": "Kg",
+                "value": "kg"
+              },
+              {
+                "label": "Lít",
+                "value": "lit"
+              },
+              {
+                "label": "Cái",
+                "value": "cai"
+              },
+              {
+                "label": "Chiếc",
+                "value": "chiec"
+              },
+              {
+                "label": "Bộ",
+                "value": "bo"
+              },
+              {
+                "label": "Gói",
+                "value": "goi"
+              },
+              {
+                "label": "Mét",
+                "value": "met"
+              },
+              {
+                "label": "Tấn",
+                "value": "tan"
+              }
+            ]
+          },
+          {
+            "key": "quantity",
+            "label": "Số lượng",
+            "type": "number",
+            "required": true,
+            "min": 0,
+            "step": 0.01,
+            "placeholder": "Nhập số lượng",
+            "validators": {
+              "min": 0
+            }
+          },
+          {
+            "key": "unit_price",
+            "label": "Đơn giá",
+            "type": "number",
+            "required": true,
+            "min": 0,
+            "step": 1000,
+            "placeholder": "Nhập đơn giá",
+            "validators": {
+              "min": 0
+            }
+          },
+          {
+            "key": "total_value",
+            "label": "Thành tiền",
+            "type": "number",
+            "disabled": true,
+            "placeholder": "Tự động tính"
+          },
+          {
+            "key": "category",
+            "label": "Nhóm hàng",
+            "type": "select",
+            "required": true,
+            "options": [
+              {
+                "label": "Nguyên vật liệu",
+                "value": "raw_material"
+              },
+              {
+                "label": "Thành phẩm",
+                "value": "finished_product"
+              },
+              {
+                "label": "Bán thành phẩm",
+                "value": "semi_finished"
+              },
+              {
+                "label": "Phụ kiện",
+                "value": "accessory"
+              },
+              {
+                "label": "Công cụ",
+                "value": "tool"
+              },
+              {
+                "label": "Vật tư tiêu hao",
+                "value": "consumable"
+              }
+            ]
+          },
+          {
+            "key": "supplier",
+            "label": "Nhà cung cấp",
+            "type": "text",
+            "placeholder": "Nhập nhà cung cấp",
+            "validators": {
+              "maxLength": 100
+            }
+          },
+          {
+            "key": "location_in_warehouse",
+            "label": "Vị trí trong kho",
+            "type": "text",
+            "placeholder": "Ví dụ: A-01-02",
+            "validators": {
+              "maxLength": 20,
+              "pattern": "^[A-Z]-[0-9]{2}-[0-9]{2}$"
+            }
+          },
+          {
+            "key": "min_stock",
+            "label": "Tồn kho tối thiểu",
+            "type": "number",
+            "min": 0,
+            "step": 1,
+            "placeholder": "Số lượng tối thiểu",
+            "validators": {
+              "min": 0
+            }
+          }
+        ],
+        "initialData": [
+          {
+            "item_id": 1,
+            "item_code": "NVL001",
+            "item_name": "Nguyên vật liệu chính 01",
+            "unit": "bao",
+            "quantity": 100.00,
+            "unit_price": 100000,
+            "total_value": 10000000,
+            "category": "raw_material",
+            "supplier": "Công ty TNHH ABC",
+            "location_in_warehouse": "A-01-01",
+            "min_stock": 20,
+            "expiry_date": "2025-12-31",
+            "status": "active"
+          },
+          {
+            "item_id": 2,
+            "item_code": "NVL002",
+            "item_name": "Nguyên vật liệu chính 02",
+            "unit": "bao",
+            "quantity": 200.00,
+            "unit_price": 200000,
+            "total_value": 40000000,
+            "category": "raw_material",
+            "supplier": "Công ty TNHH XYZ",
+            "location_in_warehouse": "A-01-02",
+            "min_stock": 30,
+            "expiry_date": "2025-11-30",
+            "status": "active"
+          },
+          {
+            "item_id": 3,
+            "item_code": "NVL003",
+            "item_name": "Nguyên vật liệu chính 03",
+            "unit": "bao",
+            "quantity": 300.00,
+            "unit_price": 300000,
+            "total_value": 90000000,
+            "category": "raw_material",
+            "supplier": "Công ty TNHH DEF",
+            "location_in_warehouse": "A-02-01",
+            "min_stock": 25,
+            "expiry_date": "2026-01-15",
+            "status": "active"
+          },
+          {
+            "item_id": 4,
+            "item_code": "NVL004",
+            "item_name": "Nguyên vật liệu chính 04",
+            "unit": "bao",
+            "quantity": 400.00,
+            "unit_price": 400000,
+            "total_value": 160000000,
+            "category": "raw_material",
+            "supplier": "Công ty TNHH GHI",
+            "location_in_warehouse": "A-02-02",
+            "min_stock": 35,
+            "expiry_date": "2025-10-20",
+            "status": "active"
+          },
+          {
+            "item_id": 5,
+            "item_code": "TP001",
+            "item_name": "Thành phẩm A",
+            "unit": "cai",
+            "quantity": 50.00,
+            "unit_price": 500000,
+            "total_value": 25000000,
+            "category": "finished_product",
+            "supplier": "Sản xuất nội bộ",
+            "location_in_warehouse": "B-01-01",
+            "min_stock": 10,
+            "expiry_date": "2026-06-30",
+            "status": "active"
+          },
+          {
+            "item_id": 6,
+            "item_code": "PK001",
+            "item_name": "Phụ kiện đóng gói",
+            "unit": "goi",
+            "quantity": 15.00,
+            "unit_price": 25000,
+            "total_value": 375000,
+            "category": "accessory",
+            "supplier": "Công ty Bao bì 123",
+            "location_in_warehouse": "C-01-01",
+            "min_stock": 50,
+            "expiry_date": null,
+            "status": "expiring_soon"
+          },
+          {
+            "item_id": 7,
+            "item_code": "CT001",
+            "item_name": "Công cụ cắt kim loại",
+            "unit": "chiec",
+            "quantity": 5.00,
+            "unit_price": 1500000,
+            "total_value": 7500000,
+            "category": "tool",
+            "supplier": "Công ty Dụng cụ XYZ",
+            "location_in_warehouse": "D-01-01",
+            "min_stock": 2,
+            "expiry_date": null,
+            "status": "active"
+          },
+          {
+            "item_id": 8,
+            "item_code": "VT001",
+            "item_name": "Vật tư tiêu hao - Dầu máy",
+            "unit": "lit",
+            "quantity": 0.00,
+            "unit_price": 85000,
+            "total_value": 0,
+            "category": "consumable",
+            "supplier": "Công ty Dầu nhớt ABC",
+            "location_in_warehouse": "E-01-01",
+            "min_stock": 10,
+            "expiry_date": "2025-08-15",
+            "status": "out_of_stock"
+          }
+        ]
+      }
+    }
+  ]
+}

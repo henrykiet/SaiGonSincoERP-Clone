@@ -1,0 +1,165 @@
+{
+  "model": "ChiTietDonHang",
+  "schema": {
+    "fields": [
+      {
+        "name": "MaDonHang",
+        "property": "maDonHang",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "DonHang",
+          "key": "MaDonHang"
+        }
+      },
+      {
+        "name": "MaChiTietDonHang",
+        "property": "maChiTietDonHang",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "primaryKey": true
+      },
+      {
+        "name": "MaVatTu",
+        "property": "maVatTu",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "VatTu",
+          "key": "MaVatTu"
+        }
+      },
+      {
+        "name": "SoLuong",
+        "property": "soLuong",
+        "type": "number",
+        "sqlType": "INT"
+      },
+      {
+        "name": "DonGia",
+        "property": "donGia",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "Thue_Tien",
+        "property": "thue_Tien",
+        "type": "number",
+        "sqlType": "DECIMAL(18,2)"
+      },
+      {
+        "name": "MaBaoGia",
+        "property": "maBaoGia",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "BaoGia",
+          "key": "MaBaoGia"
+        }
+      },
+      {
+        "name": "MaChiTietBaoGia",
+        "property": "maChiTietBaoGia",
+        "type": "string",
+        "sqlType": "VARCHAR(50)",
+        "foreign": {
+          "table": "ChiTietBaoGia",
+          "key": "MaChiTietBaoGia"
+        }
+      }
+    ]
+  },
+  "excelIntegration": {
+    "sheetName": "ChiTietDonHang",
+    "columnMapping": [
+      {
+        "excelColumn": "MaDonHang",
+        "fieldName": "MaDonHang",
+        "required": true
+      },
+      {
+        "excelColumn": "MaChiTietDonHang",
+        "fieldName": "MaChiTietDonHang",
+        "required": true
+      },
+      {
+        "excelColumn": "MaVatTu",
+        "fieldName": "MaVatTu",
+        "required": true
+      },
+      {
+        "excelColumn": "SoLuong",
+        "fieldName": "SoLuong",
+        "required": true
+      },
+      {
+        "excelColumn": "DonGia",
+        "fieldName": "DonGia",
+        "required": true
+      },
+      {
+        "excelColumn": "Thue_Tien",
+        "fieldName": "Thue_Tien",
+        "required": false
+      },
+      {
+        "excelColumn": "MaBaoGia",
+        "fieldName": "MaBaoGia",
+        "required": false
+      },
+      {
+        "excelColumn": "MaChiTietBaoGia",
+        "fieldName": "MaChiTietBaoGia",
+        "required": false
+      }
+    ],
+    "templateRules": {
+      "fileFormat": "xlsx",
+      "firstRowData": 2,
+      "maxRows": 20000
+    }
+  },
+  "checking": {
+    "rules": [
+      {
+        "fieldName": "MaChiTietDonHang",
+        "type": "databaseCheck",
+        "checkQuery": "WHERE MaChiTietDonHang = @maChiTietDonHang",
+        "threshold": "0",
+        "message": "MaChiTietDonHang đã tồn tại trong hệ thống"
+      },
+      {
+        "fieldName": "SoLuong",
+        "type": "range",
+        "min": "1",
+        "max": "100000",
+        "message": "SoLuong phải từ 1 đến 100000"
+      },
+      {
+        "fieldName": "DonGia",
+        "type": "range",
+        "min": "0",
+        "max": "1000000000",
+        "message": "DonGia phải từ 0 đến 1 tỷ"
+      },
+      {
+        "fieldName": "Thue_Tien",
+        "type": "range",
+        "min": "0",
+        "max": "100000000",
+        "message": "Thue_Tien phải từ 0 đến 100 triệu"
+      }
+    ]
+  },
+  "dataProcessing": {
+    "sqlStatements": {
+      "insert": "IF EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @maChiTietDonHang) THROW 51001, 'Trùng MaChiTietDonHang', 1;\nINSERT INTO ChiTietDonHang (MaDonHang, MaChiTietDonHang, MaVatTu, SoLuong, DonGia, Thue_Tien, MaBaoGia, MaChiTietBaoGia) VALUES (@maDonHang, @maChiTietDonHang, @maVatTu, @soLuong, @donGia, @thue_Tien, @maBaoGia, @maChiTietBaoGia);",
+      "update": "IF NOT EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @maChiTietDonHang) THROW 51002, 'Chi tiết đơn hàng không tồn tại', 1;\nUPDATE ChiTietDonHang SET MaDonHang = @maDonHang, MaVatTu = @maVatTu, SoLuong = @soLuong, DonGia = @donGia, Thue_Tien = @thue_Tien, MaBaoGia = @maBaoGia, MaChiTietBaoGia = @maChiTietBaoGia WHERE MaChiTietDonHang = @maChiTietDonHang;",
+      "delete": "IF NOT EXISTS (SELECT 1 FROM ChiTietDonHang WHERE MaChiTietDonHang = @maChiTietDonHang) THROW 51003, 'Chi tiết đơn hàng không tồn tại để xóa', 1;\nDELETE FROM ChiTietDonHang WHERE MaChiTietDonHang = @maChiTietDonHang;",
+      "getAll": "SELECT * FROM ChiTietDonHang;",
+      "getById": "SELECT * FROM ChiTietDonHang WHERE MaChiTietDonHang = @maChiTietDonHang;",
+      "myTableType": "CREATE TYPE dbo.ChiTietDonHangTableType AS TABLE (MaDonHang VARCHAR(50), MaChiTietDonHang VARCHAR(50) PRIMARY KEY, MaVatTu VARCHAR(50), SoLuong INT, DonGia DECIMAL(18,2), Thue_Tien DECIMAL(18,2), MaBaoGia VARCHAR(50), MaChiTietBaoGia VARCHAR(50));",
+      "dropTableType": "DROP PROCEDURE IF EXISTS usp_UpsertChiTietDonHang; DROP TYPE IF EXISTS dbo.ChiTietDonHangTableType;"
+    }
+  }
+}

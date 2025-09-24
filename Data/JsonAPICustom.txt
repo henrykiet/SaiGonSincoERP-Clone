@@ -1,0 +1,26 @@
+Json đầu vào:
+
+{
+	"userId": "1",
+	"unit": "CTY",
+	"language": "vn",
+	"params" : ["ma_kh", "ngay_ct"],
+	"dataType" : ["String", "DateTime"],
+	"value" : ["KH00234", "2025-07-08"],
+	"query": "declare @zzzz varchar(50); select @zzzz = 'PhongNN'; select dia_chi, ten_kh, ten_kh2, @zzzz as ten_nv from customer where ma_kh = @ma_kh"
+}
+
+Json đầu ra:
+
+{
+	"data" : [
+		{
+			"dia_chi": "487 Đường ABC, Q2, TP.HCM",
+			"ten_kh": "Phan Duc Linh",
+			"ten_kh2": "Phan Duc Linh Co., Ltd"
+		}
+	],
+	"Success": true,
+	"Message": "Request complete"
+	"StatusCode": 200
+}

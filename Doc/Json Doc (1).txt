@@ -1,0 +1,153 @@
+
+GET /api/dynamic/list: Lấy danh sách dữ liệu.
+Link: https://localhost:44310/api/Dynamic/list?formId=customer&filter={"status":"1"}&page=1&pageSize=10&sort=ma_kh
+--/api/Dynamic/list?formId={"controller":"customer","tableName":"customer","primaryKey":"ma_kh","type":"list","action":"loading","sort":"ma_kh","language":"vn","unit": "CTY","idVC": "","userId": "1"}&filter={"status":"1"}&page=1&pageSize=10
+--/api/Dynamic/list?formId={"controller":"customer","tableName":"order","primaryKey":"ma_kh","type":"voucher","action":"loading","sort":"idGui","language":"vn","unit": "CTY","idVC": "Z01","userId": "1"}&filter={"status":"1"}&page=1&pageSize=10
+update Link: https://localhost:44310/api/Dynamic/list?formId={"controller":"customer","tableName":"customer","primaryKey":"ma_kh","type":"list","action":"loading","sort":"ma_kh","language":"vn","unit": "CTY","idVC": "","userId": "1"}&filter={"status":"1"}&page=1&pageSize=10
+	1: formId: Tên bảng
+	2: filter: điều kiện where parse qua sql: định dạng Object
+		Ví dụ: filter={"status":"1"} hoặc filter={"status":"1", "ma_kh":"KH001" .....}
+	3: page: Page số mấy
+	4: pageSize: Số lượng bảng ghi trên 1 page
+	5: sort: điều kiện sắp xếp
+
+Json trả về: 
+{
+  "data": [
+    {
+      "ma_kh": "KH001",
+      "ten_kh": "Khách hàng 003 ",
+      "ten_kh2": "Customer 003",
+      "dien_thoai": "0908892434",
+      "email": "test@gmai.com",
+      "status": "1",
+      "userid0": 1,
+      "userid2": 1,
+      "datetime0": "2025-06-07T10:56:32.34",
+      "datetime2": "2025-06-07T00:00:00"
+    },
+    {
+      "ma_kh": "KH002",
+      "ten_kh": "Khách hàng 002",
+      "ten_kh2": "Customer 002",
+      "dien_thoai": "0908892434",
+      "email": "n.phong94@gmail.com",
+      "status": "1",
+      "userid0": 1,
+      "userid2": 1,
+      "datetime0": "2025-06-07T10:56:32.343",
+      "datetime2": "2025-06-07T10:56:32.343"
+    }
+  ],
+  "total": 2,
+  "page": 1,
+  "pageSize": 10
+}
+   
+  
+POST /api/dynamic/save: Lưu dữ liệu (thêm mới hoặc cập nhật). 
+Link: https://localhost:44310/api/Dynamic/save
+
+Json đầu vào insert:
+{
+  "controller": "customer",
+  "formId": "customer",
+  "action": "insert",
+  "type": "list",
+  "userId": "1",
+  "unit": "CTY",
+  "language": "vn",
+  "VCDate": "",
+  "idVC": "",// mã chứng từ
+  "primaryKey": "ma_kh",
+  "data": {
+    "ma_kh": "KH003",
+    "ten_kh": "Khách hàng 003 ",
+    "ten_kh2": "Customer 003",
+    "dien_thoai": "0908892434", 
+    "email": "test@gmai.com", 
+    "status": "1", 
+    "datetime0": "2025-06-07",
+    "datetime2": "2025-06-07",
+    "details": {
+	   "controllerDetail": "customerDetail",
+       "formIdDetail": "customerDetail",
+       "foreignKey": "ma_kh, line_nbr",
+       "data": {
+            "row1": {"ma_kh": "KH003", "line_nbr":"1", "ghi_chu":"Ghi chú khách hàng 003 update"},
+            "row2": {"ma_kh": "KH003", "line_nbr":"2", "ghi_chu":"Ghi chú khách hàng 003 update"}
+        }
+    }
+  }
+}
+
+Json đầu vào update:
+{
+  "controller": "customer",
+  "formId": "customer",
+  "action": "update",
+  "type": "list",
+  "userId": "1",
+  "unit": "CTY",
+  "language": "vn",
+  "VCDate": "",
+  "idVC": "",// mã chứng từ
+  "primaryKey": "ma_kh",
+  "data": {
+    "ma_kh": "KH003",
+    "ten_kh": "Khách hàng 003 ",
+    "ten_kh2": "Customer 003",
+    "dien_thoai": "0908892434", 
+    "email": "test@gmai.com", 
+    "status": "1", 
+    "datetime0": "2025-06-07",
+    "datetime2": "2025-06-07",
+    "details": {
+	   "controllerDetail": "customerDetail",
+       "formIdDetail": "customerDetail",
+       "foreignKey": "ma_kh, line_nbr",
+       "data": {
+            "row1": {"ma_kh": "KH003", "line_nbr":"1", "ghi_chu":"Ghi chú khách hàng 003 update"},
+            "row2": {"ma_kh": "KH003", "line_nbr":"2", "ghi_chu":"Ghi chú khách hàng 003 update"}
+        }
+    }
+  }
+}
+
+  
+
+Json trả về:
+{
+  "success": true,
+  "message": "Data saved successfully",
+  "id": "KH001",
+  "errors": null
+}
+
+
+DELETE /api/dynamic/delete: Xóa dữ liệu.
+
+Json đầu vào:
+{
+  "controller": "customer",
+  "formId": "customer",
+  "action": "delete",
+  "type": "list",
+  "userId": "1",
+  "unit": "CTY",
+  "language": "vn",
+  "VCDate": "",
+  "idVC": "",// mã chứng từ
+  "primaryKey": "ma_kh",
+  "value": "KH003",
+  "listTable": "customer, customerDetail"
+}
+
+Json trả về:
+
+{
+  "success": true,
+  "message": "Data deleted successfully",
+  "ma_kh": "KH003",
+  "errors": null
+}

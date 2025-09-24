@@ -1,0 +1,345 @@
+URL : GET /metadata/{controller}?formId=DonHang&Primarykey=dh1&Action=update&Type=list
+
+------------------Request-------------------
+string : formId	//tên bảng
+string : controller //tên controller (link)
+string : action //insert hoặc update, nếu ko truyền gì hoặc trỗng thì mặc định là insert -> form rỗng
+string?: primarykey //nếu update thì truyền khóa chính của bảng cần update để lấy dữ liẹu hiển thị
+string : type //kiểu dạng list hoặc entity, không truyền thì mặc định sẽ lấy hết list
+
+
+-----------------response-------------------
+
+{
+  "data": {
+    "controller": "donhang", //tên table cần truy vấn
+    "type": "",
+    "title": "",
+    "class": "",
+    "tabs": [
+      {
+        "title": "donhang 1",// tên table -> số ở sau nếu là dạng list thì hiển thị
+        "class": "",
+        "form": {
+          "typeForm": "master", //định nghĩa form chính của tab
+          "formId": "donhang", //tên table của tab
+          "primaryKey": "DH1",// id chính của table
+          "title": "Thông tin donhang",
+          "fields": [
+            {
+              "key": "MaDonHang",
+              "label": "",
+              "type": "",
+              "placeholder": "" 
+            },
+            {
+              "key": "MaKhachHang",
+              "label": "",
+              "type": "",
+              "placeholder": "KH1"
+            },
+            {
+              "key": "SoChungTu",
+              "label": "",
+              "type": "",
+              "placeholder": "DH0001"
+            },
+            {
+              "key": "MaNguoiDung",
+              "label": "",
+              "type": "",
+              "placeholder": "2"
+            },
+            {
+              "key": "NgayTao",
+              "label": "",
+              "type": "",
+              "placeholder": "2024-06-01"
+            },
+            {
+              "key": "TrangThai",
+              "label": "",
+              "type": "",
+              "placeholder": "Ðang x? lý"
+            },
+            {
+              "key": "TongSoLuong",
+              "label": "",
+              "type": "",
+              "placeholder": "100"
+            },
+            {
+              "key": "TongTien",
+              "label": "",
+              "type": "",
+              "placeholder": "1500000"
+            },
+            {
+              "key": "GhiChu",
+              "label": "",
+              "type": "",
+              "placeholder": "Ðon hàng m?i"
+            }
+          ],
+          "initialData": { //các data được lấy ra từ table chính
+            "MaDonHang": "DH1",
+            "MaKhachHang": "KH1",
+            "SoChungTu": "DH0001",
+            "MaNguoiDung": "2",
+            "NgayTao": "2024-06-01T00:00:00",
+            "TrangThai": "Ðang x? lý",
+            "TongSoLuong": 100,
+            "TongTien": 1500000,
+            "GhiChu": "Ðon hàng m?i"
+          }
+        },
+        "detail": {
+          "typeForm": "detail",// định nghĩa form phụ
+          "formId": "MaDonHang", //khóa chính của bảng chính
+          "primaryKey": "MaChiTietDonHang", khóa chính của bảng phụ
+          "title": "Chi tiết donhang",
+          "entity": "ChiTietDonHang",// tên bảng phụ
+          "foreignKey": "DH1", //giá trị khóa ngoại kết nối tới bảng chính (đơn hàng)
+          "fields": [
+            {
+              "key": "MaDonHang",
+              "label": "MaDonHang",
+              "type": "",
+              "placeholder": "DH1"
+            },
+            {
+              "key": "MaChiTietDonHang",
+              "label": "MaChiTietDonHang",
+              "type": "",
+              "placeholder": "CTDH1"
+            },
+            {
+              "key": "MaVatTu",
+              "label": "MaVatTu",
+              "type": "",
+              "placeholder": "VT1"
+            },
+            {
+              "key": "SoLuong",
+              "label": "SoLuong",
+              "type": "",
+              "placeholder": "50"
+            },
+            {
+              "key": "DonGia",
+              "label": "DonGia",
+              "type": "",
+              "placeholder": "15000"
+            },
+            {
+              "key": "Thue_Tien",
+              "label": "Thue_Tien",
+              "type": "",
+              "placeholder": "75000"
+            },
+            {
+              "key": "MaBaoGia",
+              "label": "MaBaoGia",
+              "type": "",
+              "placeholder": "BG1"
+            },
+            {
+              "key": "MaChiTietBaoGia",
+              "label": "MaChiTietBaoGia",
+              "type": "",
+              "placeholder": "CTBG1"
+            }
+          ],
+          "initialDatas": [// mảng dữ liệu các row của bảng phụ khi trùng với bảng chính
+            {
+              "MaDonHang": "DH1",
+              "MaChiTietDonHang": "CTDH1",
+              "MaVatTu": "VT1",
+              "SoLuong": 50,
+              "DonGia": 15000,
+              "Thue_Tien": 75000,
+              "MaBaoGia": "BG1",
+              "MaChiTietBaoGia": "CTBG1"
+            },
+            {
+              "MaDonHang": "DH1",
+              "MaChiTietDonHang": "CTDH3",
+              "MaVatTu": "VT2",
+              "SoLuong": 12,
+              "DonGia": 100000,
+              "Thue_Tien": 125000,
+              "MaBaoGia": "BG3",
+              "MaChiTietBaoGia": "CTBG3"
+            }
+          ]
+        }
+      },
+      {
+        "title": "donhang 2",
+        "class": "",
+        "form": {
+          "typeForm": "master",
+          "formId": "donhang",
+          "primaryKey": "DH2",
+          "title": "Thông tin donhang",
+          "fields": [
+            {
+              "key": "MaDonHang",
+              "label": "",
+              "type": "",
+              "placeholder": "DH2"
+            },
+            {
+              "key": "MaKhachHang",
+              "label": "",
+              "type": "",
+              "placeholder": "KH2"
+            },
+            {
+              "key": "SoChungTu",
+              "label": "",
+              "type": "",
+              "placeholder": "DH0002"
+            },
+            {
+              "key": "MaNguoiDung",
+              "label": "",
+              "type": "",
+              "placeholder": "U2"
+            },
+            {
+              "key": "NgayTao",
+              "label": "",
+              "type": "",
+              "placeholder": "2024-06-05"
+            },
+            {
+              "key": "TrangThai",
+              "label": "",
+              "type": "",
+              "placeholder": "Hoàn thành"
+            },
+            {
+              "key": "TongSoLuong",
+              "label": "",
+              "type": "",
+              "placeholder": "200"
+            },
+            {
+              "key": "TongTien",
+              "label": "",
+              "type": "",
+              "placeholder": "5000000"
+            },
+            {
+              "key": "GhiChu",
+              "label": "",
+              "type": "",
+              "placeholder": "Ðon hàng dã giao"
+            }
+          ],
+          "initialData": {
+            "MaDonHang": "DH2",
+            "MaKhachHang": "KH2",
+            "SoChungTu": "DH0002",
+            "MaNguoiDung": "U2",
+            "NgayTao": "2024-06-05T00:00:00",
+            "TrangThai": "Hoàn thành",
+            "TongSoLuong": 200,
+            "TongTien": 5000000,
+            "GhiChu": "Ðon hàng dã giao"
+          }
+        },
+        "detail": {
+          "typeForm": "detail",
+          "formId": "MaDonHang",
+          "primaryKey": "MaChiTietDonHang",
+          "title": "Chi tiết donhang",
+          "entity": "ChiTietDonHang",
+          "foreignKey": "DH2",
+          "fields": [
+            {
+              "key": "MaDonHang",
+              "label": "MaDonHang",
+              "type": "",
+              "placeholder": "DH2"
+            },
+            {
+              "key": "MaChiTietDonHang",
+              "label": "MaChiTietDonHang",
+              "type": "",
+              "placeholder": "CTDH2"
+            },
+            {
+              "key": "MaVatTu",
+              "label": "MaVatTu",
+              "type": "",
+              "placeholder": "VT2"
+            },
+            {
+              "key": "SoLuong",
+              "label": "SoLuong",
+              "type": "",
+              "placeholder": "100"
+            },
+            {
+              "key": "DonGia",
+              "label": "DonGia",
+              "type": "",
+              "placeholder": "25000"
+            },
+            {
+              "key": "Thue_Tien",
+              "label": "Thue_Tien",
+              "type": "",
+              "placeholder": "100000"
+            },
+            {
+              "key": "MaBaoGia",
+              "label": "MaBaoGia",
+              "type": "",
+              "placeholder": "BG2"
+            },
+            {
+              "key": "MaChiTietBaoGia",
+              "label": "MaChiTietBaoGia",
+              "type": "",
+              "placeholder": "CTBG2"
+            }
+          ],
+          "initialDatas": [
+            {
+              "MaDonHang": "DH2",
+              "MaChiTietDonHang": "CTDH2",
+              "MaVatTu": "VT2",
+              "SoLuong": 100,
+              "DonGia": 25000,
+              "Thue_Tien": 100000,
+              "MaBaoGia": "BG2",
+              "MaChiTietBaoGia": "CTBG2"
+            }
+          ]
+        }
+      }
+    ],
+    "dataProcessing": {
+      "actions": {
+        "posts": [
+          {
+            "step": "soKho",
+            "type": "sql",
+            "query": "INSERT INTO KhachHang (CustomerCode, CustomerName, Phone) VALUES (@CustomerCode, @CustomerName, @Phone)"
+          },
+          {
+            "step": "soCai",
+            "type": "sql",
+            "query": "INSERT INTO Logs (Action, Description) VALUES ('Insert', 'Thêm mới khách hàng')"
+          }
+        ]
+      }
+    }
+  },
+  "success": true,
+  "message": "Form list", //thông báo trả về list hoặc entity
+  "statusCode": 200
+}

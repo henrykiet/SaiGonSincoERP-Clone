@@ -1,0 +1,500 @@
+<!-- Master-Detail Form Template with Multiple Detail Sections Support -->
+<ng-container *ngIf="metadata as page">
+  <div class="master-detail-container mt-15">
+
+    <!-- Header Section -->
+    <div class="form-header">
+      <h1 class="form-title">{{ page.title | translate}}</h1>
+    </div>
+
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+      <div class="tab-nav">
+        <div *ngFor="let tab of page.tabs; let i = index" class="tab-button" [class.active]="selectedTab === i"
+          (click)="selectedTab = i; onSelectChange()">
+          {{ tab.title | translate}}
+        </div>
+      </div>
+    </div>
+
+    <!-- Global Form Actions -->
+    <div class="form-actions" style="padding-right: 25px; padding-bottom: 15px" *ngIf="!page.tabs[selectedTab]?.type">
+      <button type="button" class="btn-modern btn-danger btn-small" (click)="onCancel()">{{ "COMMON.CANCEL" |
+        translate}}</button>
+      <button *ngIf="mode !== 'view'" type="button" class="btn-modern btn-success btn-small" (click)="onSubmit()">{{
+        "COMMON.SAVE" |
+        translate}}</button>
+    </div>
+
+    <!-- Master Form Section -->
+    <div class="flex justify-center items-center min-h-[calc(100vh-150px)]"
+      *ngIf="page.tabs[selectedTab]?.type == 'file-attachment'">
+      <div class="min-h-[150px]">
+        <app-file-attachment [controller]="getController()" [sysKey]="getSysKey()"
+          (fileDataChange)="onFileAttachmentDataChange($event)">
+        </app-file-attachment>
+      </div>
+    </div>
+    <div class="flex justify-center items-center min-h-[calc(100vh-150px)]"
+      *ngIf="page.tabs[selectedTab]?.type == 'file-handle'">
+      <div class="min-h-[150px]">
+        <app-file-handle></app-file-handle>
+      </div>
+    </div>
+    <!-- Master Form Section -->
+    <form appArrowNavigation *ngIf="page.tabs[selectedTab]?.form as form" class="master-form">
+      <h2 class="master-form-title">{{ form.title ? (form.title | translate) : '' }}</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <!-- Show all fields but hide the hidden ones -->
+        <div *ngFor="let field of form.fields" [hidden]="field.type === 'hidden'" class="flex flex-col space-y-1">
+
+          <label *ngIf=" !field.subtotal" class="font-medium text-gray-700" [class.required]="field.required">
+            {{ field.label | translate}}
+          </label>
+
+          <!-- Currency inputs -->
+          <input *ngIf="field.type === 'number' && isCurrencyField(field.key, field) && !field.subtotal" type="text"
+            [name]="field.key" [required]="!!field.required" [disabled]="!!field.disabled"
+            [placeholder]="field.placeholder ? (field.placeholder | translate) : (( 'COMMON.ENTER' | translate ) + ' ' + (field.label | translate))"
+            [value]="getFormattedMasterValue(field.key, field)"
+            (input)="onMasterCurrencyInput(field.key, $event, field)"
+            (blur)="onMasterCurrencyBlur(field.key, $event, field)"
+            class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100" />
+
+          <!-- Text, Email, Number inputs -->
+          <input
+            *ngIf="['text', 'email'].includes(field.type) || (field.type === 'number' && !isCurrencyField(field.key, field)) && !field.subtotal"
+            [type]="field.type" [name]="field.key" [required]="!!field.required" [disabled]="!!field.disabled"
+            [min]="field.min" [max]="field.max"
+            [placeholder]="field.placeholder ? (field.placeholder | translate) : (( 'COMMON.ENTER' | translate ) + ' ' + (field.label | translate))"
+            class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            [(ngModel)]="formData[selectedTab][field.key]" (ngModelChange)="onMasterFieldChange(field.key, $event)" />
+
+          <!-- Date input -->
+          <input *ngIf="field.type === 'date' && !field.subtotal" type="date" [name]="field.key"
+            [required]="!!field.required" [disabled]="!!field.disabled"
+            [placeholder]="field.placeholder ? (field.placeholder | translate) : (( 'COMMON.SELECT' | translate ) + ' ' + (field.label | translate))"
+            class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            [(ngModel)]="formData[selectedTab][field.key]" (ngModelChange)="onMasterFieldChange(field.key, $event)" />
+
+          <!-- Textarea -->
+          <textarea *ngIf="field.type === 'textarea' && !field.subtotal" [name]="field.key"
+            [required]="!!field.required" [disabled]="!!field.disabled" [rows]="field.rows || 3"
+            [placeholder]="field.placeholder ? (field.placeholder | translate) : (( 'COMMON.ENTER' | translate ) + ' ' + (field.label | translate))"
+            class="border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100 resize-y"
+            [(ngModel)]="formData[selectedTab][field.key]" (ngModelChange)="onMasterFieldChange(field.key, $event)">
+        </textarea>
+        
+          <!-- Select dropdown -->
+          <select *ngIf="field.type === 'select' && !field.subtotal" [name]="field.key" [required]="!!field.required"
+            [disabled]="!!field.disabled"
+            class="border border-gray-300 rounded px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-100"
+            [(ngModel)]="formData[selectedTab][field.key]"
+            (ngModelChange)="field.onChange ? handleOnChange(field, $event) : null">
+            <option value="">-- {{ "COMMON.SELECT" | translate}} {{ field.label | translate}} --</option>
+            <option *ngFor="let opt of field.options || []" [value]="opt.value">
+              {{ opt.label | translate}}
+            </option>
+          </select>
+
+          <!-- Lookup field with button -->
+          <div *ngIf="field.type === 'lookup' && !field.subtotal">
+            <app-lookup [multiple]="field.multiple ? true : false" [value]="formData[selectedTab][field.key]"
+              [query]="field.default" (valueChange)="onFieldValueChange($event, field)">
+            </app-lookup>
+
+          </div>
+
+          <!-- Taxcode field with button -->
+          <div *ngIf="field.type === 'taxcode'">
+            <app-taxcode-input [(value)]="formData[selectedTab][field.key]" [required]="!!field.required"
+              (valueChange)="onFieldValueChange($event, field)">
+            </app-taxcode-input>
+          </div>
+
+          <!-- Error message -->
+          <div *ngIf="getFieldError(field.key)" class="text-red-500 text-sm mt-1">
+            {{ (getFieldError(field.key) || '') | translate }}
+          </div>
+        </div>
+
+        <!-- Hidden fields -->
+        <div *ngFor="let field of form.fields" [hidden]="field.type !== 'hidden'">
+          <input [type]="field.type === 'hidden' ? 'hidden' : field.type" [name]="field.key"
+            [(ngModel)]="formData[selectedTab][field.key]" />
+        </div>
+      </div>
+
+    </form>
+
+    <!-- Detail Sections (Multiple Detail Support) -->
+    <div *ngIf="page.tabs[selectedTab]?.detail && page.tabs[selectedTab]?.detail!.length > 0" class="detail-section">
+
+      <!-- Detail Section Navigation (if multiple detail sections exist) -->
+      <div *ngIf="page.tabs[selectedTab]?.detail!.length > 1" class="detail-nav-container"
+        style="background-color: #f3f4f6; border-bottom: 1px solid #d1d5db; padding: 0.75rem 1.5rem;">
+        <div class="detail-nav" style="display: flex; gap: 0.5rem;">
+          <button *ngFor="let detailSection of page.tabs[selectedTab]?.detail; let i = index" type="button"
+            class="detail-nav-button"
+            [class]="'btn-modern btn-small ' + (selectedDetailIndex === i ? 'btn-primary' : 'btn-secondary')"
+            (click)="onDetailSectionChange(i)">
+            {{ (detailSection.title ?? "" | translate) + (i + 1) }}
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Detail Section -->
+      <ng-container *ngIf="page.tabs[selectedTab]?.detail![selectedDetailIndex] as detail">
+
+        <!-- Detail Header with Summary Info -->
+        <div class="detail-header">
+          <h3 class="detail-title">
+            {{ detail.title ?? "" | translate }}
+            <span class="text-sm text-gray-500 ml-2">
+              ({{ currentFilteredDetailRows.length }}/{{ currentDetailRows.length }})
+            </span>
+          </h3>
+          <div class="detail-actions flex flex-wrap gap-2 sm:flex-nowrap sm:items-center">
+            <!-- Filter Mode Toggle -->
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+              <span class="text-sm text-gray-600"> {{ "FILTER.MODE" | translate }}</span>
+              <button type="button" class="btn-modern btn-small w-full sm:w-auto"
+                [class.btn-success]="filterMode === 'all'" [class.btn-secondary]="filterMode !== 'all'"
+                (click)="toggleFilterMode()"
+                title="{{ filterMode === 'all' ? 'Tất cả điều kiện (AND)' : 'Bất kỳ điều kiện (OR)' }}">
+                {{ filterMode === 'all' ? 'Tất cả điều kiện (AND)' : 'Bất kỳ điều kiện (OR)' }}
+              </button>
+            </div>
+
+            <!-- Clear All Filters Button -->
+            <button type="button" class="btn-modern btn-warning btn-small w-full sm:w-auto"
+              [disabled]="!hasActiveFilters()" (click)="clearAllFilters()" title="Xóa tất cả bộ lọc">
+              {{ "FILTER.CLEAR_FILTER" | translate }}
+              <span *ngIf="hasActiveFilters()" class="ml-1 bg-red-500 text-white rounded-full px-2 py-0.5 text-xs">
+                {{ getActiveFilterCount() }}
+              </span>
+            </button>
+
+            <!-- Add Row Button -->
+            <button type="button" class="btn-modern btn-success btn-small w-full sm:w-auto" (click)="addDetailRow()">
+              {{ "FILTER.ADD_ROW" | translate }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Detail Table with Column Filters -->
+        <div class="detail-table-container" *ngIf="getAllDetailFields().length > 0; else noFieldsTemplate">
+          <table appArrowNavigation class="detail-table">
+            <thead>
+              <!-- Column Headers -->
+              <tr>
+                <th style="width: 80px;">
+                  {{ "FILTER.ACTION" | translate }}
+                  <div class="resize-handle"
+                       (mousedown)="startResize($event, 'actions')"
+                       (dblclick)="autoResizeColumn($event, 'actions')"
+                       title="Kéo để thay đổi độ rộng, double-click để auto-resize">
+                  </div>
+                </th>
+                <th>
+                  #
+                </th>
+              
+                <th *ngFor="let field of getAllDetailFields()"
+                    [style.width]="getFieldWidth(field)"
+                    class="resizable-header"
+                    [hidden]="field.type === 'hidden'"
+                    [attr.data-field-key]="field.key">
+
+                  <div class="flex items-center justify-between">
+                    <span>
+                      {{ field.label | translate}}
+                      <span *ngIf="field.required" class="text-red-500">*</span>
+                    </span>
+                    <span *ngIf="currentColumnFilters[field.key]" class="ml-2 text-blue-500 text-xs"
+                          title="Đang lọc: {{ currentColumnFilters[field.key] }}">
+                      🔍
+                    </span>
+                    <div class="resize-handle"
+                         (mousedown)="startResize($event, field.key)"
+                         (dblclick)="autoResizeColumn($event, field.key)"
+                         title="Kéo để thay đổi độ rộng, double-click để auto-resize">
+                    </div>
+                  </div>
+                </th>
+
+              </tr>
+
+              <!-- Column Filters Row -->
+              <tr class="bg-gray-50">
+                <td class="p-1"></td>
+                <td *ngFor="let field of getAllDetailFields()" class="p-1" [hidden]="field.type === 'hidden'">
+                  <div class="relative" [hidden]="field.disabled">
+
+                    <!-- Currency Filter Input -->
+                    <input *ngIf="field.type !== 'select' && isCurrencyField(field.key)" type="text"
+                      class="w-full text-xs border border-gray-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
+                      [value]="getFormattedFilterValue(field.key, field)"
+                      (blur)="onCurrencyFilterBlur(field.key, $event, field)"
+                      [(ngModel)]="currentColumnFilters[field.key]" (ngModelChange)="onFilterChange(field.key, $event)"
+                      (keydown.enter)="applyFilters()" />
+
+
+                    <!-- Text/Number Filter Input -->
+                    <input *ngIf="field.type !== 'select'  && !isCurrencyField(field.key)" type="text"
+                      class="w-full text-xs border border-gray-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
+                      [(ngModel)]="currentColumnFilters[field.key]" (ngModelChange)="onFilterChange(field.key, $event)"
+                      (keydown.enter)="applyFilters()" />
+
+                    <!-- Select Filter Dropdown -->
+                    <select *ngIf="field.type === 'select'"
+                      class="w-full text-xs border border-gray-300 rounded px-2 py-1 focus:border-blue-500 focus:outline-none"
+                      [(ngModel)]="currentColumnFilters[field.key]" (ngModelChange)="onFilterChange(field.key, $event)">
+                      <option value="">{{"COMMON.ALL"| translate}}</option>
+                      <option *ngFor="let opt of field.options || []" [value]="opt.value">
+                        {{ opt.label | translate}}
+                      </option>
+                    </select>
+
+                    <!-- Clear Filter Button -->
+                    <button *ngIf="currentColumnFilters[field.key]" type="button"
+                      class="absolute right-1 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 transition-colors text-xs"
+                      (click)="clearFilter(field.key)" title="Xóa bộ lọc">
+                      ×
+                    </button>
+                  </div>
+                </td>
+                <td class="p-1"></td>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- Data Rows -->
+              <tr *ngFor="let row of currentFilteredDetailRows; let i = index; trackBy: trackByIndex"
+                class="hover:bg-blue-50">
+                 <!-- Row actions -->
+                <td>
+                  <div class="row-actions flex justify-center gap-1">
+                    <!-- Move Up -->
+                    <button type="button" class="btn-modern btn-info btn-xs" [disabled]="!canMoveUp(i)"
+                      (click)="moveRowUp(i)" title="Chuyển lên" style="min-width: 24px; height: 26px; padding: 2px;">
+                      ↑
+                    </button>
+
+                    <!-- Move Down -->
+                    <button type="button" class="btn-modern btn-info btn-xs" [disabled]="!canMoveDown(i)"
+                      (click)="moveRowDown(i)" title="Chuyển xuống"
+                      style="min-width: 24px; height: 26px; padding: 2px;">
+                      ↓
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button type="button" class="btn-modern btn-danger btn-xs" (click)="removeDetailRow(i)"
+                      title="Xóa dòng" style="min-width: 24px; height: 26px; padding: 1px;">
+                      ×
+                    </button>
+                  </div>
+                </td>
+                <!-- Row number -->
+                <td class="text-center text-gray-500">{{ row.line_nbr || (i + 1) }}</td>
+
+                <!-- Detail fields -->
+                <td class="relative" *ngFor="let field of getAllDetailFields()" [hidden]="field.type === 'hidden'">
+                  <div *ngIf="detailErrors[i]?.[field.key]"
+                    class="absolute -top-8 left-0 bg-red-500 text-white text-xs rounded px-2 py-1 shadow z-10 animate-fadeIn">
+                    {{ detailErrors[i][field.key] }}
+                  </div>
+                  <!-- Currency inputs -->
+                  <input *ngIf="field.type === 'number' && isCurrencyField(field.key)" type="text"
+                    [value]="formatCurrencyNumber(row[field.key] || 0)" (input)="onCurrencyBlur($event, i, field.key)"
+                    class="form-input w-full text-sm text-right" placeholder="0" />
+
+
+                  <!-- Text/Number inputs -->
+                  <input *ngIf="field.type === 'number' && !isCurrencyField(field.key)" type="text"
+                    [value]="formatCurrencyNumber(row[field.key] || 0)" (input)="onCurrencyBlur($event, i, field.key)"
+                    class="form-input w-full text-sm text-right" placeholder="0" />
+
+                  <!-- Text inputs -->
+                  <input *ngIf="field.type === 'text' && !field.disabled" [type]="field.type" [name]="field.key"
+                    [min]="field.min" [max]="field.max" [step]="field.step" class="form-input w-full text-sm"
+                    [(ngModel)]="row[field.key]" (ngModelChange)="onDetailFieldChange(i, field.key, $event)" />
+
+                  <!-- Select dropdown -->
+                  <select *ngIf="field.type === 'select' && !field.disabled" [name]="field.key + '_' + i"
+                    class="form-select w-full text-sm" [(ngModel)]="row[field.key]"
+                    (ngModelChange)="onDetailFieldChange(i, field.key, $event)">
+                    <option value="">--</option>
+                    <option *ngFor="let opt of field.options || []" [value]="opt.value">
+                      {{ opt.label | translate}}
+                    </option>
+                  </select>
+
+                  <!-- Date input -->
+                  <input *ngIf="field.type === 'date' && !field.disabled" type="date" [name]="field.key + '_' + i"
+                    class="form-input w-full text-sm" [(ngModel)]="row[field.key]"
+                    (ngModelChange)="onDetailFieldChange(i, field.key, $event)" />
+
+                  <!-- Readonly/calculated fields -->
+                  <span *ngIf="field.disabled && field.type !== 'select'" class="text-right block font-medium text-sm"
+                    [ngClass]="{'text-green-600 font-bold': field.key === 'total'}">
+                    {{ formatFieldValue(row, field) }}
+                  </span>
+
+                  <!-- Lookup -->
+                  <app-lookup *ngIf="field.type === 'lookup'" [multiple]="field.multiple ? true : false"
+                    [value]="row[field.key]" [query]="field.default"
+                    (valueChange)="onDetailLookupChange(i, field.key,$event)">
+                  </app-lookup>
+
+                  <!-- Display select fields -->
+                  <div *ngIf="field.type === 'select'" class="text-sm">
+                    <span *ngIf="field.key !== 'product'">
+                      {{ getOptionLabel(field.key, row[field.key]) }}
+                    </span>
+                  </div>
+
+                </td>
+
+               
+              </tr>
+
+              <!-- Empty state -->
+              <tr *ngIf="currentFilteredDetailRows.length === 0 && currentDetailRows.length === 0">
+                <td [attr.colspan]="getAllDetailFields().length + 2" class="text-center text-gray-500 py-8">
+                  {{"FILTER.EMPTY_ADD_ROW" | translate}}
+                </td>
+              </tr>
+
+              <!-- No results after filtering -->
+              <tr *ngIf="currentFilteredDetailRows.length === 0 && currentDetailRows.length > 0">
+                <td [attr.colspan]="getAllDetailFields().length + 2" class="text-center text-yellow-600 py-8">
+                  <div class="flex flex-col items-center gap-2">
+                    <span>{{"FILTER.NOT_FOUND" | translate}}</span>
+                    <button type="button" class="btn-modern btn-warning btn-small" (click)="clearAllFilters()">
+                      {{"FILTER.REMOVE_ALL" | translate}}
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- No Fields Template -->
+        <ng-template #noFieldsTemplate>
+          <div class="text-center py-8 bg-gray-50 rounded-lg border border-gray-200">
+            <p class="text-gray-600 mb-4">Không tìm thấy định nghĩa trường dữ liệu.</p>
+            <button type="button" class="btn-modern btn-primary btn-small" (click)="loadInitialDetailData()">
+              🔄 Tải lại dữ liệu
+            </button>
+          </div>
+        </ng-template>
+
+        <!-- Total Summary -->
+        <div class="summary-grid mb-4">
+          <div class="text-lg font-semibold text-gray-800 col-span-2 mb-2 border-b border-gray-300 pb-2">
+            📊 Tổng kết tất cả dữ liệu ({{ currentDetailRows.length }} dòng)
+          </div>
+
+          <!-- Dynamically load master fields that should be displayed in summary -->
+          <ng-container *ngFor="let field of getSummaryFields()">
+            <!-- Only show fields that are disabled (calculated/aggregated) and not hidden -->
+
+            <ng-container *ngIf="field.disabled && field.type !== 'hidden' && field.subtotal">
+              <div class="summary-label">{{ field.label }}:</div>
+              <div class="summary-value" [ngClass]="{'summary-total': field.key === 'final_total'}"
+                style="padding-right: 25px">
+                <ng-container [ngSwitch]="field.key">
+                  <!-- Format based on field key -->
+                  <span *ngIf="field.type === 'number' && isCurrencyField(field.key, field)">
+                    {{ formatCurrency(getMasterFieldValue(field.key)) }}
+                  </span>
+
+                  <!-- Format non-currency number fields -->
+                  <span *ngIf="field.type === 'number' && !isCurrencyField(field.key, field)">
+                    {{ formatNumber(getMasterFieldValue(field.key)) }}
+                  </span>
+                </ng-container>
+              </div>
+            </ng-container>
+          </ng-container>
+        </div>
+        <!-- Summary Section -->
+        <div class="summary-section" *ngIf="shouldShowSummary()">
+          <!-- Filter Status Info -->
+          <div *ngIf="hasActiveFilters()" class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-blue-700 font-medium">🔍 Đang áp dụng bộ lọc:</span>
+                <span class="text-blue-600">{{ getActiveFilterCount() }} điều kiện</span>
+                <span class="text-sm text-blue-600">({{ filterMode === 'all' ? 'Tất cả' : 'Bất kỳ' }})</span>
+              </div>
+              <button type="button" class="btn-modern btn-warning btn-small" (click)="clearAllFilters()">
+                Xóa bộ lọc
+              </button>
+            </div>
+
+            <!-- Active filters display -->
+            <div class="mt-2 flex flex-wrap gap-2">
+              <span *ngFor="let field of getAllDetailFields()"
+                class="inline-flex items-center gap-1 px-2 py-1 bg-blue-100 text-blue-700 rounded text-xs"
+                [hidden]="!currentColumnFilters[field.key] || field.type === 'hidden'">
+                <strong>{{ field.label }}:</strong>
+                <span>{{ currentColumnFilters[field.key] }}</span>
+                <button type="button" class="ml-1 text-blue-500 hover:text-red-500" (click)="clearFilter(field.key)">
+                  ×
+                </button>
+              </span>
+            </div>
+          </div>
+
+
+
+          <!-- Filtered Summary -->
+          <div *ngIf="hasActiveFilters() && currentFilteredDetailRows.length > 0"
+            class="summary-grid border-t-2 border-blue-200 pt-4 bg-blue-50 rounded-lg p-4">
+            <div class="text-lg font-semibold text-blue-800 col-span-2 mb-2 border-b border-blue-300 pb-2">
+              🔍 Tổng kết dữ liệu đã lọc ({{ currentFilteredDetailRows.length }} dòng)
+            </div>
+
+            <div class="summary-label text-blue-700">Số mặt hàng đã lọc:</div>
+            <div class="summary-value text-blue-800">{{ currentFilteredDetailRows.length }} sản phẩm</div>
+
+            <div class="summary-label text-blue-700">Tổng SL đã lọc:</div>
+            <div class="summary-value text-blue-800">{{ formatNumber(calculateFilteredQuantity()) }}</div>
+
+            <div class="summary-label text-blue-700">Tổng tiền hàng đã lọc:</div>
+            <div class="summary-value text-blue-800">{{ formatCurrency(calculateFilteredSubtotal()) }}</div>
+
+            <div class="summary-total border-blue-300">
+              <div class="summary-label text-blue-700">Tỷ lệ so với tổng:</div>
+              <div class="summary-value text-blue-800">{{ calculateFilteredPercentage() }}%</div>
+            </div>
+          </div>
+
+          <!-- Empty filter result notice -->
+          <div *ngIf="hasActiveFilters() && currentFilteredDetailRows.length === 0"
+            class="summary-grid border-t-2 border-yellow-200 pt-4 bg-yellow-50 rounded-lg p-4">
+            <div class="col-span-2 text-center text-yellow-700">
+              <div class="text-lg font-semibold mb-2">⚠️ Không có dữ liệu phù hợp</div>
+              <p class="text-sm mb-3">Bộ lọc hiện tại không tìm thấy kết quả nào. Hãy thử:</p>
+              <div class="flex flex-wrap justify-center gap-2">
+                <button type="button" class="btn-modern btn-warning btn-small" (click)="clearAllFilters()">
+                  🗑️ Xóa tất cả bộ lọc
+                </button>
+                <button type="button" class="btn-modern btn-secondary btn-small" (click)="toggleFilterMode()">
+                  🔄 Đổi chế độ lọc ({{ filterMode === 'all' ? 'OR' : 'AND' }})
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </ng-container>
+    </div>
+
+  </div>
+</ng-container>

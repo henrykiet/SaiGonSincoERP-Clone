@@ -1,0 +1,20 @@
+{
+  "controller": "job",
+  "formId": "job",
+  "primaryKey": ["jobCode"],
+  "language": "@language",
+  "unit": "@@unit",
+  "userId": "@@userId",
+  "type": "one",
+  "sort": ["jobCode"],
+  "fields": [
+    {
+      "field": "jobCode",
+      "header": "Mã dự án"
+    },
+    {
+      "field": "jobName",
+      "header": "Tên dự án"
+    }
+  ]
+}
